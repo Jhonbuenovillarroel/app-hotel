@@ -10,3 +10,20 @@
     background-color: white;
   }
 }
+
+html::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgb(118, 118, 118);
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: rgb(180, 180, 180);
+}
+
+html.dark::-webkit-scrollbar {
+  background-color: rgb(18, 18, 18);
+}
+
+html.dark::-webkit-scrollbar-thumb {
+  background-color: rgb(60, 60, 60);
+}

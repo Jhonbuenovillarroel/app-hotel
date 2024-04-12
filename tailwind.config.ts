@@ -1,4 +1,5 @@
-import type { Config } from "tailwindcss";
+import { hr } from "date-fns/locale";
+import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
@@ -19,17 +20,23 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        "gold-hr": "#e9c57c",
+        "gold-hr-dark": "#bd9b57",
+      },
       transitionDuration: {
         "1200": "1200ms",
         "1300": "1300ms",
+        "1400": "1400ms",
         "1500": "1500ms",
         "1800": "1800ms",
         "2000": "2000ms",
       },
-      fontFamily: {
-        bonanova: ["var(--font-bonanova)", ...fontFamily.serif],
-        worksans: ["var(--font-worksans)", ...fontFamily.sans],
+      transitionTimingFunction: {
+        "in-slider": "cubic-bezier(0.9, 0, 0.2, 1)",
+        "in-slow": "cubic-bezier(0.4, 0, 1, 1)",
       },
+      fontFamily: {},
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

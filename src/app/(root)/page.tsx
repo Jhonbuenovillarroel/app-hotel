@@ -1,10 +1,14 @@
 import React from "react";
 import HeroSection from "./_components/HeroSection/hero-section";
+import BookingSection from "./_components/BookingSection/booking-section";
+import OfficeSection from "./_components/OfficeSection/office-section";
 
 const Page = () => {
   return (
-    <main>
+    <main className={``}>
       <HeroSection />
+      <BookingSection />
+      <OfficeSection />
     </main>
   );
 };

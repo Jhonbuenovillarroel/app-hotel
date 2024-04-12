@@ -6,28 +6,45 @@ import Link from "next/link";
 import UserProfile from "./_components/UserProfile/user-profile";
 import ShoppingCart from "./_components/ShoppingCart/shopping-cart";
 import ToggleTheme from "../ToggleTheme/toggle-theme";
-import { workSans } from "@/fonts/fonts";
+import axios from "axios";
+import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 
-const Header = () => {
+const getData = async () => {
+  const response = await axios.get(
+    process.env.NODE_ENV === "development"
+      ? `${process.env.DEV_URL}/api/hotel-centers/api/get-all-hotel-centers`
+      : `${process.env.PROD_URL}/api/hotel-centers/api/get-all-hotel-centers`
+  );
+
+  const hotelCenters = response.data.hotelCenters as HotelCenter[];
+
+  return { hotelCenters };
+};
+
+const Header = async () => {
+  const data = await getData();
+
   return (
     <header
-      className={`fixed z-40 text-white w-full px-6 py-2 flex justify-between items-center ${workSans.className}`}
+      className={`sticky z-[30] top-0 bg-[rgba(250,250,250,1)] dark:bg-[rgba(0,0,0,0.85)] text-black dark:text-white right-0 left-0 w-full px-6 py-2 flex justify-between items-center`}
     >
       <div className="flex items-center gap-4">
-        <Image
-          // priority
-          src={"/images/logo_hospedaje.png"}
-          className="w-24"
-          width={300}
-          height={150}
-          alt="Logo Hospedaje"
-        />
-        <Navbar />
+        <Link href={`/`}>
+          <Image
+            priority
+            src={"/images/logo_hospedaje.png"}
+            className="w-24"
+            width={300}
+            height={150}
+            alt="Logo Hospedaje"
+          />
+        </Link>
+        <Navbar hotelCentersData={data.hotelCenters} />
       </div>
       <div className="flex items-center gap-5">
         <Link
           href={"/"}
-          className="h-10 text-sm font-normal tracking-wide flex items-center justify-center rounded-md bg-[#bd9b57] hover:bg-[#cbab69] transition-all duration-300 text-white px-6"
+          className="h-10 text-sm font-normal tracking-wide flex items-center justify-center bg-[#bd9b57] hover:bg-[#cbab69] transition-all duration-300 text-white w-36"
         >
           Reservar
         </Link>

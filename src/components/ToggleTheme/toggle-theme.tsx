@@ -10,7 +10,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { workSans } from "@/fonts/fonts";
 
 const ToggleTheme = () => {
   const { setTheme } = useTheme();
@@ -24,7 +23,7 @@ const ToggleTheme = () => {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className={`${workSans.className}`}>
+      <DropdownMenuContent align="end" className={``}>
         <DropdownMenuItem onClick={() => setTheme("light")}>
           Light
         </DropdownMenuItem>

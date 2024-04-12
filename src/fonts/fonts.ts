@@ -1,11 +1,8 @@
-import { Bona_Nova, Work_Sans } from "next/font/google";
+import { Raleway } from "next/font/google";
 
-const bonaNova = Bona_Nova({
+const raleway = Raleway({
   subsets: ["latin"],
-  weight: ["400", "700"],
-});
-const workSans = Work_Sans({
-  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-export { bonaNova, workSans };
+export { raleway };
