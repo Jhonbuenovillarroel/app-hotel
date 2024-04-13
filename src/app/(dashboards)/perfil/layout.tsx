@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "../globals.css";
+import "../../globals.css";
 import SideBar from "./_components/SideBar/sidebar";
 
 export const metadata: Metadata = {

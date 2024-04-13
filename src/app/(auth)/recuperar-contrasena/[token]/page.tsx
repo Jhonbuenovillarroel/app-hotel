@@ -101,7 +101,7 @@ const Page = ({ params }: { params: { token: string } }) => {
 
   useEffect(() => {
     validateToken();
-  }, []);
+  });
 
   if (loading) {
     return (

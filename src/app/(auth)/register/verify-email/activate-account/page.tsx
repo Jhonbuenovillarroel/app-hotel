@@ -7,29 +7,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-// const validateToken = async () => {
-//   const cookieStore = cookies();
-//   const token = cookieStore.get("emailVerificationToken")?.value;
-
-//   try {
-//     const response = await axios.post(
-//       `${
-//         process.env.NODE_ENV === "development"
-//           ? process.env.DEV_URL
-//           : process.env.PROD_URL
-//       }/api/auth/verify-email`,
-//       {
-//         token,
-//       }
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// };
-
-const Page = async () => {
+const Page = () => {
   const searchParams = useSearchParams();
 
   const [isVerified, setIsVerified] = useState(false);
@@ -54,7 +32,7 @@ const Page = async () => {
 
   useEffect(() => {
     verifyToken();
-  }, []);
+  });
 
   if (isVerified) {
     return (

@@ -2,7 +2,7 @@
 
 import { Room } from "@/types/Room/room";
 import { Check, BedDouble, Users, Baby, Hotel, CloudSun } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import BookingForm from "../BookingForm/booking-form";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
@@ -17,14 +17,17 @@ const DescriptionSection = ({ room }: Props) => {
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [selected, setSelected] = useState(false);
 
-  const roomIsSelected = (room: Room) => {
-    for (let shoppingCartRoom of shoppingCartStore.rooms) {
-      if (shoppingCartRoom.id === room.id) {
-        return true;
+  const roomIsSelected = useCallback(
+    (room: Room) => {
+      for (let shoppingCartRoom of shoppingCartStore.rooms) {
+        if (shoppingCartRoom.id === room.id) {
+          return true;
+        }
       }
-    }
-    return false;
-  };
+      return false;
+    },
+    [shoppingCartStore.rooms]
+  );
 
   useEffect(() => {
     if (roomIsSelected(room)) {
@@ -33,7 +36,7 @@ const DescriptionSection = ({ room }: Props) => {
     } else {
       setSelected(false);
     }
-  }, [shoppingCartStore.rooms]);
+  }, [shoppingCartStore.rooms, roomIsSelected, room]);
 
   return (
     <>

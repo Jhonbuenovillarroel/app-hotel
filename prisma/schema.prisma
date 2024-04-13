@@ -57,7 +57,7 @@ model user {
   role          user_role
   emailVerified DateTime?
   image         image?
-  booking       booking[]
+  bookings      booking[]
 }
 
 model roomtype {

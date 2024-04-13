@@ -19,7 +19,7 @@ import {
   Trash2,
 } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Room as RoomType } from "@/types/Room/room";
 import { Button } from "@/components/ui/button";
 import { useShoppingCartStore } from "@/store/shoppingCartStore";
@@ -33,14 +33,17 @@ const Room = ({ room }: Props) => {
   const [selected, setSelected] = useState(false);
   const [addingRoom, setAddingRoom] = useState(false);
 
-  const roomIsSelected = (room: RoomType) => {
-    for (let shoppingCartRoom of shoppingCartStore.rooms) {
-      if (shoppingCartRoom.id === room.id) {
-        return true;
+  const roomIsSelected = useCallback(
+    (room: RoomType) => {
+      for (let shoppingCartRoom of shoppingCartStore.rooms) {
+        if (shoppingCartRoom.id === room.id) {
+          return true;
+        }
       }
-    }
-    return false;
-  };
+      return false;
+    },
+    [shoppingCartStore.rooms]
+  );
 
   useEffect(() => {
     if (roomIsSelected(room)) {
@@ -48,7 +51,7 @@ const Room = ({ room }: Props) => {
     } else {
       setSelected(false);
     }
-  }, [shoppingCartStore.rooms]);
+  }, [shoppingCartStore.rooms, roomIsSelected, room]);
 
   return (
     <div className="flex flex-col justify-between gap-12 w-full max-w-[900px]">

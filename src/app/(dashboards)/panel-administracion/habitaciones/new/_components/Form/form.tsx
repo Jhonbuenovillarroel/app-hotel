@@ -90,6 +90,7 @@ interface Props {
 const CreateRoomForm = ({ roomTypes, amenities, hotelCenters }: Props) => {
   const router = useRouter();
   const [formLoading, setFormLoading] = useState(false);
+  const reactSelectId = useId();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -306,8 +307,7 @@ const CreateRoomForm = ({ roomTypes, amenities, hotelCenters }: Props) => {
                   <FormLabel>Comodidades</FormLabel>
                   <FormControl>
                     <ReactSelect
-                      // defaultValue={}
-                      instanceId={useId()}
+                      instanceId={reactSelectId}
                       isMulti
                       value={field.value.map((item) => {
                         return { value: item.name, label: item.name };

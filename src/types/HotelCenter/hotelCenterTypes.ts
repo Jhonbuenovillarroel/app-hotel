@@ -9,8 +9,8 @@ export interface HotelCenter {
   mapUrl: string;
   description: string;
   urlSegment: string;
-  phone?: string;
-  cellPhone?: string;
+  phone?: string | null;
+  cellPhone?: string | null;
   garage: boolean;
   rooms: Room[];
   images: Image[];

@@ -106,6 +106,7 @@ const FormAddImages = ({ roomId }: Props) => {
             <div className="flex flex-wrap items-center justify-center gap-6 w-full">
               {imageFiles.map((image) => (
                 <Image
+                  key={image.name}
                   src={URL.createObjectURL(image)}
                   width={200}
                   height={200}

@@ -28,7 +28,10 @@ const getData = async (): Promise<{
     }/api/hotel-centers/api/get-all-hotel-centers`
   );
 
-  return { rooms, hotelCenters };
+  return {
+    rooms,
+    hotelCenters,
+  };
 };
 
 const Page = async () => {
