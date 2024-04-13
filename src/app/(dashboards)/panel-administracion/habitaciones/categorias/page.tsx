@@ -3,17 +3,12 @@ import DataTable from "./_components/DataTableCategories/data-table";
 import axios from "axios";
 import { RoomType } from "@/types/Room/RoomType";
 import { columns } from "./_components/DataTableColumns/columns";
+import { getAllRoomTypes } from "@/db/room-types/getAllRoomTypes";
 
 const getData = async (): Promise<RoomType[]> => {
-  const response = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/room-types/get-all-room-types`
-  );
+  const roomTypes = await getAllRoomTypes();
 
-  return response.data.roomTypes;
+  return roomTypes as RoomType[];
 };
 
 const Page = async () => {

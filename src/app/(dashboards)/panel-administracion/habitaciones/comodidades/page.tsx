@@ -3,19 +3,12 @@ import AmenitiesDataTable from "./_components/AmenitiesDataTable/data-table";
 import axios from "axios";
 import { Amenitie } from "@/types/Room/amenitie";
 import { columns } from "./_components/DataTableColumns/columns";
+import { getAllAmenities } from "@/db/amenities/get-all";
 
 const getData = async (): Promise<Amenitie[]> => {
-  const {
-    data: { amenities },
-  } = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/amenities/get-all-amenities`
-  );
+  const amenities = await getAllAmenities();
 
-  return amenities;
+  return amenities as Amenitie[];
 };
 
 const Page = async () => {

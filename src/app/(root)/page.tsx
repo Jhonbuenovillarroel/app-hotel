@@ -5,7 +5,7 @@ import OfficeSection from "./_components/OfficeSection/office-section";
 
 const Page = () => {
   return (
-    <main className={``}>
+    <main>
       <HeroSection />
       <BookingSection />
       <OfficeSection />

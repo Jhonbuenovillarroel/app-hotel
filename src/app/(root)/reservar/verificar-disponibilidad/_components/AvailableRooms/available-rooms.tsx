@@ -1,8 +1,8 @@
 import { Room as RoomType } from "@/types/Room/room";
-import axios from "axios";
 import React from "react";
 import Room from "../Room/room";
 import { BedDouble } from "lucide-react";
+import { getAvailableRooms } from "@/db/rooms/get-available-rooms";
 
 type SearchParams = {
   hcId: string;
@@ -17,22 +17,13 @@ interface Props {
 }
 
 const getData = async (searchParams: SearchParams): Promise<RoomType[]> => {
-  const {
-    data: { rooms },
-  } = await axios.post(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/api/get-available-rooms`,
-    {
-      hotelCenterId: searchParams.hcId,
-      checkIn: new Date(searchParams["check-in"]),
-      checkOut: new Date(searchParams["check-out"]),
-      adults: searchParams.adults,
-      children: searchParams.children,
-    }
-  );
+  const rooms = await getAvailableRooms({
+    hotelCenterId: searchParams.hcId,
+    checkIn: new Date(searchParams["check-in"]),
+    checkOut: new Date(searchParams["check-out"]),
+    adults: searchParams.adults,
+    children: searchParams.children,
+  });
 
   return rooms;
 };

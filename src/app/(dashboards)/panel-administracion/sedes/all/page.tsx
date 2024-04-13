@@ -3,17 +3,11 @@ import HotelCentersDataTable from "./_components/HotelCentersDataTable/hotel-cen
 import axios from "axios";
 import { columns } from "./_components/DataTableColumns/data-table-columns";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
+import { getAllHotelCenters } from "@/db/hotel-center/getAllHotelCenters";
 
 const getData = async (): Promise<HotelCenter[]> => {
-  const response = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/hotel-centers/api/get-all-hotel-centers`
-  );
-
-  return response.data.hotelCenters;
+  const hotelCenters = await getAllHotelCenters();
+  return hotelCenters as HotelCenter[];
 };
 
 const Page = async () => {

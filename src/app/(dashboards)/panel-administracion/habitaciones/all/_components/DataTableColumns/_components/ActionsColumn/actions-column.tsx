@@ -1,4 +1,5 @@
 import { Room } from "@/types/Room/room";
+import { room } from "@prisma/client";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -23,7 +24,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 interface Props {
-  row: Row<Room>;
+  row: Row<room>;
 }
 
 const ActionsColumn = ({ row }: Props) => {

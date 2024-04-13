@@ -1,36 +1,21 @@
 import React from "react";
 import RoomsDataTable from "./_components/RoomsDataTable/data-table";
-import axios from "axios";
 import { Room } from "@/types/Room/room";
 import { columns } from "./_components/DataTableColumns/columns";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
+import { getAllRooms } from "@/db/rooms/getAllRooms";
+import { getAllHotelCenters } from "@/db/hotel-center/getAllHotelCenters";
 
 const getData = async (): Promise<{
   rooms: Room[];
   hotelCenters: HotelCenter[];
 }> => {
-  const {
-    data: { rooms },
-  } = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/api/get-all`
-  );
-  const {
-    data: { hotelCenters },
-  } = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/hotel-centers/api/get-all-hotel-centers`
-  );
+  const rooms = await getAllRooms();
+  const hotelCenters = await getAllHotelCenters();
 
   return {
-    rooms,
-    hotelCenters,
+    rooms: rooms as Room[],
+    hotelCenters: hotelCenters as HotelCenter[],
   };
 };
 

@@ -3,19 +3,12 @@ import DataTableUsers from "./_components/DataTableUsers/data-table";
 import axios from "axios";
 import { User } from "@/types/User/user";
 import { columns } from "./_components/DataTableColumns/columns";
+import { getAllUsers } from "@/db/users/get-all";
 
 const getData = async (): Promise<User[]> => {
-  const {
-    data: { users },
-  } = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/users/api/get-all`
-  );
+  const users = await getAllUsers();
 
-  return users;
+  return users as User[];
 };
 
 const Page = async () => {

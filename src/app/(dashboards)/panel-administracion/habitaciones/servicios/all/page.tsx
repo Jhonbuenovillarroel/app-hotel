@@ -3,18 +3,10 @@ import DataTableServices from "./_components/DataTableServices/data-table";
 import axios from "axios";
 import { Service } from "@/types/Room/service";
 import { columns } from "./_components/DataTableColumns/columns";
+import { getAllServices } from "@/db/services/get-all";
 
 const getData = async (): Promise<Service[]> => {
-  const {
-    data: { services },
-  } = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/services/api/get-all`
-  );
-
+  const services = await getAllServices();
   return services;
 };
 

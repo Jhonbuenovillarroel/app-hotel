@@ -8,17 +8,11 @@ import ShoppingCart from "./_components/ShoppingCart/shopping-cart";
 import ToggleTheme from "../ToggleTheme/toggle-theme";
 import axios from "axios";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
+import { getAllHotelCenters } from "@/db/hotel-center/getAllHotelCenters";
 
 const getData = async () => {
-  const response = await axios.get(
-    process.env.NODE_ENV === "development"
-      ? `${process.env.DEV_URL}/api/hotel-centers/api/get-all-hotel-centers`
-      : `${process.env.PROD_URL}/api/hotel-centers/api/get-all-hotel-centers`
-  );
-
-  const hotelCenters = response.data.hotelCenters as HotelCenter[];
-
-  return { hotelCenters };
+  const hotelCenters = await getAllHotelCenters();
+  return { hotelCenters: hotelCenters as HotelCenter[] };
 };
 
 const Header = async () => {

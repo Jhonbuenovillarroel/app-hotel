@@ -2,7 +2,7 @@ import React from "react";
 import AvailableRooms from "./_components/AvailableRooms/available-rooms";
 import SideBar from "./_components/SideBar/side-bar";
 
-const Page = async ({
+const Page = ({
   searchParams,
 }: {
   searchParams: {
