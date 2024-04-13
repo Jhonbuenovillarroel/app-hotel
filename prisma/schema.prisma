@@ -78,15 +78,6 @@ model image {
   user          user?        @relation(fields: [userId], references: [id])
 }
 
-model amenitietoroom {
-  A String
-  B String
-
-  @@unique([A, B], map: "_amenitieToroom_AB_unique")
-  @@index([B], map: "_amenitieToroom_B_index")
-  @@map("_amenitietoroom")
-}
-
 model service {
   id   String @id @default(cuid())
   name String @unique(map: "Service_name_key")
@@ -99,15 +90,6 @@ model booking {
   userId   String
   rooms    room[]
   user     user     @relation(fields: [userId], references: [id])
-}
-
-model bookingtoroom {
-  A String
-  B String
-
-  @@unique([A, B], map: "_bookingToroom_AB_unique")
-  @@index([B], map: "_bookingToroom_B_index")
-  @@map("_bookingtoroom")
 }
 
 enum user_role {

@@ -1,7 +1,6 @@
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import { RoomType } from "@/types/Room/RoomType";
 import { Amenitie } from "@/types/Room/amenitie";
-import axios from "axios";
 import React from "react";
 import EditRoomForm from "./_components/Form/form";
 import { Room } from "@/types/Room/room";
