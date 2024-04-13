@@ -12,6 +12,14 @@ const getData = async () => {
 const HeroSection = async () => {
   const data = await getData();
 
+  if (!data.length) {
+    return (
+      <section className="w-full h-[450px] relative flex items-center justify-center">
+        <p>No hay ninguna sede para mostrar</p>
+      </section>
+    );
+  }
+
   return (
     <section className="w-full h-[450px] relative">
       <SliderCarousel dataSlides={data} />
