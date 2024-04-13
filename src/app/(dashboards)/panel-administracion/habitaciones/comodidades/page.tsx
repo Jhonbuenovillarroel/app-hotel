@@ -7,7 +7,6 @@ import { getAllAmenities } from "@/db/amenities/get-all";
 
 const getData = async (): Promise<Amenitie[]> => {
   const amenities = await getAllAmenities();
-
   return amenities as Amenitie[];
 };
 

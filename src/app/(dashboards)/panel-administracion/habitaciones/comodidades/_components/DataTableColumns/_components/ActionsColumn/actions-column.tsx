@@ -6,14 +6,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
-} from "@radix-ui/react-dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { Row } from "@tanstack/react-table";
 import axios from "axios";
-import { MoreHorizontal, Settings, Link, Pencil, Trash2 } from "lucide-react";
+import { MoreHorizontal, Settings, Pencil, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import Link from "next/link";
 
 interface Props {
   row: Row<Amenitie>;

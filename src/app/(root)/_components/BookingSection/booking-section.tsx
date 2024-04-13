@@ -1,12 +1,10 @@
 import BookingForm from "@/components/BookingForm/booking-form";
 import { getAllHotelCenters } from "@/db/hotel-center/getAllHotelCenters";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
-import axios from "axios";
 import React from "react";
 
 const getData = async (): Promise<HotelCenter[]> => {
   const hotelCenters = await getAllHotelCenters();
-
   return hotelCenters as HotelCenter[];
 };
 

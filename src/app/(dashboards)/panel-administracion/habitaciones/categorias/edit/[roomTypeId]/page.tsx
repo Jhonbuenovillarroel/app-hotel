@@ -4,7 +4,6 @@ import { RoomType } from "@/types/Room/RoomType";
 
 const getRoomTypeById = async (roomTypeId: string): Promise<RoomType> => {
   const roomType = await getRoomTypeById(roomTypeId);
-
   return roomType as RoomType;
 };
 

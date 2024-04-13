@@ -5,56 +5,29 @@ import axios from "axios";
 import React from "react";
 import EditRoomForm from "./_components/Form/form";
 import { Room } from "@/types/Room/room";
+import { getAllRoomTypes } from "@/db/room-types/getAllRoomTypes";
+import { getAllAmenities } from "@/db/amenities/get-all";
+import { getAllHotelCenters } from "@/db/hotel-center/getAllHotelCenters";
 
 const getData = async (): Promise<{
   roomTypes: RoomType[];
   amenities: Amenitie[];
   hotelCenters: HotelCenter[];
 }> => {
-  const {
-    data: { roomTypes },
-  } = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/room-types/get-all-room-types`
-  );
-  const {
-    data: { amenities },
-  } = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/amenities/get-all-amenities`
-  );
-  const {
-    data: { hotelCenters },
-  } = await axios.get(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/hotel-centers/api/get-all-hotel-centers`
-  );
+  const roomTypes = await getAllRoomTypes();
+  const amenities = await getAllAmenities();
+  const hotelCenters = await getAllHotelCenters();
 
-  return { roomTypes, amenities, hotelCenters };
+  return {
+    roomTypes: roomTypes as RoomType[],
+    amenities: amenities as Amenitie[],
+    hotelCenters: hotelCenters as HotelCenter[],
+  };
 };
 
 const getRoomById = async (roomId: string): Promise<Room> => {
-  const {
-    data: { room },
-  } = await axios.post(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/api/get-room-by-id`,
-    { id: roomId }
-  );
-
-  return room;
+  const room = await getRoomById(roomId);
+  return room as Room;
 };
 
 const Page = async ({ params }: { params: { roomId: string } }) => {

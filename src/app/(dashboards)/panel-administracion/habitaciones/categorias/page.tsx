@@ -7,7 +7,6 @@ import { getAllRoomTypes } from "@/db/room-types/getAllRoomTypes";
 
 const getData = async (): Promise<RoomType[]> => {
   const roomTypes = await getAllRoomTypes();
-
   return roomTypes as RoomType[];
 };
 

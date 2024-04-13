@@ -1,22 +1,11 @@
 import React from "react";
 import FormEditUser from "./_components/Form/form";
 import { User } from "@/types/User/user";
-import axios from "axios";
 import FormEditImage from "./_components/FormEditImage/form";
 
 const getUserById = async (userId: string): Promise<User> => {
-  const {
-    data: { user },
-  } = await axios.post(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/users/api/get-by-id`,
-    { id: userId }
-  );
-
-  return user;
+  const user = await getUserById(userId);
+  return user as User;
 };
 
 const Page = async ({ params }: { params: { userId: string } }) => {

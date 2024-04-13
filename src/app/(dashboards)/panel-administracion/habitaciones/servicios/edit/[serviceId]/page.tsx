@@ -1,21 +1,10 @@
 import React from "react";
 import FormEditService from "./_components/Form/form";
-import axios from "axios";
 import { Service } from "@/types/Room/service";
 
 const getServiceById = async (serviceId: string): Promise<Service> => {
-  const {
-    data: { service },
-  } = await axios.post(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/services/api/get-by-id`,
-    { id: serviceId }
-  );
-
-  return service;
+  const service = await getServiceById(serviceId);
+  return service as Service;
 };
 
 const Page = async ({ params }: { params: { serviceId: string } }) => {

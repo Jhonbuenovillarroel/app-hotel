@@ -5,19 +5,11 @@ import DataTableImages from "./_components/DataTableImages/data-table";
 import { columns } from "./_components/DataTableColumns/columns";
 import Link from "next/link";
 import { ImagePlus, Images } from "lucide-react";
+import { getAllRoomImages } from "@/db/rooms/get-all-images";
+import { Room } from "@/types/Room/room";
 
 const getData = async (roomId: string): Promise<Image[]> => {
-  const {
-    data: { room },
-  } = await axios.post(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/api/get-all-images`,
-    { id: roomId }
-  );
-
+  const room = (await getAllRoomImages(roomId)) as Room;
   return room.images;
 };
 

@@ -6,7 +6,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
-} from "@radix-ui/react-dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { Row } from "@tanstack/react-table";
 import axios from "axios";
 import { MoreHorizontal, Settings, Trash2 } from "lucide-react";

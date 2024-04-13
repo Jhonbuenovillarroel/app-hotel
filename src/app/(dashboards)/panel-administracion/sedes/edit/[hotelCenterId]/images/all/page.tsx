@@ -4,19 +4,10 @@ import axios from "axios";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import { Image } from "@/types/Image/image";
 import { columns } from "./_components/DataTableColumns/columns";
+import { getHotelCenterById } from "@/db/hotel-center/get-by-id";
 
 const getData = async (hotelCenterId: string): Promise<Image[]> => {
-  const {
-    data: { hotelCenter },
-  } = await axios.post(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/hotel-centers/api/get-hotel-center-by-id`,
-    { id: hotelCenterId }
-  );
-
+  const hotelCenter = (await getHotelCenterById(hotelCenterId)) as HotelCenter;
   return hotelCenter.images;
 };
 
