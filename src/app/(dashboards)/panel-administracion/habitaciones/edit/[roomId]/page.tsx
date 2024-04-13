@@ -8,6 +8,7 @@ import { Room } from "@/types/Room/room";
 import { getAllRoomTypes } from "@/db/room-types/getAllRoomTypes";
 import { getAllAmenities } from "@/db/amenities/get-all";
 import { getAllHotelCenters } from "@/db/hotel-center/getAllHotelCenters";
+import { getRoomById as getRoomByIdFromDatabase } from "@/db/rooms/get-by-id";
 
 const getData = async (): Promise<{
   roomTypes: RoomType[];
@@ -26,7 +27,7 @@ const getData = async (): Promise<{
 };
 
 const getRoomById = async (roomId: string): Promise<Room> => {
-  const room = await getRoomById(roomId);
+  const room = await getRoomByIdFromDatabase(roomId);
   return room as Room;
 };
 
