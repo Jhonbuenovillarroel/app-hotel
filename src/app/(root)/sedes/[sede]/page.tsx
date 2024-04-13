@@ -16,18 +16,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Link from "next/link";
+import { getHotelCenterByUrlSegment } from "@/db/hotel-center/get-by-url-segment";
 
 const getData = async (urlSegment: string) => {
-  const response = await axios.post(
-    process.env.NODE_ENV === "development"
-      ? `${process.env.DEV_URL}/api/hotel-centers/api/get-hotel-center-by-url-segment`
-      : `${process.env.PROD_URL}/api/hotel-centers/api/get-hotel-center-by-url-segment`,
-    { urlSegment }
-  );
-
-  const hotelCenter = response.data.hotelCenter as HotelCenter;
-
-  return hotelCenter;
+  const hotelCenter = await getHotelCenterByUrlSegment(urlSegment);
+  return hotelCenter as HotelCenter;
 };
 
 const Page = async ({ params }: { params: { sede: string } }) => {

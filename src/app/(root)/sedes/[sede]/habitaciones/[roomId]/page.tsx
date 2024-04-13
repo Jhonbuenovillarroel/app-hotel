@@ -1,25 +1,14 @@
 import { Room } from "@/types/Room/room";
-import axios from "axios";
 import React from "react";
 import HeroSection from "./_components/HeroSection/hero";
 import DescriptionSection from "./_components/DescriptionSection/description";
 import ImagesSection from "./_components/ImagesSection/section";
 import OtherRoomsSection from "./_components/OtherRoomsSection/section";
-import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
+import { getRoomById } from "@/db/rooms/get-by-id";
 
 const getData = async (roomId: string): Promise<{ room: Room }> => {
-  const {
-    data: { room },
-  } = await axios.post(
-    `${
-      process.env.NODE_ENV === "development"
-        ? process.env.DEV_URL
-        : process.env.PROD_URL
-    }/api/rooms/api/get-room-by-id`,
-    { id: roomId }
-  );
-
-  return { room };
+  const room = await getRoomById(roomId);
+  return { room: room as Room };
 };
 
 const Page = async ({ params }: { params: { roomId: string } }) => {
