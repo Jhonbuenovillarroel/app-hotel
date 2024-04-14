@@ -43,6 +43,7 @@
     "react-phone-number-input": "^3.3.12",
     "react-select": "^5.8.0",
     "resend": "^3.2.0",
+    "sharp": "^0.33.3",
     "sweetalert2": "^11.10.7",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
