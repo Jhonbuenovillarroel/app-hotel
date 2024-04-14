@@ -16,13 +16,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Loading from "../../loading";
 import { ShieldX } from "lucide-react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import ButtonLoading from "@/components/Loading/ButtonLoading/button-loading";
 import { useRouter } from "next/navigation";
 import router from "next/router";
+import Loading from "@/app/loading";
 
 const formSchema = z.object({
   password: z.string().min(10, {
