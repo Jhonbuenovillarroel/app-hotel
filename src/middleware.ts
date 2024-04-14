@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt";
 
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
-  const session = await getToken({ req });
+  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   console.log(session);
 
   if (session && pathname.startsWith("/panel-administracion")) {
