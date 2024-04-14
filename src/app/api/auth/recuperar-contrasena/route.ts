@@ -27,10 +27,10 @@ export async function POST(req: NextRequest) {
       const data = await resend.emails.send({
         from: "Hospedaje El Rinconcito <noreply@hospedajerinconcito.com>",
         to: [email],
-        subject: "Activa tu cuenta",
+        subject: "Cambia tu contraseña",
         html: `<div>
                 <p>Hola <strong>${user.username}</strong>, puedes cambiar tu contraseña con el siguiente enlace:</p>
-                <a href="http://localhost:3000/recuperar-contrasena/${token}">Verifica tu correo electrónico</a>
+                <a href="${process.env.NEXTAUTH_URL}/recuperar-contrasena/${token}">Verifica tu correo electrónico</a>
              </div>`,
       });
 

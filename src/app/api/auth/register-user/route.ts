@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       subject: "Activa tu cuenta",
       html: `<div>
                 <p>Hola <strong>${username}</strong> verifica tu cuenta con el siguiente enlace</p>
-                <a href="http://localhost:3000/register/verify-email/activate-account?at=${token}">Verifica tu correo electrónico</a>
+                <a href="${process.env.NEXTAUTH_URL}/register/verify-email/activate-account?at=${token}">Verifica tu correo electrónico</a>
              </div>`,
     });
 
