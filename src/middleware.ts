@@ -4,6 +4,7 @@ import { getToken } from "next-auth/jwt";
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const session = await getToken({ req });
+  console.log(session);
 
   if (session && pathname.startsWith("/panel-administracion")) {
     if (session.role === "customer") {

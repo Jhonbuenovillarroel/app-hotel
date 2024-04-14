@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { Suspense } from "react";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import {
