@@ -6,9 +6,7 @@ export const metadata: Metadata = {
   title: "Inicia Sesión",
 };
 
-export const dynamic = "force-dynamic";
-
-const Page = async () => {
+const Page = () => {
   return (
     <main>
       <LoginForm />
