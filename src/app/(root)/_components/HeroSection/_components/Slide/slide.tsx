@@ -20,14 +20,14 @@ const Slide = ({ title, subtitle, bgImage, mounted }: Props) => {
           <h2
             className={`${
               mounted ? "opacity-100 top-0" : "opacity-0 top-8"
-            } relative transition-all duration-500 font-medium text-2xl sm:text-3xl md:text-4xl max-w-[400px] text-center`}
+            } relative transition-all duration-500 font-medium text-2xl sm:text-3xl  max-w-[400px] text-center`}
           >
             {title}
           </h2>
           <p
             className={`${
               mounted ? "opacity-100 top-0" : "opacity-0 top-8"
-            } relative text-sm md:text-base leading-6 md:leading-6 max-w-[600px] text-center transition-all duration-500`}
+            } relative text-sm  leading-7 max-w-[600px] text-center transition-all duration-500`}
           >
             {subtitle}
           </p>
