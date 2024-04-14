@@ -14,8 +14,6 @@ const getData = async () => {
   return { hotelCenters: hotelCenters as HotelCenter[] };
 };
 
-export const dynamic = "force-dynamic";
-
 const Header = async () => {
   const data = await getData();
 
