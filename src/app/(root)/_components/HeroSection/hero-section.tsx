@@ -21,7 +21,7 @@ const HeroSection = async () => {
   }
 
   return (
-    <section className="w-full h-[450px] relative">
+    <section className="w-full h-[420px] md:h-[440px] lg:h-[450px] xl:h-[450px] relative">
       <SliderCarousel dataSlides={data} />
     </section>
   );

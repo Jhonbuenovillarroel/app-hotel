@@ -43,7 +43,7 @@ const ShoppingCart = () => {
         </div>
       </SheetTrigger>
       <SheetContent
-        className={`border-none overflow-y-scroll ${styles["sheet-content"]}`}
+        className={`border-none overflow-y-scroll ${styles["sheet-content"]} z-[80]`}
       >
         <SheetHeader>
           <SheetTitle>Resumen de compra</SheetTitle>

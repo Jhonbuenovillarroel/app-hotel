@@ -108,11 +108,13 @@ const BookingForm = ({
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className={`grid ${
-            positioning === "horizontal" ? "grid-cols-5" : "grid-cols-1"
+            positioning === "horizontal"
+              ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
+              : "grid-cols-1"
           } max-w-[1200px] w-full ${
             positioning === "horizontal"
-              ? "max-w-[1200px] gap-4"
-              : "max-w-[320px] gap-2"
+              ? "max-w-[1200px] gap-3 md:gap-4 md:gap-y-6"
+              : "max-w-[280px] gap-2"
           } items-start justify-center ${className}`}
         >
           <FormField
@@ -143,7 +145,7 @@ const BookingForm = ({
                       />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="relative z-[60]">
                     {hotelCenters.map((hotelCenter) => (
                       <SelectItem key={hotelCenter.id} value={hotelCenter.name}>
                         {hotelCenter.name}
@@ -171,7 +173,7 @@ const BookingForm = ({
                       <SelectValue placeholder="Select a verified email to display" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="relative z-[60]">
                     {Array.from(Array(5), (_, i) => i + 1).map((item, i) => (
                       <SelectItem key={i} value={`${item}`}>
                         {item}
@@ -198,7 +200,7 @@ const BookingForm = ({
                       <SelectValue placeholder="Select a verified email to display" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="relative z-[60]">
                     {Array.from(Array(5), (_, i) => i).map((item, i) => (
                       <SelectItem key={i} value={`${item}`}>
                         {`${item}`}
@@ -211,15 +213,19 @@ const BookingForm = ({
             )}
           />
 
-          <div className="flex flex-col gap-2 items-start">
-            <p className="opacity-0 pointer-events-none select-none">a</p>
-            <Button
-              type="submit"
-              variant={"bookingFormButton"}
-              className="rounded-none w-full"
-            >
-              <p className="select-none">Buscar</p>
-            </Button>
+          <div className="w-full flex flex-col gap-2 items-center justify-center xl:items-start md:col-span-2 lg:col-span-4 xl:col-span-1">
+            <div className="w-full flex flex-col xl:gap-2">
+              <p className="opacity-0 pointer-events-none select-none hidden xl:flex">
+                a
+              </p>
+              <Button
+                type="submit"
+                variant={"bookingFormButton"}
+                className="rounded-none w-full mt-2 md:mt-1 xl:mt-0"
+              >
+                <p className="select-none">Buscar</p>
+              </Button>
+            </div>
           </div>
         </form>
       </Form>

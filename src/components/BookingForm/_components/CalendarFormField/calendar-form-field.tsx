@@ -70,7 +70,10 @@ const CalendarFormField = ({ form, name, label }: Props) => {
                   </Button>
                 </FormControl>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent
+                className="w-auto p-0 relative z-[60]"
+                align="start"
+              >
                 <Calendar
                   initialFocus
                   mode="range"

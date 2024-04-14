@@ -54,7 +54,10 @@ const UserProfile = () => {
                     </>
                   ) : (
                     <>
-                      <p>{session.user?.name && session.user?.name[0]}</p>
+                      <p>
+                        {session.user?.name &&
+                          session.user?.name[0].toUpperCase()}
+                      </p>
                     </>
                   )}
                 </>
