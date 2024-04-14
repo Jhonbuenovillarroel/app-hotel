@@ -32,7 +32,7 @@ const UserProfile = () => {
 
   return (
     <DropdownMenu modal={false} onOpenChange={() => {}}>
-      <DropdownMenuTrigger className=" data-[state=open]:rotate-child-180 outline-none hover:bg-zinc-200 dark:hover:bg-zinc-900 transition-all duration-300 px-3 rounded-md py-2">
+      <DropdownMenuTrigger className=" data-[state=open]:rotate-child-180 outline-none rounded-md">
         <div className="flex items-center gap-2">
           <div className=" data-[state=open]:bg-black">
             <div

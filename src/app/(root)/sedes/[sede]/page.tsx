@@ -28,8 +28,8 @@ const Page = async ({ params }: { params: { sede: string } }) => {
   return (
     <main>
       <section className="py-4">
-        <div className="flex justify-between px-10 items-center pt-10">
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-7 md:flex-row md:justify-between md:gap-8 px-10 items-center pt-10">
+          <div className=" max-w-[600px] flex flex-col gap-3">
             <p className="text-4xl font-semibold">{data.name}</p>
             <p>{data.description}</p>
             <p className="flex items-center gap-1">
@@ -40,7 +40,7 @@ const Page = async ({ params }: { params: { sede: string } }) => {
           <div>
             <Link
               href={`/sedes/${params.sede}/habitaciones`}
-              className="w-[280px] h-12 flex items-center justify-center rounded-md gap-2 bg-gold-hr-dark hover:gap-3 hover:scale-105 transition-all duration-300"
+              className="w-full min-w-[260px] h-12 flex items-center text-white justify-center rounded-md gap-2 bg-gold-hr-dark hover:gap-3 hover:scale-105 transition-all duration-300"
             >
               <div className="flex items-center gap-2">
                 <BedDouble className="w-4 h-4" />
@@ -51,19 +51,19 @@ const Page = async ({ params }: { params: { sede: string } }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 pt-16 pb-10 w-full mx-auto max-w-[600px]">
-          <div className="flex flex-col gap-3 justify-center items-center rounded-md py-4 hover:bg-zinc-800 hover:scale-105 transition-all duration-300">
+        <div className="flex flex-wrap items-center justify-center gap-4 pt-16 pb-10 w-full mx-auto max-w-[600px]">
+          <div className="flex flex-col min-w-[180px] gap-3 justify-center items-center rounded-md py-4 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:scale-105 transition-all duration-300">
             <Wifi className="w-10 h-10 text-gold-hr" strokeWidth={1.5} />
             <p className="text-base">Wi-Fi</p>
           </div>
 
-          <div className="flex flex-col gap-3 justify-center items-center rounded-md py-4 hover:bg-zinc-800 hover:scale-105 transition-all duration-300">
+          <div className="flex flex-col min-w-[180px] gap-3 justify-center items-center rounded-md py-4 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:scale-105 transition-all duration-300">
             <CarFront className="w-10 h-10 text-gold-hr" strokeWidth={1.5} />
             <p className="text-base">
               {data.garage ? "Cochera (Gratis)" : "Sin Cochera"}
             </p>
           </div>
-          <div className="flex flex-col gap-3 w-full justify-center items-center rounded-md py-4 hover:bg-zinc-800 hover:scale-105 transition-all duration-300">
+          <div className="flex flex-col min-w-[180px] gap-3 justify-center items-center rounded-md py-4 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:scale-105 transition-all duration-300">
             <Phone className="w-10 h-10 text-gold-hr" strokeWidth={1.5} />
             <Accordion type="single" collapsible className="">
               <AccordionItem value="item-1" className="border-none">
@@ -71,8 +71,12 @@ const Page = async ({ params }: { params: { sede: string } }) => {
                   Contacto
                 </AccordionTrigger>
                 <AccordionContent className="border-none py-0">
-                  <p className="text-sm text-zinc-300">{data.phone}</p>
-                  <p className="text-sm text-zinc-300">{data.cellPhone}</p>
+                  <p className="text-sm text-zinc-800 dark:text-zinc-300">
+                    {data.phone}
+                  </p>
+                  <p className="text-sm text-zinc-800 dark:text-zinc-300">
+                    {data.cellPhone}
+                  </p>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

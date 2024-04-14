@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -13,35 +12,105 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
+import styles from "./navbar.module.css";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import Image from "next/image";
 
 interface Props {
   hotelCentersData: HotelCenter[];
 }
 
 export default function Navbar({ hotelCentersData }: Props) {
+  const [showMenuPopup, setShowMenuPopup] = React.useState(false);
+
   return (
-    <NavigationMenu className="hidden sm:flex">
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Sedes</NavigationMenuTrigger>
-          <NavigationMenuContent className="">
-            <ul className="grid lg:grid-cols-2 gap-2 w-[550px] p-4">
-              {hotelCentersData.map((hotelCenter) => (
-                <ListItem
-                  key={hotelCenter.name}
-                  title={hotelCenter.name}
-                  href={`/sedes/${hotelCenter.urlSegment}`}
-                >
-                  {hotelCenter.address}
-                </ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <>
+      <div className="flex sm:hidden">
+        <div className="cursor-pointer" onClick={() => setShowMenuPopup(true)}>
+          <Menu className="w-6 h-6" />
+        </div>
+        <div
+          className={`fixed top-0 right-0 left-0 cursor-pointer w-full bg-white dark:bg-zinc-950 z-[10] overflow-hidden ${
+            showMenuPopup ? `h-full opacity-100` : "h-0 opacity-0"
+          } flex flex-col items-center justify-center transition-all duration-500`}
+        >
+          <div className="w-full max-w-[150px]">
+            <Image
+              priority
+              src={"/images/logo_hospedaje.png"}
+              className="w-full max-w-[100px] mx-auto mb-4"
+              width={300}
+              height={150}
+              alt="Logo Hospedaje"
+            />
+            <Link
+              href={`/`}
+              className="font-medium"
+              onClick={() => setShowMenuPopup(false)}
+            >
+              Home
+            </Link>
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1" className="border-none">
+                <AccordionTrigger className="w-full hover:no-underline">
+                  Sedes
+                </AccordionTrigger>
+                <AccordionContent className="w-full ">
+                  <ul className="grid lg:grid-cols-2 gap-2">
+                    {hotelCentersData.map((hotelCenter) => (
+                      <Link
+                        onClick={() => setShowMenuPopup(false)}
+                        key={hotelCenter.name}
+                        href={`/sedes/${hotelCenter.urlSegment}`}
+                      >
+                        {hotelCenter.name}
+                      </Link>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+
+          <div
+            className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center"
+            onClick={() => {
+              setShowMenuPopup(false);
+            }}
+          >
+            <X className="w-5 h-5" />
+          </div>
+        </div>
+      </div>
+
+      <NavigationMenu className="hidden sm:flex">
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Sedes</NavigationMenuTrigger>
+            <NavigationMenuContent className="">
+              <ul className="grid lg:grid-cols-2 gap-2 w-[550px] p-4">
+                {hotelCentersData.map((hotelCenter) => (
+                  <ListItem
+                    key={hotelCenter.name}
+                    title={hotelCenter.name}
+                    href={`/sedes/${hotelCenter.urlSegment}`}
+                  >
+                    {hotelCenter.address}
+                  </ListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </>
   );
 }
 
