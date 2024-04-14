@@ -110,7 +110,7 @@ const SliderCarousel = ({ dataSlides }: Props) => {
       ))}
 
       <div
-        className={`absolute flex flex-col items-center gap-8 cursor-pointer bottom-12 right-1/2 translate-x-1/2 z-[20]`}
+        className={`absolute flex flex-col items-center gap-8 cursor-pointer bottom-12 right-1/2 translate-x-1/2 z-[40]`}
       >
         <div className={`flex gap-4`}>
           {Object.entries(slides).map((slide, i) => (

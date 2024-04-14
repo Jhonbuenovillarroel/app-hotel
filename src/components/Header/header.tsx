@@ -20,7 +20,7 @@ const Header = async () => {
 
   return (
     <header
-      className={`sticky z-[30] top-0 bg-[rgba(250,250,250,1)] dark:bg-[rgba(0,0,0,0.85)] text-black dark:text-white right-0 left-0 w-full px-6 py-2 flex justify-between items-center`}
+      className={`sticky z-[50] top-0 bg-[rgba(250,250,250,1)] dark:bg-[rgba(0,0,0,0.85)] text-black dark:text-white right-0 left-0 w-full px-6 py-2 flex justify-between items-center`}
     >
       <div className="flex items-center gap-4">
         <Link href={`/`}>
