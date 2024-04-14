@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
   const session = await getToken({
     req,
     cookieName:
-      process.env.VERCEL_ENV === "development"
+      process.env.NODE_ENV === "development"
         ? "next-auth.session-token"
         : "__Secure-next-auth.session-token",
     secret: process.env.NEXTAUTH_SECRET,
