@@ -3,6 +3,8 @@ import HeroSection from "./_components/HeroSection/hero-section";
 import BookingSection from "./_components/BookingSection/booking-section";
 import OfficeSection from "./_components/OfficeSection/office-section";
 
+export const dynamic = "force-dynamic";
+
 const Page = () => {
   return (
     <main>
