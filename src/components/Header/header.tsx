@@ -6,7 +6,6 @@ import Link from "next/link";
 import UserProfile from "./_components/UserProfile/user-profile";
 import ShoppingCart from "./_components/ShoppingCart/shopping-cart";
 import ToggleTheme from "../ToggleTheme/toggle-theme";
-import axios from "axios";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import { getAllHotelCenters } from "@/db/hotel-center/getAllHotelCenters";
 
@@ -14,6 +13,8 @@ const getData = async () => {
   const hotelCenters = await getAllHotelCenters();
   return { hotelCenters: hotelCenters as HotelCenter[] };
 };
+
+export const dynamic = "force-dynamic";
 
 const Header = async () => {
   const data = await getData();
