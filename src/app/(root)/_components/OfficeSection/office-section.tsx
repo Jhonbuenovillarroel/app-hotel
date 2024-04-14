@@ -1,7 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
+import { useSession } from "next-auth/react";
 
-const OfficeSection = async () => {
+const OfficeSection = () => {
+  const { data: session } = useSession();
+
+  console.log(session);
+
   return (
     <section className="pb-20 pt-6">
       <h2 className="text-3xl font-medium text-center">
