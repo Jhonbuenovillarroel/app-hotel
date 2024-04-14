@@ -33,7 +33,7 @@ const AvailableRooms = async ({ searchParams }: Props) => {
 
   return (
     <>
-      {data.length ? (
+      {!!data.length ? (
         <>
           <div className="flex flex-col gap-16 px-16">
             {data.map((room) => (

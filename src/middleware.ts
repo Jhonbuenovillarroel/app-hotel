@@ -11,7 +11,6 @@ export async function middleware(req: NextRequest) {
         : "__Secure-next-auth.session-token",
     secret: process.env.NEXTAUTH_SECRET,
   });
-  // console.log(session);
 
   if (session && pathname.startsWith("/panel-administracion")) {
     if (session.role === "customer") {

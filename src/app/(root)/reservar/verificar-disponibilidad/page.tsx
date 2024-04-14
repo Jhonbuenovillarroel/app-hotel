@@ -2,6 +2,8 @@ import React from "react";
 import AvailableRooms from "./_components/AvailableRooms/available-rooms";
 import SideBar from "./_components/SideBar/side-bar";
 
+export const dynamic = "force-dynamic";
+
 const Page = ({
   searchParams,
 }: {
