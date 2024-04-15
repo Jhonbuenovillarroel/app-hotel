@@ -33,11 +33,11 @@ const SideBar = () => {
   const [showSideBar, setShowSideBar] = useState(false);
 
   return (
-    <div className="fixed lg:relative z-[60]">
+    <div className="fixed lg:relative  z-[60]">
       <aside
         className={`fixed lg:sticky ${
           showSideBar ? "w-64" : "w-0 md:w-10"
-        } pt-6 pb-8 top-0 bottom-0 z-[10] bg-zinc-100 dark:bg-zinc-950 overflow-y-scroll overflow-x-hidden flex flex-col flex-none h-auto gap-3 min-h-screen ${
+        } pt-6 pb-8 top-0 bottom-0 z-[10] bg-zinc-100 dark:bg-zinc-950 overflow-scroll flex flex-col flex-none max-h-screen gap-3 min-h-screen ${
           showSideBar ? "dashboard-sidebar" : `${styles["hide-scrollbar"]}`
         } transition-all duration-700`}
       >
