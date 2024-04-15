@@ -67,7 +67,7 @@ const EditRoomTypeForm = ({ roomType }: Props) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-full">
+    <div className="flex items-center justify-center min-h-screen w-full">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
