@@ -26,7 +26,7 @@ const ActionsColumn = ({ row }: Props) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="hover:bg-zinc-800 w-fit px-2 py-1.5 rounded-md transition-all duration-200">
+      <DropdownMenuTrigger className="hover:bg-zinc-300 dark:hover:bg-zinc-800 w-fit px-2 py-1.5 rounded-md transition-all duration-200">
         <MoreHorizontal className="w-4 h-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>

@@ -1,9 +1,10 @@
 import React from "react";
 import FormEditService from "./_components/Form/form";
 import { Service } from "@/types/Room/service";
+import { getServiceById as getServiceByIdDatabase } from "@/db/services/get-by-id";
 
 const getServiceById = async (serviceId: string): Promise<Service> => {
-  const service = await getServiceById(serviceId);
+  const service = await getServiceByIdDatabase(serviceId);
   return service as Service;
 };
 

@@ -1,11 +1,11 @@
 import React from "react";
 import FormEditAmenitie from "./_components/Form/form";
-import axios from "axios";
 import { Amenitie } from "@/types/Room/amenitie";
+import { getAmenitieById as getAmenitieByIdDatabase } from "@/db/amenities/get-by-id";
 
 const getAmenitieById = async (amenitieId: string): Promise<Amenitie> => {
-  const amenitie = await getAmenitieById(amenitieId);
-  return amenitie;
+  const amenitie = await getAmenitieByIdDatabase(amenitieId);
+  return amenitie as Amenitie;
 };
 
 const Page = async ({ params }: { params: { amenitieId: string } }) => {

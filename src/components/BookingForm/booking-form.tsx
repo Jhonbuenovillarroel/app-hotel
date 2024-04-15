@@ -107,10 +107,10 @@ const BookingForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={`grid ${
+          className={`${
             positioning === "horizontal"
-              ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
-              : "grid-cols-1"
+              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
+              : "flex flex-col"
           } max-w-[1200px] w-full ${
             positioning === "horizontal"
               ? "max-w-[1200px] gap-3 md:gap-4 md:gap-y-6"

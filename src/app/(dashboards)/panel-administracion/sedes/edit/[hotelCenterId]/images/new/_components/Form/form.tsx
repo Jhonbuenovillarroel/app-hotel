@@ -76,12 +76,12 @@ const FormAddImages = ({ hotelCenterId }: Props) => {
               <section className="w-full h-40">
                 <div
                   {...getRootProps()}
-                  className={`border border-dashed w-full h-full flex items-center justify-center cursor-pointer ${
-                    isDragActive ? " bg-zinc-800  " : ""
-                  } hover:border-gold-hr hover:text-gold-hr transition-all duration-300`}
+                  className={`border border-dashed px-6 border-zinc-400 dark:border-zinc-300 w-full h-full flex items-center justify-center cursor-pointer ${
+                    isDragActive ? " bg-zinc-300 dark:bg-zinc-800  " : ""
+                  } hover:border-gold-hr-dark dark:hover:border-gold-hr hover:text-gold-hr-dark dark:hover:text-gold-hr transition-all duration-300`}
                 >
                   <input {...getInputProps()} />
-                  <p className="text-sm">
+                  <p className="text-sm text-center">
                     {isDragActive
                       ? "Suelta los archivos en esta zona"
                       : "Haz click o arrastra los archivos aquí"}

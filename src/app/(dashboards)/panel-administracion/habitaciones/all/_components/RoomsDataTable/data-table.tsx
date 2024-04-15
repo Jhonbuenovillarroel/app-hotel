@@ -107,7 +107,7 @@ const RoomsDataTable = <TData, TValue>({
           </DropdownMenu>
         </div>
       </div>
-      <div className="border border-zinc-800 rounded-md">
+      <div className="border broder-zinc-300 dark:border-zinc-800 rounded-md">
         <Table className="">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -138,7 +138,7 @@ const RoomsDataTable = <TData, TValue>({
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}
-                        className="border-t border-zinc-800"
+                        className="border-t border-zinc-300 dark:border-zinc-800"
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
@@ -154,7 +154,7 @@ const RoomsDataTable = <TData, TValue>({
                 <TableRow>
                   <TableCell
                     colSpan={columns.length}
-                    className="border-t border-zinc-800 text-center py-10"
+                    className="border-t border-zinc-300 dark:border-zinc-800 text-center py-10"
                   >
                     No hay resultados
                   </TableCell>

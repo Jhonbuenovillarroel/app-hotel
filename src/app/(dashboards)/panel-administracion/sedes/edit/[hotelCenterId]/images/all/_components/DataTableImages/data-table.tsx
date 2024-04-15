@@ -31,7 +31,7 @@ const DataTableImages = <TData, TValue>({
   });
 
   return (
-    <div className="border border-zinc-800 rounded-md w-full max-w-[800px] my-10">
+    <div className="border border-zinc-300 dark:border-zinc-800 rounded-md w-full max-w-[800px] my-10">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -61,7 +61,7 @@ const DataTableImages = <TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="border-t border-zinc-800"
+                      className="border-t border-zinc-300 dark:border-zinc-800"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -77,7 +77,7 @@ const DataTableImages = <TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="border-t border-zinc-800 text-center py-10"
+                  className="border-t border-zinc-300 dark:border-zinc-800 text-center py-10"
                 >
                   No hay resultados
                 </TableCell>

@@ -35,7 +35,7 @@ const DataTable = <TData, TValue>({
 
   return (
     <div className="w-full flex items-center justify-center">
-      <Table className="border rounded-md border-zinc-800">
+      <Table className="border rounded-md border-zinc-300 dark:border-zinc-800">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -81,7 +81,7 @@ const DataTable = <TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="text-center py-10"
+                  className="text-center py-10 border-t border-zinc-300 dark:border-zinc-800"
                 >
                   No hay resultados
                 </TableCell>

@@ -1,9 +1,6 @@
-.sidebar::-webkit-scrollbar {
-  background-color: rgb(40, 40, 40);
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0px;
 }
-.sidebar::-webkit-scrollbar:vertical {
-  width: 4px;
-}
-.sidebar::-webkit-scrollbar-thumb {
-  background-color: rgb(80, 80, 80);
-}
+/* .hide-scrollbar::-webkit-scrollbar:vertical {
+  display: none;
+} */

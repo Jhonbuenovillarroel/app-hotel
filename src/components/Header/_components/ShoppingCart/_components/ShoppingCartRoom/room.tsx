@@ -20,7 +20,7 @@ const ShoppingCartRoom = ({ room }: Props) => {
     <div className="relative w-full h-full ">
       <Link
         href={`/sedes/${room.hotelcenter.name}/habitaciones/${room.id}`}
-        className="w-full h-full flex items-center justify-start px-4 py-3 border-t border-zinc-800 hover:bg-zinc-800 rounded-md transition-all duration-300"
+        className="w-full h-full flex items-center justify-start px-4 py-3 border-t border-zinc-300 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md transition-all duration-300"
       >
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-4">
@@ -34,7 +34,7 @@ const ShoppingCartRoom = ({ room }: Props) => {
               </div>
               <Image
                 className="w-full h-fit"
-                src={room.images[0].url}
+                src={room.images[0]?.url ? room.images[0].url : ""}
                 width={150}
                 height={150}
                 alt={room.roomtype.name}

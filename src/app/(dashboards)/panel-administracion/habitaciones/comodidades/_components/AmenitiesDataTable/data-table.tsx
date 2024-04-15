@@ -78,7 +78,7 @@ const AmenitiesDataTable = <TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="text-center py-10 border-t border-zinc-800"
+                  className="text-center py-10 border-t border-zinc-300 dark:border-zinc-800"
                 >
                   No hay resultados
                 </TableCell>

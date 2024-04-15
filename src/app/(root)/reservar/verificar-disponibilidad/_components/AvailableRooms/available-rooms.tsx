@@ -35,7 +35,7 @@ const AvailableRooms = async ({ searchParams }: Props) => {
     <>
       {!!data.length ? (
         <>
-          <div className="flex flex-col gap-16 px-16">
+          <div className="w-full flex flex-col gap-16 px-6 sm:px-12 xl:px-16 order-2 md:order-1">
             {data.map((room) => (
               <Room key={room.id} room={room} />
             ))}
@@ -43,7 +43,7 @@ const AvailableRooms = async ({ searchParams }: Props) => {
         </>
       ) : (
         <>
-          <div className="flex flex-col gap-2 items-center w-full justify-start pt-12">
+          <div className="flex flex-col gap-2 items-center w-full justify-start px-6 pt-12 order-2 md:order-1">
             <BedDouble className="w-8 h-8" strokeWidth={1.2} />
             <span>No se encontró ninguna habitacion</span>
           </div>

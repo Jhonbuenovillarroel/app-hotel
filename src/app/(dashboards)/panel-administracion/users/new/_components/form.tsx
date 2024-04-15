@@ -101,10 +101,10 @@ const UserForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 w-full max-w-[800px] px-6"
+          className="space-y-4 w-full max-w-[320px] sm:max-w-[800px] px-6"
         >
           <h2 className="text-xl font-medium">Crea un nuevo Usuario</h2>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
             <FormField
               control={form.control}
               name="username"

@@ -148,11 +148,11 @@ const EditRoomForm = ({ roomTypes, amenities, hotelCenters, room }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full max-w-[800px] space-y-5"
+          className="w-full max-w-[360px] sm:max-w-[800px] space-y-5"
         >
           <h2 className="text-2xl font-medium">Edita la habitación</h2>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
             <FormField
               control={form.control}
               name="roomType"

@@ -54,8 +54,10 @@ const Room = ({ room }: Props) => {
   }, [shoppingCartStore.rooms, roomIsSelected, room]);
 
   return (
-    <div className="flex flex-col justify-between gap-12 w-full max-w-[900px]">
-      <div className={`w-[500px] order-1`}>
+    <div className="w-full flex flex-col justify-between gap-12 max-w-[900px]">
+      <div
+        className={`w-[260px] md:w-[320px] lg:w-[400px] xl:w-[500px] order-1`}
+      >
         <Carousel className="rounded-md overflow-hidden">
           <CarouselContent>
             {room.images.map((image) => (
@@ -128,22 +130,22 @@ const Room = ({ room }: Props) => {
           </div>
 
           {selected ? (
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap w-full items-center gap-4">
               <Button
                 variant={"selectedButton"}
-                className="flex items-center gap-2 h-12"
+                className="flex items-center w-full max-w-[240px] gap-2 h-12"
               >
                 <Check className="w-4 h-4" />
-                <span>Agregada a tus reservas</span>
+                <p className="w-full text-wrap">Agregada a tus reservas</p>
               </Button>
               <Button
                 variant={"bookingFormButton"}
-                className="h-12 font-medium bg-zinc-800 hover:bg-zinc-700 px-8 w-[180px] flex items-center justify-center gap-2 text-sm rounded-md transition-all duration-300"
+                className="h-12 font-medium w-full max-w-[130px] bg-zinc-800 hover:bg-zinc-700 px-8 flex items-center justify-center gap-2 text-sm rounded-md transition-all duration-300"
                 onClick={() => {
                   shoppingCartStore.removeRoom(room.id);
                 }}
               >
-                <span>Quitar</span>
+                <p className="text-wrap">Quitar</p>
                 <Trash2 className="w-4 h-4" />
               </Button>
             </div>
@@ -155,7 +157,7 @@ const Room = ({ room }: Props) => {
                     <Button
                       variant={"bookingFormButton"}
                       disabled
-                      className="h-12 font-medium px-8 w-[240px] flex items-center justify-center gap-2 text-sm hover:scale-110 rounded-md transition-all duration-300"
+                      className="h-12 font-medium px-8 flex items-center justify-center gap-2 text-sm hover:scale-110 rounded-md transition-all duration-300"
                     >
                       <Loader2 className="animate-spin" />
                       <span>Agregando...</span>
@@ -166,7 +168,7 @@ const Room = ({ room }: Props) => {
                 <>
                   <Button
                     variant={"bookingFormButton"}
-                    className="h-12 font-medium px-8 w-[240px] flex items-center justify-center gap-2 text-sm hover:scale-110 rounded-md transition-all duration-300"
+                    className="h-12 font-medium px-6 flex items-center justify-center gap-2 text-sm hover:scale-110 rounded-md transition-all duration-300"
                     onClick={() => {
                       setAddingRoom(true);
 

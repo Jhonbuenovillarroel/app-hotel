@@ -86,11 +86,11 @@ const FormEditUser = ({ user }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full max-w-[600px] space-y-4"
+          className="w-full max-w-[320px] sm:max-w-[600px] space-y-4"
         >
           <h2 className="text-lg font-medium">Datos de usuario</h2>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
             <FormField
               control={form.control}
               name="username"
@@ -158,7 +158,7 @@ const FormEditUser = ({ user }: Props) => {
       </Form>
       <Link
         href={`/recuperar-contrasena`}
-        className="text-sm font-medium border px-4 h-12 rounded-md border-zinc-800 flex items-center justify-center hover:bg-zinc-800 transition-all duration-150"
+        className="text-sm font-medium border px-4 h-12 rounded-md border-zinc-300 dark:border-zinc-800 flex items-center justify-center hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-150"
       >
         Cambiar Contraseña
       </Link>

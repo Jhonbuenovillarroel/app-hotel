@@ -110,11 +110,11 @@ const EditForm = ({ hotelCenter }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 w-full max-w-[800px] px-6"
+          className="space-y-4 w-full max-w-[360px] sm:max-w-[800px] px-6"
         >
           <h2 className="text-2xl font-medium mb-6">Edita la sede</h2>
           <div className="flex flex-col gap-2">
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
               <FormField
                 control={form.control}
                 name="name"
@@ -187,7 +187,7 @@ const EditForm = ({ hotelCenter }: Props) => {
                     <FormLabel>Teléfono</FormLabel>
                     <FormControl>
                       <PhoneInput
-                        className={`${styles["phone-input-container"]}`}
+                        className={`${styles["phone-input-container"]} focus-within:outline-2 focus-within:outline-zinc-800 dark:border-zinc-800 dark:focus-within:outline-2 dark:focus-within:outline-zinc-100`}
                         placeholder="ej. 064 (362866)"
                         {...field}
                       />
@@ -204,7 +204,7 @@ const EditForm = ({ hotelCenter }: Props) => {
                     <FormLabel>Celular</FormLabel>
                     <FormControl>
                       <PhoneInput
-                        className={`${styles["phone-input-container"]}`}
+                        className={`${styles["phone-input-container"]} focus-within:outline-2 focus-within:outline-zinc-800 dark:border-zinc-800 dark:focus-within:outline-2 dark:focus-within:outline-zinc-100`}
                         placeholder="ej. 997706692"
                         {...field}
                       />
@@ -240,7 +240,7 @@ const EditForm = ({ hotelCenter }: Props) => {
                 )}
               />
             </div>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
               <FormField
                 control={form.control}
                 name="description"
@@ -277,14 +277,14 @@ const EditForm = ({ hotelCenter }: Props) => {
       <div className="w-full flex flex-col gap-4 items-center justify-center mb-8">
         <Link
           href={`/panel-administracion/sedes/edit/${hotelCenter.id}/images/all`}
-          className="flex items-center gap-2 text-sm border rounded-md border-zinc-800 hover:bg-zinc-800 transition-all duration-300 px-6 h-12"
+          className="flex items-center gap-2 text-sm border rounded-md border-zinc-300 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 px-6 h-12"
         >
           <Images className="w-4 h-4" />
           <span>Ver Imágenes</span>
         </Link>
         <Link
           href={`/panel-administracion/sedes/edit/${hotelCenter.id}/images/new`}
-          className="flex items-center gap-2 text-sm border rounded-md border-zinc-800 hover:bg-zinc-800 transition-all duration-300 px-6 h-12"
+          className="flex items-center gap-2 text-sm border rounded-md border-zinc-300 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 px-6 h-12"
         >
           <LayoutList className="w-4 h-4" />
           <span>Agregar Imágenes</span>

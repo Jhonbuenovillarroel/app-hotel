@@ -30,8 +30,10 @@ const Page = async ({ params }: { params: { sede: string } }) => {
       <section className="py-4">
         <div className="flex flex-col gap-7 md:flex-row md:justify-between md:gap-8 px-10 items-center pt-10">
           <div className=" max-w-[600px] flex flex-col gap-3">
-            <p className="text-4xl font-semibold">{data.name}</p>
-            <p>{data.description}</p>
+            <p className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
+              {data.name}
+            </p>
+            <p className="text-sm lg:text-base">{data.description}</p>
             <p className="flex items-center gap-1">
               <MapPin strokeWidth={1.5} className="w-4 h-4" />
               <span>{data.address}</span>
@@ -40,7 +42,7 @@ const Page = async ({ params }: { params: { sede: string } }) => {
           <div>
             <Link
               href={`/sedes/${params.sede}/habitaciones`}
-              className="w-full min-w-[260px] h-12 flex items-center text-white justify-center rounded-md gap-2 bg-gold-hr-dark hover:gap-3 hover:scale-105 transition-all duration-300"
+              className="text-sm lg:text-base w-full min-w-[260px] h-12 flex items-center text-white justify-center rounded-md gap-2 bg-gold-hr-dark hover:gap-3 hover:scale-105 transition-all duration-300"
             >
               <div className="flex items-center gap-2">
                 <BedDouble className="w-4 h-4" />

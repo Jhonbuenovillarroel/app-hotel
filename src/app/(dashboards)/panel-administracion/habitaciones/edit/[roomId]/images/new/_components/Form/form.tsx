@@ -75,12 +75,12 @@ const FormAddImages = ({ roomId }: Props) => {
             <section className="w-full h-40">
               <div
                 {...getRootProps()}
-                className={`w-full h-full border border-dashed flex items-center justify-center ${
-                  isDragActive ? "bg-zinc-800" : ""
-                } cursor-pointer hover:border-gold-hr hover:text-gold-hr transition-all duration-300`}
+                className={`w-full px-6 h-full border border-dashed border-zinc-400 dark:border-zinc-300 flex items-center justify-center ${
+                  isDragActive ? "bg-zinc-300 dark:bg-zinc-800" : ""
+                } cursor-pointer hover:border-gold-hr-dark dark:hover:border-gold-hr hover:text-gold-hr-dark dark:hover:text-gold-hr transition-all duration-300`}
               >
                 <input {...getInputProps()} />
-                <p>
+                <p className="text-center text-sm">
                   {isDragActive
                     ? "Suelta las imagenes aquí"
                     : "Haz click o arrastra imagenes aquí"}

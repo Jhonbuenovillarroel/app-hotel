@@ -137,10 +137,10 @@ const CreateRoomForm = ({ roomTypes, amenities, hotelCenters }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-3 w-full max-w-[750px] py-8"
+          className="space-y-3 w-full max-w-[360px] sm:max-w-[800px] py-8"
         >
           <h2 className="font-medium text-xl">Crear nueva habitación</h2>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
             <FormField
               control={form.control}
               name="roomType"

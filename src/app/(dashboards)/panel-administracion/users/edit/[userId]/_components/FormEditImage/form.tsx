@@ -39,7 +39,7 @@ const FormEditImage = ({ user }: Props) => {
           <DialogTrigger>
             <div className={`relative w-28 h-28 ${styles["image-container"]}`}>
               <div
-                className={`absolute w-full h-full flex items-center justify-center flex-col gap-1 bg-zinc-800 rounded-full ${styles.shadow}`}
+                className={`absolute w-full h-full flex items-center justify-center flex-col gap-1 bg-zinc-200 dark:bg-zinc-800 rounded-full ${styles.shadow}`}
               >
                 <span className="text-xs">Cambiar Foto</span>
                 <Camera className="w-4 h-4" />
@@ -55,14 +55,14 @@ const FormEditImage = ({ user }: Props) => {
                 />
               ) : (
                 <>
-                  <div className="border rounded-full border-zinc-800 w-full h-full flex items-center justify-center">
+                  <div className="border rounded-full border-zinc-300 dark:border-zinc-800 w-full h-full flex items-center justify-center">
                     <p className="text-3xl">{user.username[0]}</p>
                   </div>
                 </>
               )}
             </div>
           </DialogTrigger>
-          <DialogTrigger className="text-white border flex items-center gap-2 h-12 px-5 rounded-md text-sm border-zinc-800 hover:bg-zinc-800 transition-all duration-200">
+          <DialogTrigger className="text-black dark:text-white border flex items-center gap-2 h-12 px-5 rounded-md text-sm border-zinc-300 dark:border-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-800 transition-all duration-200">
             <ImageIcon className="w-4 h-4" strokeWidth={1.5} />
             <span>Cambiar Imagen</span>
           </DialogTrigger>
@@ -147,12 +147,12 @@ const FormEditImage = ({ user }: Props) => {
                     <section className="w-full h-32">
                       <div
                         {...getRootProps()}
-                        className={`w-full text-sm cursor-pointer flex items-center justify-center h-full border border-dashed hover:border-gold-hr hover:text-gold-hr transition-all duration-300 ${
+                        className={`w-full text-sm px-6 cursor-pointer flex items-center justify-center h-full border border-dashed border-zinc-400 dark:border-zinc-300 hover:border-gold-hr-dark dark:hover:border-gold-hr hover:text-gold-hr-dark dark:hover:text-gold-hr transition-all duration-300 ${
                           isDragActive ? "bg-zinc-800" : ""
                         }`}
                       >
                         <input {...getInputProps()} />
-                        <p>
+                        <p className="text-center">
                           {isDragActive
                             ? "Suelta la imagen aquí"
                             : "Haz click o arrastra la imagen aquí"}

@@ -2,9 +2,10 @@ import React from "react";
 import FormEditUser from "./_components/Form/form";
 import { User } from "@/types/User/user";
 import FormEditImage from "./_components/FormEditImage/form";
+import { getUserById as getUserByIdDatabase } from "@/db/users/get-by-id";
 
 const getUserById = async (userId: string): Promise<User> => {
-  const user = await getUserById(userId);
+  const user = await getUserByIdDatabase(userId);
   return user as User;
 };
 

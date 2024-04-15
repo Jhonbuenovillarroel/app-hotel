@@ -1,10 +1,10 @@
 .phone-input-container input {
-  background-color: rgb(10, 10, 10);
+  background-color: transparent;
   outline: none;
   padding: 0 4px;
 }
 .phone-input-container {
-  border: 1px solid rgb(32, 32, 32);
+  border: 1px solid rgb(226, 226, 226);
   height: 40px;
   display: flex;
   align-items: center;
@@ -13,7 +13,4 @@
   transition: all;
   transition-duration: 300ms;
   outline: 2px solid transparent;
-}
-.phone-input-container:focus-within {
-  outline: 2px solid rgb(240, 240, 240);
 }

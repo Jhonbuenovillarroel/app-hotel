@@ -1,9 +1,10 @@
 import React from "react";
 import EditRoomTypeForm from "./_components/Form/form";
 import { RoomType } from "@/types/Room/RoomType";
+import { getRoomTypeById as getRoomTypeByIdDatabase } from "@/db/room-types/get-by-id";
 
 const getRoomTypeById = async (roomTypeId: string): Promise<RoomType> => {
-  const roomType = await getRoomTypeById(roomTypeId);
+  const roomType = await getRoomTypeByIdDatabase(roomTypeId);
   return roomType as RoomType;
 };
 

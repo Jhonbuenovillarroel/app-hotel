@@ -15,7 +15,7 @@ const Page = ({
 }) => {
   return (
     <main>
-      <section className="flex justify-between py-12">
+      <section className="flex flex-col md:flex-row gap-16 justify-start items-start xl:items-start xl:justify-between py-12">
         <AvailableRooms searchParams={searchParams} />
         <SideBar searchParams={searchParams} />
       </section>

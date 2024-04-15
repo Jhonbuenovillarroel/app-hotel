@@ -23,7 +23,7 @@ const buttonVariants = cva(
         bookingFormButton:
           "text-white bg-[#bd9b57] hover:bg-[#cbab69] transition-all duration-200",
         selectedButton:
-          "text-white bg-transparent border border-zinc-800 hover:bg-zinc-800 transition-all duration-200 ",
+          "text-zinc-950 dark:text-white bg-transparent border border-zinc-300 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-200 ",
         edit: "text-white border border-zinc-800 hover:bg-zinc-800 transition-all duration-200",
       },
       size: {

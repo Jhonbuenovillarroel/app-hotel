@@ -22,7 +22,7 @@ const Page = async ({ params }: { params: { roomId: string } }) => {
       <section className="w-full flex flex-col gap-8 items-center justify-center my-10">
         <Link
           href={`/panel-administracion/habitaciones/edit/${roomId}/images/new`}
-          className="flex gap-2 items-center border border-zinc-800 px-6 h-12 rounded-md hover:bg-zinc-800 transition-all duration-300"
+          className="flex gap-2 items-center border border-zinc-300 dark:border-zinc-800 px-6 h-12 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300"
         >
           <ImagePlus className="w-4 h-4" />
           <span className="text-sm">Agregar Imagenes</span>
