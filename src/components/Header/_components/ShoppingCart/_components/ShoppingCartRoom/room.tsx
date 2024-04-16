@@ -53,7 +53,7 @@ const ShoppingCartRoom = ({ room }: Props) => {
         </div>
       </Link>
       <div
-        className="cursor-pointer absolute top-2 right-2 p-1.5 rounded-md hover:bg-zinc-800 transition-all duration-200"
+        className="cursor-pointer absolute top-2 right-2 p-1.5 rounded-md hover:bg-zinc-300 dark:hover:bg-zinc-800 transition-all duration-200"
         onClick={() => {
           setRemovingRoom(true);
 

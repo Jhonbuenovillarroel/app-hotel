@@ -17,6 +17,7 @@ import {
   ChevronRight,
   Loader2,
   Trash2,
+  AlertCircle,
 } from "lucide-react";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
@@ -33,18 +34,43 @@ interface Props {
 const Room = ({ room, checkIn, checkOut }: Props) => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const [selected, setSelected] = useState(false);
+  const [selectedWithADifferentDate, setSelectedWithADifferentDate] =
+    useState(false);
   const [addingRoom, setAddingRoom] = useState(false);
 
   const roomIsSelected = useCallback(
     (room: RoomType) => {
-      for (let shoppingCartRoom of shoppingCartStore.rooms) {
-        if (shoppingCartRoom.room.id === room.id) {
-          return true;
+      if (shoppingCartStore.rooms.length) {
+        for (let shoppingCartRoom of shoppingCartStore.rooms) {
+          if (shoppingCartRoom.room.id === room.id) {
+            return true;
+          }
         }
       }
       return false;
     },
     [shoppingCartStore.rooms]
+  );
+
+  const roomIsSelectedWithADifferentDate = useCallback(
+    (room: RoomType) => {
+      if (shoppingCartStore.rooms.length) {
+        for (let shoppingCartRoom of shoppingCartStore.rooms) {
+          if (shoppingCartRoom.room.id === room.id) {
+            if (
+              new Date(shoppingCartRoom.checkIn).toLocaleDateString() !==
+                new Date(checkIn).toLocaleDateString() ||
+              new Date(shoppingCartRoom.checkOut).toLocaleDateString() !==
+                new Date(checkOut).toLocaleDateString()
+            ) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    },
+    [shoppingCartStore.rooms, checkIn, checkOut]
   );
 
   useEffect(() => {
@@ -53,7 +79,18 @@ const Room = ({ room, checkIn, checkOut }: Props) => {
     } else {
       setSelected(false);
     }
-  }, [shoppingCartStore.rooms, roomIsSelected, room]);
+
+    if (roomIsSelectedWithADifferentDate(room)) {
+      setSelectedWithADifferentDate(true);
+    } else {
+      setSelectedWithADifferentDate(false);
+    }
+  }, [
+    shoppingCartStore.rooms,
+    roomIsSelected,
+    roomIsSelectedWithADifferentDate,
+    room,
+  ]);
 
   return (
     <div className="w-full flex flex-col justify-between gap-12 max-w-[900px]">
@@ -187,6 +224,22 @@ const Room = ({ room, checkIn, checkOut }: Props) => {
                 </>
               )}
             </>
+          )}
+
+          {selectedWithADifferentDate ? (
+            <>
+              <p className="text-red-400 max-w-[400px] text-sm leading-7">
+                <AlertCircle
+                  className="w-4 h-4 inline mr-1"
+                  strokeWidth={2.4}
+                />
+                Importante: Parece que seleccionaste una fecha diferente de
+                búsqueda, si quieres agregar esta habitación con la nueva fecha,
+                quítala y vuélvela a agregar{" "}
+              </p>
+            </>
+          ) : (
+            <></>
           )}
         </div>
       </div>

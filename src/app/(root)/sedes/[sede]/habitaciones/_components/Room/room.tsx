@@ -103,7 +103,7 @@ const Room = ({ room, hotelCenterId, orderChildren }: Props) => {
 
           <Link
             href={`/sedes/${hotelCenterId}/habitaciones/${room.id}`}
-            className="h-11 font-medium w-[200px] flex items-center justify-center gap-2 text-sm border border-gold-hr-dark bg-gold-hr-dark hover:scale-110 rounded-md transition-all duration-300"
+            className="h-11 text-white font-medium w-[200px] flex items-center justify-center gap-2 text-sm border border-gold-hr-dark bg-gold-hr-dark hover:scale-110 rounded-md transition-all duration-300"
           >
             <span>Ver Detalles</span>
             <ChevronRight className="w-4 h-4" />

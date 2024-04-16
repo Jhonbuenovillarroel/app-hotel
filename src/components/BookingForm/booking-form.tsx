@@ -26,6 +26,8 @@ import { Link } from "lucide-react";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import { useRouter } from "next/navigation";
 import router from "next/router";
+import { addDays, format } from "date-fns";
+import { es } from "date-fns/locale";
 
 export type FormSchemaType = UseFormReturn<
   {
@@ -87,19 +89,25 @@ const BookingForm = ({
           }
         : { id: hotelCenters[0].id, name: hotelCenters[0].name },
       date: defaultValues?.date
-        ? defaultValues.date
-        : { from: new Date(), to: new Date() },
+        ? {
+            from: new Date(defaultValues.date.from),
+            to: new Date(defaultValues.date.to),
+          }
+        : {
+            from: new Date(),
+            to: new Date(format(addDays(new Date(), 3), "MM-dd-yyyy")),
+          },
       adults: defaultValues?.adults ? defaultValues.adults : "1",
       children: defaultValues?.children ? defaultValues.children : "0",
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-
+    console.log(values.date);
     router.push(
       `/reservar/verificar-disponibilidad?hcId=${values.hotelCenter.id}&check-in=${values.date.from}&check-out=${values.date.to}&adults=${values.adults}&children=${values.children}`
     );
+    router.refresh();
   };
 
   return (
@@ -157,7 +165,12 @@ const BookingForm = ({
               </FormItem>
             )}
           />
-          <CalendarFormField form={form} label="Check-in" name="date" />
+          <CalendarFormField
+            defaultDate={defaultValues?.date && defaultValues.date}
+            form={form}
+            label="Check-in - Check-out"
+            name="date"
+          />
           <FormField
             control={form.control}
             name="adults"

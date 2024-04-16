@@ -123,7 +123,7 @@ const ListItem = React.forwardRef<
       <Link legacyBehavior passHref ref={ref} {...props}>
         <NavigationMenuLink
           className={cn(
-            "flex flex-col rounded-md gap-1 px-3 py-2 hover:bg-zinc-900 transition-all duration-150",
+            "flex flex-col rounded-md gap-1 px-5 py-3 hover:bg-zinc-200 dark:hover:bg-zinc-900 transition-all duration-150",
             className
           )}
         >

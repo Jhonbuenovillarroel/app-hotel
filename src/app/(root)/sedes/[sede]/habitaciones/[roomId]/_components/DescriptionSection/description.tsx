@@ -19,9 +19,11 @@ const DescriptionSection = ({ room }: Props) => {
 
   const roomIsSelected = useCallback(
     (room: Room) => {
-      for (let shoppingCartRoom of shoppingCartStore.rooms) {
-        if (shoppingCartRoom.room.id === room.id) {
-          return true;
+      if (shoppingCartStore.rooms.length) {
+        for (let shoppingCartRoom of shoppingCartStore.rooms) {
+          if (shoppingCartRoom.room.id === room.id) {
+            return true;
+          }
         }
       }
       return false;

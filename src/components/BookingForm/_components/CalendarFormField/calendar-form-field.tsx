@@ -25,13 +25,16 @@ interface Props {
   form: FormSchemaType;
   name: "date";
   label: string;
+  defaultDate: { from: Date; to: Date } | undefined;
 }
 
-const CalendarFormField = ({ form, name, label }: Props) => {
-  const [date, setDate] = useState<DateRange | undefined>({
-    from: new Date(),
-    to: addDays(new Date(), 3),
-  });
+const CalendarFormField = ({ form, name, label, defaultDate }: Props) => {
+  const [date, setDate] = useState<DateRange | undefined>(
+    defaultDate || {
+      from: new Date(),
+      to: addDays(new Date(), 3),
+    }
+  );
 
   return (
     <div>
