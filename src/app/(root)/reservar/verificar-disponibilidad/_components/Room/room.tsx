@@ -26,9 +26,11 @@ import { useShoppingCartStore } from "@/store/shoppingCartStore";
 
 interface Props {
   room: RoomType;
+  checkIn: Date;
+  checkOut: Date;
 }
 
-const Room = ({ room }: Props) => {
+const Room = ({ room, checkIn, checkOut }: Props) => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const [selected, setSelected] = useState(false);
   const [addingRoom, setAddingRoom] = useState(false);
@@ -36,7 +38,7 @@ const Room = ({ room }: Props) => {
   const roomIsSelected = useCallback(
     (room: RoomType) => {
       for (let shoppingCartRoom of shoppingCartStore.rooms) {
-        if (shoppingCartRoom.id === room.id) {
+        if (shoppingCartRoom.room.id === room.id) {
           return true;
         }
       }
@@ -59,11 +61,11 @@ const Room = ({ room }: Props) => {
         className={`w-[260px] md:w-[320px] lg:w-[400px] xl:w-[500px] order-1`}
       >
         <Carousel className="rounded-md overflow-hidden">
-          <CarouselContent>
+          <CarouselContent className="">
             {room.images.map((image) => (
               <CarouselItem key={image.id}>
                 <Image
-                  className="w-full h-full"
+                  className=""
                   src={image.url}
                   width={800}
                   height={800}
@@ -173,7 +175,7 @@ const Room = ({ room }: Props) => {
                       setAddingRoom(true);
 
                       setTimeout(() => {
-                        shoppingCartStore.addRoom(room);
+                        shoppingCartStore.addRoom({ room, checkIn, checkOut });
                         setAddingRoom(false);
                         shoppingCartStore.openShoppingCart(true);
                       }, 1000);

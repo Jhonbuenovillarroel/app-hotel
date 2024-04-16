@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UseFormReturn, useForm } from "react-hook-form";
-import { z } from "zod";
+import { date, z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -110,7 +110,11 @@ const BookingForm = ({
           customClass: "text-sm",
         }).then((result) => {
           if (result.isConfirmed) {
-            shoppingCartStore.addRoom(room);
+            shoppingCartStore.addRoom({
+              room,
+              checkIn: values.date.from,
+              checkOut: values.date.to,
+            });
           }
         });
       } else if (data.error) {

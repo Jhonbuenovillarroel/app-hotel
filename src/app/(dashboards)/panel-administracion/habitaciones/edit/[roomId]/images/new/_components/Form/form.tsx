@@ -5,112 +5,96 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
-import Dropzone from "react-dropzone";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { CldUploadWidget } from "next-cloudinary";
+import { Images } from "lucide-react";
+import { Room } from "@/types/Room/room";
 
 interface Props {
-  roomId: string;
+  room: Room;
 }
 
-const FormAddImages = ({ roomId }: Props) => {
+const FormAddImages = ({ room }: Props) => {
   const router = useRouter();
   const [formLoading, setFormLoading] = useState(false);
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   return (
-    <div className="w-full h-full flex flex-col gap-12 items-center justify-center">
-      <form
-        onSubmit={async (e: FormEvent<HTMLFormElement>) => {
-          e.preventDefault();
-          setFormLoading(true);
+    <div className="w-full h-full min-h-screen flex flex-col gap-6 items-center justify-center">
+      <h2 className="text-xl font-medium">Agregar Imagenes</h2>
 
-          const formData = new FormData();
-
-          formData.append("roomId", roomId);
-          imageFiles.map((image, i) => {
-            formData.append(`image${i + 1}`, image);
-          });
+      <CldUploadWidget
+        signatureEndpoint="/api/cloudinary/api/sign-params"
+        onQueuesEnd={async (result: any, { widget }) => {
+          const images = result.info.files.map((file: any) => ({
+            url: file.uploadInfo.secure_url,
+            public_id: file.uploadInfo.public_id,
+          }));
 
           try {
             const { data } = await axios.post(
-              "/api/rooms/api/upload-images",
-              formData
+              `/api/rooms/api/add-uploaded-images`,
+              { roomId: room.id, images: images }
             );
-
-            if (data.error) {
-              toast.error(data.error);
-            } else if (data.ok) {
-              toast.success(data.message);
-              setImageFiles([]);
+            if (data.ok) {
+              toast.success("Imagenes subidas correctamente");
+              widget.close();
               router.refresh();
             }
           } catch (error) {
             toast.error("Algo salió mal, vuelve a intentarlo");
           }
 
-          setTimeout(() => {
-            setFormLoading(false);
-          }, 2100);
+          if (result.info) {
+            setImageUrls([
+              ...imageUrls,
+              ...images.map((image: any) => image.url),
+            ]);
+          }
         }}
-        className="space-y-5 w-full max-w-[500px] pt-12"
+        onError={(result, { widget }) => {
+          setTimeout(() => {
+            toast.error("Ocurió un error durante el proceso");
+            widget.close();
+          }, 300);
+        }}
+        options={{
+          folder: `${process.env.NEXT_PUBLIC_CLOUDINARY_FOLDER}/sedes/${room.hotelcenter.name}/habitaciones/${room.roomNumber}`,
+          maxFiles: 5,
+          multiple: true,
+        }}
       >
-        <h2 className="text-xl font-medium">Agregar Imagenes</h2>
+        {({ open, cloudinary }) => {
+          return (
+            <Button
+              type="button"
+              variant={"bookingFormButton"}
+              onClick={() => {
+                open();
+              }}
+              className="flex items-center gap-2"
+            >
+              <Images className="w-4 h-4" />
+              Subir una imagen
+            </Button>
+          );
+        }}
+      </CldUploadWidget>
 
-        <Dropzone
-          accept={{
-            "image/png": [],
-            "image/jpg": [],
-            "image/jpeg": [],
-            "image/webp": [],
-          }}
-          onDropRejected={() => {
-            toast.error("Sólo puedes subir imagenes");
-          }}
-          onDrop={(acceptedFiles) => {
-            setImageFiles(acceptedFiles);
-          }}
-        >
-          {({ getRootProps, getInputProps, isDragActive }) => (
-            <section className="w-full h-40">
-              <div
-                {...getRootProps()}
-                className={`w-full px-6 h-full border border-dashed border-zinc-400 dark:border-zinc-300 flex items-center justify-center ${
-                  isDragActive ? "bg-zinc-300 dark:bg-zinc-800" : ""
-                } cursor-pointer hover:border-gold-hr-dark dark:hover:border-gold-hr hover:text-gold-hr-dark dark:hover:text-gold-hr transition-all duration-300`}
-              >
-                <input {...getInputProps()} />
-                <p className="text-center text-sm">
-                  {isDragActive
-                    ? "Suelta las imagenes aquí"
-                    : "Haz click o arrastra imagenes aquí"}
-                </p>
-              </div>
-            </section>
-          )}
-        </Dropzone>
-
-        <div>
-          {formLoading ? (
-            <ButtonLoading />
-          ) : (
-            <Button>Agregar Imagen(es)</Button>
-          )}
-        </div>
-      </form>
-
-      {!!imageFiles?.length ? (
+      {!!imageUrls?.length ? (
         <>
           <div className="w-full max-w-[900px] flex flex-col items-center justify-center gap-8 px-6 pb-12">
             <h3 className="text-lg font-medium">Vista previa Imagenes</h3>
             <div className="flex flex-wrap items-center justify-center gap-6 w-full">
-              {imageFiles.map((image) => (
+              {imageUrls.map((url, i) => (
                 <Image
-                  key={image.name}
-                  src={URL.createObjectURL(image)}
+                  className="w-auto h-auto"
+                  key={i}
+                  src={url}
                   width={200}
                   height={200}
-                  alt={image.name}
+                  alt={`Imagen subida ${i + 1}`}
                 />
               ))}
             </div>

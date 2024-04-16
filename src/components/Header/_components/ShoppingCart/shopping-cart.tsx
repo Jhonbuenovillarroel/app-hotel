@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import {
   Ban,
   Bed,
@@ -25,9 +25,15 @@ import Image from "next/image";
 import styles from "./shopping-cart.module.css";
 import ShoppingCartRoom from "./_components/ShoppingCartRoom/room";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const ShoppingCart = () => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
+  const router = useRouter();
+  const { data: session } = useSession();
 
   return (
     <div className="relative z-[90] flex items-center">
@@ -57,7 +63,7 @@ const ShoppingCart = () => {
             {shoppingCartStore.rooms.length ? (
               <div className="flex flex-col gap-3 py-6">
                 {shoppingCartStore.rooms.map((room) => (
-                  <ShoppingCartRoom key={room.id} room={room} />
+                  <ShoppingCartRoom key={room.room.id} room={room.room} />
                 ))}
               </div>
             ) : (
@@ -68,14 +74,27 @@ const ShoppingCart = () => {
                   </div>
                   <BedDouble className="w-6 h-6" strokeWidth={1.2} />
                 </div>
-                <p className="text-sm">Carrito vacío</p>
-                <p className="text-sm">Agrega algunas habitaciones</p>
+                <p className="text-sm text-center">Carrito vacío</p>
+                <p className="text-sm text-center">
+                  Agrega algunas habitaciones
+                </p>
               </div>
             )}
           </section>
           {!!shoppingCartStore.rooms.length ? (
             <SheetFooter>
-              <Button variant={"bookingFormButton"} className="w-full">
+              <Button
+                onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                  if (session) {
+                    router.push(`/pago`);
+                    shoppingCartStore.openShoppingCart(false);
+                  } else {
+                    toast.error("Error: Debes iniciar sesión primero");
+                  }
+                }}
+                variant={"bookingFormButton"}
+                className="w-full"
+              >
                 Realizar Pago
               </Button>
             </SheetFooter>

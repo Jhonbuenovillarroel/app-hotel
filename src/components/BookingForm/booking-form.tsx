@@ -121,7 +121,7 @@ const BookingForm = ({
             control={form.control}
             name="hotelCenter"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel>Sede</FormLabel>
                 <Select
                   defaultValue={hotelCenters[0].name}
@@ -162,7 +162,7 @@ const BookingForm = ({
             control={form.control}
             name="adults"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel>Adultos</FormLabel>
                 <Select
                   onValueChange={field.onChange}
@@ -189,7 +189,7 @@ const BookingForm = ({
             control={form.control}
             name="children"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel>Niños</FormLabel>
                 <Select
                   onValueChange={field.onChange}

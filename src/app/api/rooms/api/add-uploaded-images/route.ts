@@ -1,6 +1,10 @@
-import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { v2 as cloudinary } from "cloudinary";
+import {
+  UploadApiErrorResponse,
+  UploadApiResponse,
+  v2 as cloudinary,
+} from "cloudinary";
+import prisma from "@/lib/prisma";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,16 +13,23 @@ cloudinary.config({
 });
 
 export const POST = async (req: NextRequest) => {
-  const { id } = await req.json();
+  const { roomId, images } = await req.json();
 
   try {
-    const removedImage = await prisma.image.delete({ where: { id } });
-    const response = await cloudinary.uploader.destroy(removedImage.public_id);
-    console.log(response);
+    const updatedRoom = await prisma.room.update({
+      where: { id: roomId },
+      data: {
+        images: {
+          createMany: {
+            data: images,
+          },
+        },
+      },
+    });
 
     return NextResponse.json({
       ok: true,
-      message: "Imagen eliminada correctamente",
+      message: "Imagenes agregadas correctamente",
     });
   } catch (error) {
     console.log(error);

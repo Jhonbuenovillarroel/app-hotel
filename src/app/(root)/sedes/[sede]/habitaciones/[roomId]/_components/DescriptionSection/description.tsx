@@ -20,7 +20,7 @@ const DescriptionSection = ({ room }: Props) => {
   const roomIsSelected = useCallback(
     (room: Room) => {
       for (let shoppingCartRoom of shoppingCartStore.rooms) {
-        if (shoppingCartRoom.id === room.id) {
+        if (shoppingCartRoom.room.id === room.id) {
           return true;
         }
       }

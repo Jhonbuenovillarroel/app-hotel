@@ -28,14 +28,14 @@ interface Props {
 
 const Room = ({ room, hotelCenterId, orderChildren }: Props) => {
   return (
-    <div className="flex justify-between gap-12 w-full max-w-[900px]">
-      <div className={`w-full order-2`}>
+    <div className="flex flex-col min-[560px]:flex-row px-6 justify-between gap-12 w-full max-w-[900px]">
+      <div className={`w-full order-1 min-[500px]:order-2`}>
         <Carousel className="rounded-md overflow-hidden">
           <CarouselContent>
             {room.images.map((image) => (
               <CarouselItem key={image.id}>
                 <Image
-                  className="w-full h-full"
+                  className=""
                   src={image.url}
                   width={800}
                   height={800}
@@ -48,7 +48,7 @@ const Room = ({ room, hotelCenterId, orderChildren }: Props) => {
           <CarouselNext className="" />
         </Carousel>
       </div>
-      <div className={`w-full order-1`}>
+      <div className={`w-full order-2 min-[500px]:order-1`}>
         <div className="space-y-8">
           <h2 className="text-2xl font-semibold">{room.roomtype.name}</h2>
           <div className="">

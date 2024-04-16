@@ -1,107 +1,89 @@
 "use client";
 
+import room from "@/app/(root)/pago/_components/ReservationSummaryRoom/room";
 import ButtonLoading from "@/components/Loading/ButtonLoading/button-loading";
 import { Button } from "@/components/ui/button";
+import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import axios from "axios";
+import { Images } from "lucide-react";
+import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
-import Dropzone from "react-dropzone";
 import toast from "react-hot-toast";
 
 interface Props {
-  hotelCenterId: string;
+  hotelCenter: HotelCenter;
 }
 
-const FormAddImages = ({ hotelCenterId }: Props) => {
+const FormAddImages = ({ hotelCenter }: Props) => {
   const router = useRouter();
   const [formLoading, setFormLoading] = useState(false);
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   return (
-    <div className="w-full h-full flex flex-col gap-8 items-center justify-center">
-      <form
-        onSubmit={async (e: FormEvent<HTMLFormElement>) => {
-          e.preventDefault();
+    <div className="w-full h-full min-h-screen flex flex-col gap-8 items-center justify-center">
+      <h2 className="text-xl font-medium">Agrega Imagenes</h2>
 
-          setFormLoading(true);
-          const formData = new FormData();
-          formData.append("hotelCenterId", `${hotelCenterId}`);
-          imageFiles.forEach((image, i) => {
-            formData.append(`image${i + 1}`, image);
-          });
+      <CldUploadWidget
+        signatureEndpoint="/api/cloudinary/api/sign-params"
+        onQueuesEnd={async (result: any, { widget }) => {
+          const images = result.info.files.map((file: any) => ({
+            url: file.uploadInfo.secure_url,
+            public_id: file.uploadInfo.public_id,
+          }));
 
           try {
             const { data } = await axios.post(
-              "/api/hotel-centers/api/upload-images",
-              formData
+              `/api/hotel-centers/api/add-uploaded-images`,
+              { hotelCenterId: hotelCenter.id, images: images }
             );
-
             if (data.ok) {
-              toast.success(data.message);
-              setImageFiles([]);
+              toast.success("Imagenes subidas correctamente");
+              widget.close();
               router.refresh();
-            } else if (data.error) {
-              toast.error(data.error);
             }
           } catch (error) {
             toast.error("Algo salió mal, vuelve a intentarlo");
           }
 
-          setTimeout(() => {
-            setFormLoading(false);
-          }, 2100);
+          if (result.info) {
+            setImageUrls([
+              ...imageUrls,
+              ...images.map((image: any) => image.url),
+            ]);
+          }
         }}
-        className="w-full max-w-[400px] space-y-6 pt-16 pb-4"
+        onError={(result, { widget }) => {
+          setTimeout(() => {
+            toast.error("Ocurió un error durante el proceso");
+            widget.close();
+          }, 300);
+        }}
+        options={{
+          folder: `${process.env.NEXT_PUBLIC_CLOUDINARY_FOLDER}/sedes/${hotelCenter.name}/images`,
+          maxFiles: 5,
+          multiple: true,
+        }}
       >
-        <h2 className="text-xl font-medium">Agrega Imagenes</h2>
+        {({ open, cloudinary }) => {
+          return (
+            <Button
+              type="button"
+              variant={"bookingFormButton"}
+              onClick={() => {
+                open();
+              }}
+              className="flex items-center gap-2"
+            >
+              <Images className="w-4 h-4" />
+              Subir una imagen
+            </Button>
+          );
+        }}
+      </CldUploadWidget>
 
-        <div>
-          <Dropzone
-            accept={{
-              "image/jpeg": [],
-              "image/png": [],
-              "image/jpg": [],
-              "image/webp": [],
-            }}
-            onDropRejected={() => {
-              toast.error("Sólo puedes subir imágenes");
-            }}
-            onDrop={(acceptedFiles) => {
-              setImageFiles(acceptedFiles);
-              console.log(acceptedFiles);
-            }}
-          >
-            {({ getRootProps, getInputProps, isDragActive }) => (
-              <section className="w-full h-40">
-                <div
-                  {...getRootProps()}
-                  className={`border border-dashed px-6 border-zinc-400 dark:border-zinc-300 w-full h-full flex items-center justify-center cursor-pointer ${
-                    isDragActive ? " bg-zinc-300 dark:bg-zinc-800  " : ""
-                  } hover:border-gold-hr-dark dark:hover:border-gold-hr hover:text-gold-hr-dark dark:hover:text-gold-hr transition-all duration-300`}
-                >
-                  <input {...getInputProps()} />
-                  <p className="text-sm text-center">
-                    {isDragActive
-                      ? "Suelta los archivos en esta zona"
-                      : "Haz click o arrastra los archivos aquí"}
-                  </p>
-                </div>
-              </section>
-            )}
-          </Dropzone>
-        </div>
-
-        <div>
-          {formLoading ? (
-            <ButtonLoading />
-          ) : (
-            <Button>Agregar Imagen(es)</Button>
-          )}
-        </div>
-      </form>
-
-      {!!imageFiles.length && (
+      {!!imageUrls.length && (
         <>
           <div className="flex flex-col items-center gap-8">
             <h3 className="text-base font-medium text-center">
@@ -109,14 +91,14 @@ const FormAddImages = ({ hotelCenterId }: Props) => {
             </h3>
 
             <div className="flex gap-6 flex-wrap max-w-[800px] justify-center pb-16">
-              {imageFiles.map((image) => (
+              {imageUrls.map((url, i) => (
                 <Image
-                  key={image.name}
+                  key={i}
                   className="h-fit"
-                  src={URL.createObjectURL(image)}
+                  src={url}
                   width={350}
                   height={200}
-                  alt={image.name}
+                  alt={`Imagen subida ${i + 1}`}
                 />
               ))}
             </div>

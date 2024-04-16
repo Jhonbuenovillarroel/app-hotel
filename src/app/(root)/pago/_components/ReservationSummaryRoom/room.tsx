@@ -7,23 +7,24 @@ import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./room.module.css";
 import Link from "next/link";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 interface Props {
   room: Room;
+  checkIn: Date;
+  checkOut: Date;
 }
 
-const ShoppingCartRoom = ({ room }: Props) => {
+const ReservationSummaryRoom = ({ room, checkIn, checkOut }: Props) => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const [removingRoom, setRemovingRoom] = useState(false);
 
   return (
-    <div className="relative w-full h-full ">
-      <Link
-        href={`/sedes/${room.hotelcenter.name}/habitaciones/${room.id}`}
-        className="w-full h-full flex items-center justify-start px-4 py-3 border-t border-zinc-300 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md transition-all duration-300"
-      >
+    <div className="relative w-full h-full hover:bg-zinc-900 px-4 py-3 rounded-md transition-all duration-200">
+      <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between gap-2">
-          <div className="flex flex-col min-[500px]:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col min-[500px]:flex-row gap-4">
             <div
               className={`relative w-[75%] min-[500px]:w-24 sm:w-24 before:content-[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[rgba(0,0,0,0.5)] before:opacity-0 before:transition-all before:duration-300 ${
                 removingRoom ? styles["image-container"] : ""
@@ -40,8 +41,14 @@ const ShoppingCartRoom = ({ room }: Props) => {
                 alt={room.roomtype.name}
               />
             </div>
-            <div className="flex flex-col gap-2  max-w-[180px]">
-              <p className=" text-sm ">{room.roomtype.name}</p>
+            <div className="flex flex-col gap2  max-w-[200px]">
+              <p className=" text-sm">
+                {room.roomtype.name}{" "}
+                {`x${
+                  parseInt(format(checkOut, "dd", { locale: es })) -
+                  parseInt(format(checkIn, "dd", { locale: es }))
+                } noches`}
+              </p>
               <div className="flex flex-col gap-1">
                 <p className="text-sm">
                   <span className="">Piso:</span> {room.floor}
@@ -51,7 +58,17 @@ const ShoppingCartRoom = ({ room }: Props) => {
             </div>
           </div>
         </div>
-      </Link>
+        <div className="flex flex-col gap-1">
+          <p className="text-sm flex gap-2 items-center">
+            <span className="font-semibold">Check-In:</span>
+            {format(checkIn, "dd 'de' MMMM 'de' yyyy", { locale: es })}
+          </p>
+          <p className="text-sm flex gap-2 items-center">
+            <span className="font-semibold">Check-out:</span>
+            {format(checkOut, "dd 'de' MMMM 'de' yyyy", { locale: es })}
+          </p>
+        </div>
+      </div>
       <div
         className="cursor-pointer absolute top-2 right-2 p-1.5 rounded-md hover:bg-zinc-800 transition-all duration-200"
         onClick={() => {
@@ -69,4 +86,4 @@ const ShoppingCartRoom = ({ room }: Props) => {
   );
 };
 
-export default ShoppingCartRoom;
+export default ReservationSummaryRoom;

@@ -1,7 +1,6 @@
-"use client";
-
 import Script from "next/script";
 import React from "react";
+import ReservationSummary from "./_components/ReservationSummary/reservation-summary";
 
 const iziConfig = {
   config: {
@@ -34,15 +33,10 @@ const iziConfig = {
 
 const Page = () => {
   return (
-    <div>
-      Page
-      <Script
-        src="https://sandbox-checkout.izipay.pe/payments/v1/js/index.js"
-        onLoad={() => {
-          console.log("El script cargó");
-        }}
-      />
-    </div>
+    <main>
+      <Script src="https://sandbox-checkout.izipay.pe/payments/v1/js/index.js" />
+      <ReservationSummary />
+    </main>
   );
 };
 

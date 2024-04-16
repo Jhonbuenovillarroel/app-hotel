@@ -21,7 +21,7 @@ interface Props {
 const SideBar = async ({ searchParams }: Props) => {
   const data = await getData();
   return (
-    <div className="w-full md:max-w-[280px] lg:max-w-[400px] md:shrink-0 md:border-l md:border-zinc-300 xl:dark:border-zinc-800 px-12 flex justify-center  md:sticky md:top-24 h-auto order-1 md:order-2">
+    <div className="w-full md:max-w-[280px] lg:max-w-[400px] md:shrink-0 md:border-l md:border-zinc-300 md:dark:border-zinc-800 px-12 flex justify-center  md:sticky md:top-24 h-auto order-1 md:order-2">
       <BookingForm
         positioning="vertical"
         className=""

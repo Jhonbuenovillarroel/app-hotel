@@ -37,7 +37,12 @@ const AvailableRooms = async ({ searchParams }: Props) => {
         <>
           <div className="w-full flex flex-col gap-16 px-6 sm:px-12 xl:px-16 order-2 md:order-1">
             {data.map((room) => (
-              <Room key={room.id} room={room} />
+              <Room
+                key={room.id}
+                room={room}
+                checkIn={searchParams["check-in"]}
+                checkOut={searchParams["check-out"]}
+              />
             ))}
           </div>
         </>
