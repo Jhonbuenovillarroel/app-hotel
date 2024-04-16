@@ -78,6 +78,7 @@ const CalendarFormField = ({ form, name, label, defaultDate }: Props) => {
                 align="start"
               >
                 <Calendar
+                  fromDate={new Date()}
                   initialFocus
                   mode="range"
                   defaultMonth={date?.from}

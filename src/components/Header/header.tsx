@@ -37,7 +37,7 @@ const Header = async () => {
       <div className="flex items-center gap-4 md:gap-5">
         <Link
           href={"/"}
-          className="h-10 hidden text-sm font-normal tracking-wide sm:flex sm:items-center sm:justify-center bg-[#bd9b57] hover:bg-[#cbab69] transition-all duration-300 text-white w-36"
+          className="h-9 hidden text-sm rounded-md font-normal tracking-wide sm:flex sm:items-center sm:justify-center bg-[#bd9b57] hover:bg-[#cbab69] transition-all duration-300 text-white w-36"
         >
           Reservar
         </Link>

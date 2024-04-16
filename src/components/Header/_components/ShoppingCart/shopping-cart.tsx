@@ -1,16 +1,7 @@
 "use client";
 
-import React, { MouseEvent, useState } from "react";
-import {
-  Ban,
-  Bed,
-  BedDouble,
-  Loader2,
-  ShoppingBag,
-  ShoppingCartIcon,
-  Trash2,
-  X,
-} from "lucide-react";
+import React, { MouseEvent } from "react";
+import { Ban, BedDouble } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -21,14 +12,12 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useShoppingCartStore } from "@/store/shoppingCartStore";
-import Image from "next/image";
 import styles from "./shopping-cart.module.css";
-import ShoppingCartRoom from "./_components/ShoppingCartRoom/room";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import ShoppingCartRoomsContainer from "./_components/ShoppingCartRoomsContainer/rooms-container";
 
 const ShoppingCart = () => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
@@ -61,11 +50,7 @@ const ShoppingCart = () => {
           </SheetHeader>
           <section>
             {shoppingCartStore.rooms.length ? (
-              <div className="flex flex-col gap-3 py-6">
-                {shoppingCartStore.rooms.map((room) => (
-                  <ShoppingCartRoom key={room.room.id} room={room.room} />
-                ))}
-              </div>
+              <ShoppingCartRoomsContainer />
             ) : (
               <div className="flex flex-col gap-1 items-center justify-center h-40">
                 <div className="relative">

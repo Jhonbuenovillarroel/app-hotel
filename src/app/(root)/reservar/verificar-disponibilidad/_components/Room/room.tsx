@@ -228,7 +228,7 @@ const Room = ({ room, checkIn, checkOut }: Props) => {
 
           {selectedWithADifferentDate ? (
             <>
-              <p className="text-red-400 max-w-[400px] text-sm leading-7">
+              <p className="text-red-500 dark:text-red-400 max-w-[400px] text-sm leading-7">
                 <AlertCircle
                   className="w-4 h-4 inline mr-1"
                   strokeWidth={2.4}

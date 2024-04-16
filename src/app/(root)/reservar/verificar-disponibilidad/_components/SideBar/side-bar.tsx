@@ -11,8 +11,8 @@ const getData = async (): Promise<HotelCenter[]> => {
 interface Props {
   searchParams: {
     hcId: string;
-    "check-in": Date;
-    "check-out": Date;
+    "check-in": string;
+    "check-out": string;
     adults: string;
     children: string;
   };

@@ -1,14 +1,15 @@
 import React from "react";
 import AvailableRooms from "./_components/AvailableRooms/available-rooms";
 import SideBar from "./_components/SideBar/side-bar";
+import { formatDate } from "@/utils/functions";
 
 const Page = ({
   searchParams,
 }: {
   searchParams: {
     hcId: string;
-    "check-in": Date;
-    "check-out": Date;
+    "check-in": string;
+    "check-out": string;
     adults: string;
     children: string;
   };

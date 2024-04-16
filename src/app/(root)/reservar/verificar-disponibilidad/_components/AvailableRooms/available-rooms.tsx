@@ -6,8 +6,8 @@ import { getAvailableRooms } from "@/db/rooms/get-available-rooms";
 
 type SearchParams = {
   hcId: string;
-  "check-in": Date;
-  "check-out": Date;
+  "check-in": string;
+  "check-out": string;
   adults: string;
   children: string;
 };
@@ -40,8 +40,8 @@ const AvailableRooms = async ({ searchParams }: Props) => {
               <Room
                 key={room.id}
                 room={room}
-                checkIn={searchParams["check-in"]}
-                checkOut={searchParams["check-out"]}
+                checkIn={new Date(searchParams["check-in"])}
+                checkOut={new Date(searchParams["check-out"])}
               />
             ))}
           </div>

@@ -41,13 +41,15 @@ const ReservationSummaryRoom = ({ room, checkIn, checkOut }: Props) => {
                 alt={room.roomtype.name}
               />
             </div>
-            <div className="flex flex-col gap2  max-w-[200px]">
+            <div className="flex flex-col gap2  max-w-[210px]">
               <p className=" text-sm">
                 {room.roomtype.name}{" "}
-                {`x${
-                  parseInt(format(checkOut, "dd", { locale: es })) -
-                  parseInt(format(checkIn, "dd", { locale: es }))
-                } noches`}
+                <span className="font-bold text-gold-hr-dark dark:text-gold-hr ml-1">
+                  {`x${
+                    parseInt(format(checkOut, "dd", { locale: es })) -
+                    parseInt(format(checkIn, "dd", { locale: es }))
+                  } noches`}
+                </span>
               </p>
               <div className="flex flex-col gap-1">
                 <p className="text-sm">
