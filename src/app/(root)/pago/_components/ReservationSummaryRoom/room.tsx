@@ -21,7 +21,7 @@ const ReservationSummaryRoom = ({ room, checkIn, checkOut }: Props) => {
   const [removingRoom, setRemovingRoom] = useState(false);
 
   return (
-    <div className="relative w-full h-full hover:bg-zinc-900 px-4 py-3 rounded-md transition-all duration-200">
+    <div className="relative w-full h-full bg-zinc-200 dark:hover:bg-zinc-900 px-4 py-3 rounded-md transition-all duration-200">
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between gap-2">
           <div className="flex flex-col min-[500px]:flex-row gap-4">
@@ -80,7 +80,7 @@ const ReservationSummaryRoom = ({ room, checkIn, checkOut }: Props) => {
           }, 1000);
         }}
       >
-        <X className="w-3.5 h-3.5 text-white" />
+        <X className="w-3.5 h-3.5 text-black dark:text-white" />
       </div>
     </div>
   );

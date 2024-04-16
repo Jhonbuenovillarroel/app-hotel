@@ -63,7 +63,7 @@ const ShoppingCartRoom = ({ room }: Props) => {
           }, 1000);
         }}
       >
-        <X className="w-3.5 h-3.5 text-white" />
+        <X className="w-3.5 h-3.5 text-black dark:text-white" />
       </div>
     </div>
   );
