@@ -1,5 +1,3 @@
-import availableRooms from "@/app/(root)/reservar/verificar-disponibilidad/_components/AvailableRooms/available-rooms";
-import room from "@/app/(root)/sedes/[sede]/habitaciones/_components/Room/room";
 import prisma from "@/lib/prisma";
 import { Room } from "@/types/Room/room";
 import { roomIsAvailable } from "@/utils/functions";
@@ -48,6 +46,7 @@ export const POST = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error }, { status: 500 });
   }
 };

@@ -2,15 +2,18 @@
 
 import React, { MouseEvent, useState } from "react";
 import { useShoppingCartStore } from "@/store/shoppingCartStore";
-import { BedDouble, Loader2 } from "lucide-react";
+import { AlertCircle, BedDouble, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ReservationSummaryRoomsContainer from "../ReservationSummaryRoomsContainer/rooms-container";
+import Swal from "sweetalert2";
+import { useSession } from "next-auth/react";
 
 const ReservationSummary = () => {
+  const { data: session } = useSession();
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const [loadingButton, setLoadingButton] = useState(false);
 
@@ -19,18 +22,7 @@ const ReservationSummary = () => {
       <h3 className="text-lg font-medium">Resumen de reserva(s)</h3>
 
       <div className="w-full flex flex-col items-center justify-center gap-6">
-        {!!shoppingCartStore.rooms.length ? (
-          <>
-            <ReservationSummaryRoomsContainer />
-          </>
-        ) : (
-          <>
-            <div className="w-full h-20 flex flex-col gap-1 items-center justify-center">
-              <BedDouble strokeWidth={1.4} />
-              <p className="text-sm">Agrega Alguna habitación</p>
-            </div>
-          </>
-        )}
+        <ReservationSummaryRoomsContainer />
       </div>
 
       <hr className="bg-zinc-300 dark:bg-zinc-800 h-[1px] border-none" />
@@ -67,6 +59,28 @@ const ReservationSummary = () => {
         <Button
           onClick={async (e: MouseEvent<HTMLButtonElement>) => {
             setLoadingButton(true);
+
+            if (!session) {
+              Swal.fire({
+                html: `
+                <div class="flex flex-col gap-2 items-center justify-center">
+                  <h3 class="text-lg font-semibold text-zinc-950 dark:text-zinc-100">
+                    Debes iniciar sesión
+                  </h3>
+                  <p class="text-sm max-w-[280px] text-zinc-900 dark:text-zinc-200">No puedes realizar una reserva si no has iniciado sesión</p>
+                </div>
+                `,
+                customClass: `text-sm border-none bg-zinc-100 pt-3 dark:bg-red-950 outline-none`,
+                confirmButtonColor: "#bd9b57",
+                confirmButtonText: "Entiendo",
+                buttonsStyling: true,
+              });
+              setTimeout(() => {
+                setLoadingButton(false);
+              }, 1000);
+              return;
+            }
+
             try {
               const { data } = await axios.post(
                 "/api/rooms/api/check-shopping-cart-rooms-availability",
@@ -74,13 +88,50 @@ const ReservationSummary = () => {
               );
 
               if (data.ok) {
-                toast.success(
-                  "Las habitaciones estás disponibles, puedes continuar con el proceso de pago"
-                );
+                const { data } = await axios.post("/api/bookings/api/create", {
+                  rooms: shoppingCartStore.rooms,
+                  userEmail: session.user.email,
+                });
+
+                if (data.ok) {
+                  Swal.fire({
+                    icon: "success",
+                    html: `
+                    <div class="flex flex-col gap-2 items-center justify-center">
+                      <h3 class="text-lg font-semibold text-zinc-950 dark:text-zinc-100">
+                        Operación exitosa
+                      </h3>
+                      <p class="text-sm text-zinc-900 dark:text-zinc-200 max">${data.message}</p>
+                    </div>
+                    `,
+                    customClass:
+                      "text-sm border-none outline-none bg-zinc-100 dark:bg-zinc-950",
+                    confirmButtonColor: "#bd9b57",
+                    confirmButtonText: "Perfecto",
+                    buttonsStyling: true,
+                  });
+                }
+              } else if (data.error) {
+                Swal.fire({
+                  html: `
+                  <div class="flex flex-col gap-2 items-center justify-center">
+                    <h3 class="text-lg font-semibold text-zinc-100">
+                      Habitación no Disponible
+                    </h3>
+                    <p class="text-sm text-zinc-200">${data.error}</p>
+                  </div>
+                  `,
+                  customClass: "text-sm border-none outline-none bg-zinc-800",
+                  background: "rgb(20, 20, 20)",
+                  confirmButtonColor: "#bd9b57",
+                  confirmButtonText: "Entiendo",
+                  buttonsStyling: true,
+                });
               }
             } catch (error) {
               toast.error("Algo salió mal, vuelve a intentarlo");
             }
+
             setTimeout(() => {
               setLoadingButton(false);
             }, 2100);

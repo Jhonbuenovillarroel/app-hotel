@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import Header from "@/components/Header/header";
+import CheckAvailabilityPageContextProvider from "./_components/CheckAvailabilityPageProvider/context-provider";
 
 export const metadata: Metadata = {
   title: "Hospedaje El Rinconcito",
@@ -20,8 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <Header />
-      {children}
+      <CheckAvailabilityPageContextProvider>
+        <Header />
+        {children}
+      </CheckAvailabilityPageContextProvider>
     </>
   );
 }

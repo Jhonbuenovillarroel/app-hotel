@@ -41,16 +41,17 @@ function Calendar({
           buttonVariants({ variant: "ghost" }),
           "h-9 w-9 p-0 font-normal aria-selected:opacity-100"
         ),
-        day_range_end: "day-range-end",
+        day_range_end:
+          "day-range-end hover:text-white dark:hover:text-zinc-900 dark:hover:bg-zinc-100",
         day_selected:
           "bg-zinc-900 text-zinc-50 hover:bg-zinc-900 hover:text-zinc-50 focus:bg-zinc-900 focus:text-zinc-50 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50 dark:hover:text-zinc-900 dark:focus:bg-zinc-50 dark:focus:text-zinc-900",
         day_today:
-          "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50",
+          "bg-zinc-300 text-zinc-900 aria-selected:text-zinc-200 aria-selected:dark:text-zinc-900 aria-selected:dark:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-50",
         day_outside:
           "day-outside text-zinc-500 opacity-50 aria-selected:bg-zinc-100/50 aria-selected:text-zinc-500 aria-selected:opacity-30 dark:text-zinc-400 dark:aria-selected:bg-zinc-800/50 dark:aria-selected:text-zinc-400",
         day_disabled: "text-zinc-500 opacity-50 dark:text-zinc-400",
         day_range_middle:
-          "aria-selected:bg-zinc-100 aria-selected:text-zinc-900 dark:aria-selected:bg-zinc-800 dark:aria-selected:text-zinc-50",
+          "aria-selected:bg-zinc-300 aria-selected:text-zinc-900 dark:aria-selected:bg-zinc-800 dark:aria-selected:text-zinc-50",
         day_hidden: "invisible",
         ...classNames,
       }}

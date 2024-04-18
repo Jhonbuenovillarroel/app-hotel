@@ -17,6 +17,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { tanstackTableFilterFunctions } from "@/utils/tanstack-table";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +32,7 @@ const DataTable = <TData, TValue>({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
+    filterFns: tanstackTableFilterFunctions,
   });
 
   return (

@@ -18,6 +18,7 @@ import {
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import {
   ColumnDef,
+  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -31,6 +32,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Room } from "@/types/Room/room";
+import { tanstackTableFilterFunctions } from "@/utils/tanstack-table";
 
 interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -48,6 +51,7 @@ const RoomsDataTable = <TData, TValue>({
     data,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    filterFns: tanstackTableFilterFunctions,
   });
 
   return (
@@ -56,7 +60,9 @@ const RoomsDataTable = <TData, TValue>({
         <div className="w-full flex flex-col gap-2 max-w-[280px]">
           <h3 className="text-sm">Filtrar por Sede</h3>
           <Select
-            value={table.getColumn("Sede")?.getFilterValue() as string}
+            value={
+              (table.getColumn("Sede")?.getFilterValue() as string) || "Todas"
+            }
             onValueChange={(value) => {
               if (value === "Todas") {
                 table.resetColumnFilters();

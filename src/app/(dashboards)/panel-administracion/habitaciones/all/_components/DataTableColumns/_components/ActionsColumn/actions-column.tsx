@@ -95,6 +95,15 @@ const ActionsColumn = ({ row }: Props) => {
             <span>Ver Imagenes</span>
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center gap-2">
+          <Link
+            className="w-full flex gap-2 items-center h-full"
+            href={`/panel-administracion/habitaciones/${row.original.id}/reservas`}
+          >
+            <Images className="w-3 h-3" />
+            <span>Ver Reservas</span>
+          </Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

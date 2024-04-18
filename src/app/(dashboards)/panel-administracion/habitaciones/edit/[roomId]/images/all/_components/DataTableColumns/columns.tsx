@@ -15,9 +15,8 @@ export const columns = [
       return (
         <Checkbox
           checked={
-            table.getIsAllPageRowsSelected() &&
-            table.getIsSomePageRowsSelected() &&
-            "indeterminate"
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
           }
           onCheckedChange={() => table.toggleAllPageRowsSelected()}
         />

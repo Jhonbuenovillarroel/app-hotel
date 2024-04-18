@@ -1,6 +1,6 @@
 import { useShoppingCartStore } from "@/store/shoppingCartStore";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ShoppingCartRoom from "../ShoppingCartRoom/room";
 import { Loader2 } from "lucide-react";
@@ -9,7 +9,7 @@ const ShoppingCartRoomsContainer = () => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const [showRooms, setShowRooms] = useState(false);
 
-  const getNonExistingIds = async () => {
+  const getNonExistingIds = useCallback(async () => {
     try {
       const { data } = await axios.post(
         "/api/rooms/api/check-existing-rooms",
@@ -25,7 +25,7 @@ const ShoppingCartRoomsContainer = () => {
     } catch (error) {
       toast.error("Error interno del servidor");
     }
-  };
+  }, [shoppingCartStore, setShowRooms]);
 
   useEffect(() => {
     getNonExistingIds();

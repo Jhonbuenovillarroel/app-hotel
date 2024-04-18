@@ -1,7 +1,7 @@
 "use client";
 
-import React, { MouseEvent } from "react";
-import { Ban, BedDouble } from "lucide-react";
+import React, { MouseEvent, useState } from "react";
+import { Ban, BedDouble, Loader2 } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -23,6 +23,7 @@ const ShoppingCart = () => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const router = useRouter();
   const { data: session } = useSession();
+  const [loadingButton, setLoadingButton] = useState(false);
 
   return (
     <div className="relative z-[90] flex items-center">
@@ -30,7 +31,7 @@ const ShoppingCart = () => {
         open={shoppingCartStore.shoppingCartIsOpen}
         onOpenChange={shoppingCartStore.openShoppingCart}
       >
-        <SheetTrigger onClick={() => console.log("kfjdaskfkjsjdkf")}>
+        <SheetTrigger>
           <div className="relative cursor-pointer">
             <p className="absolute top-[-9px] right-[-9px] bg-red-500 text-white h-5 w-5 flex items-center justify-center text-xs font-medium rounded-full">
               {shoppingCartStore.rooms.length}
@@ -68,20 +69,35 @@ const ShoppingCart = () => {
           </section>
           {!!shoppingCartStore.rooms.length ? (
             <SheetFooter>
-              <Button
-                onClick={(e: MouseEvent<HTMLButtonElement>) => {
-                  if (session) {
-                    router.push(`/pago`);
-                    shoppingCartStore.openShoppingCart(false);
-                  } else {
-                    toast.error("Error: Debes iniciar sesión primero");
-                  }
-                }}
-                variant={"bookingFormButton"}
-                className="w-full"
-              >
-                Realizar Pago
-              </Button>
+              {loadingButton ? (
+                <Button
+                  disabled
+                  variant={"bookingFormButton"}
+                  className="w-full flex items-center justify-center gap-2"
+                >
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Redirigiendo...</span>
+                </Button>
+              ) : (
+                <Button
+                  onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                    setLoadingButton(true);
+                    if (session) {
+                      router.push(`/pago`);
+                      setTimeout(() => {
+                        setLoadingButton(false);
+                        shoppingCartStore.openShoppingCart(false);
+                      }, 1200);
+                    } else {
+                      toast.error("Error: Debes iniciar sesión primero");
+                    }
+                  }}
+                  variant={"bookingFormButton"}
+                  className="w-full"
+                >
+                  Realizar Pago
+                </Button>
+              )}
             </SheetFooter>
           ) : (
             <></>

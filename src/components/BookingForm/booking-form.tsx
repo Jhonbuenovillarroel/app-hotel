@@ -22,12 +22,11 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import CalendarFormField from "./_components/CalendarFormField/calendar-form-field";
-import { Link } from "lucide-react";
+import { Link, Loader2 } from "lucide-react";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import { useRouter } from "next/navigation";
-import router from "next/router";
 import { addDays, format } from "date-fns";
-import { es } from "date-fns/locale";
+import { useCheckAvailabilityPageContext } from "@/app/(root)/_components/CheckAvailabilityPageProvider/context-provider";
 
 export type FormSchemaType = UseFormReturn<
   {
@@ -76,6 +75,7 @@ const BookingForm = ({
   className,
 }: Props) => {
   const router = useRouter();
+  const checkAvailabilityPageContext = useCheckAvailabilityPageContext();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -103,7 +103,7 @@ const BookingForm = ({
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values.date);
+    checkAvailabilityPageContext.setSearchButtonLoading(true);
     router.push(
       `/reservar/verificar-disponibilidad?hcId=${values.hotelCenter.id}&check-in=${values.date.from}&check-out=${values.date.to}&adults=${values.adults}&children=${values.children}`
     );
@@ -231,13 +231,24 @@ const BookingForm = ({
               <p className="opacity-0 pointer-events-none select-none hidden xl:flex">
                 a
               </p>
-              <Button
-                type="submit"
-                variant={"bookingFormButton"}
-                className="rounded-none w-full mt-2 md:mt-1 xl:mt-0"
-              >
-                <p className="select-none">Buscar</p>
-              </Button>
+              {checkAvailabilityPageContext.searchButtonLoading ? (
+                <Button
+                  disabled
+                  variant={"bookingFormButton"}
+                  className="rounded-none w-full flex items-center justify-center gap-2 mt-2 md:mt-1 xl:mt-0"
+                >
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Buscando...</span>
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  variant={"bookingFormButton"}
+                  className="rounded-none w-full mt-2 md:mt-1 xl:mt-0"
+                >
+                  <p className="select-none">Buscar</p>
+                </Button>
+              )}
             </div>
           </div>
         </form>

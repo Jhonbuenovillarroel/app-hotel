@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
-import ReservationSummaryRoom from "../ReservationSummaryRoom/room";
+"use client";
+
+import React, { useCallback, useEffect, useState } from "react";
 import { useShoppingCartStore } from "@/store/shoppingCartStore";
-import { Loader2 } from "lucide-react";
+import { BedDouble, Loader2 } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import ReservationSummaryRoom from "../ReservationSummaryRoom/room";
 
 const ReservationSummaryRoomsContainer = () => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const [showRooms, setShowRooms] = useState(false);
 
-  const getNonExistingIds = async () => {
+  const getNonExistingIds = useCallback(async () => {
     try {
       const { data } = await axios.post(
         "/api/rooms/api/check-existing-rooms",
@@ -25,7 +27,7 @@ const ReservationSummaryRoomsContainer = () => {
     } catch (error) {
       toast.error("Error interno del servidor");
     }
-  };
+  }, [shoppingCartStore, setShowRooms]);
 
   useEffect(() => {
     getNonExistingIds();
@@ -34,14 +36,25 @@ const ReservationSummaryRoomsContainer = () => {
   if (showRooms) {
     return (
       <>
-        {shoppingCartStore.rooms.map((room) => (
-          <ReservationSummaryRoom
-            key={room.room.id}
-            room={room.room}
-            checkIn={room.checkIn}
-            checkOut={room.checkOut}
-          />
-        ))}
+        {!!shoppingCartStore.rooms.length ? (
+          <>
+            {shoppingCartStore.rooms.map((room) => (
+              <ReservationSummaryRoom
+                key={room.room.id}
+                room={room.room}
+                checkIn={room.checkIn}
+                checkOut={room.checkOut}
+              />
+            ))}
+          </>
+        ) : (
+          <>
+            <div className="w-full h-20 flex flex-col gap-1 items-center justify-center">
+              <BedDouble strokeWidth={1.4} />
+              <p className="text-sm">Agrega Alguna habitación</p>
+            </div>
+          </>
+        )}
       </>
     );
   } else {

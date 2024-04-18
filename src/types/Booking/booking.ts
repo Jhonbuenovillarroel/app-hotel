@@ -6,6 +6,7 @@ export type Booking = {
   checkIn: Date;
   checkOut: Date;
   userId: string;
-  rooms: Room[];
+  roomId: string;
+  room: Room;
   user: User;
 };

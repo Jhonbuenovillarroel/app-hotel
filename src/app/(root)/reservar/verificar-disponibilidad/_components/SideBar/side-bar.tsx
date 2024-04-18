@@ -26,15 +26,19 @@ const SideBar = async ({ searchParams }: Props) => {
         positioning="vertical"
         className=""
         hotelCenters={data}
-        defaultValues={{
-          hotelCenterId: searchParams.hcId,
-          date: {
-            from: new Date(searchParams["check-in"]),
-            to: new Date(searchParams["check-out"]),
-          },
-          adults: searchParams.adults,
-          children: searchParams.children,
-        }}
+        defaultValues={
+          searchParams.hcId
+            ? {
+                hotelCenterId: searchParams.hcId,
+                date: {
+                  from: new Date(searchParams["check-in"]),
+                  to: new Date(searchParams["check-out"]),
+                },
+                adults: searchParams.adults,
+                children: searchParams.children,
+              }
+            : undefined
+        }
       />
     </div>
   );

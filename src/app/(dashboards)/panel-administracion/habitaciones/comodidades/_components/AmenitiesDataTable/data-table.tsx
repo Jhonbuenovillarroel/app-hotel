@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { tanstackTableFilterFunctions } from "@/utils/tanstack-table";
 import {
   ColumnDef,
   flexRender,
@@ -29,6 +30,7 @@ const AmenitiesDataTable = <TData, TValue>({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
+    filterFns: tanstackTableFilterFunctions,
   });
 
   return (

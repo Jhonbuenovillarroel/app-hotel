@@ -12,6 +12,7 @@ import {
   AlarmSmoke,
   Anvil,
   BedSingle,
+  Calendar,
   ChevronLeft,
   ChevronRight,
   Eye,
@@ -390,6 +391,48 @@ const SideBar = () => {
                   </AccordionContent>
                 </AccordionItem>
               </li>
+              <li className="w-full">
+                <AccordionItem value="item-4" className="border-none">
+                  <AccordionTrigger className="font-normal text-sm hover:no-underline hover:bg-zinc-200 dark:hover:bg-zinc-900 w-full px-3 h-11">
+                    <div className="flex gap-3 items-center">
+                      <Calendar className="w-4 h-4" strokeWidth={1.5} />
+                      <p>Reservas</p>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="py-0">
+                    <ul>
+                      <li>
+                        <LinkItem
+                          setShowSideBar={setShowSideBar}
+                          href={`/panel-administracion/reservas/all`}
+                          className={`flex gap-2 items-center px-10 h-11 hover:bg-zinc-200 dark:hover:bg-zinc-900 ${
+                            pathname === "/panel-administracion/users/all"
+                              ? "bg-zinc-300 dark:bg-zinc-900"
+                              : ""
+                          }`}
+                        >
+                          <Eye className="w-3.5 h-3.5" strokeWidth={2} />
+                          <p className="text-sm">Ver Todas</p>
+                        </LinkItem>
+                      </li>
+                      <li>
+                        <LinkItem
+                          setShowSideBar={setShowSideBar}
+                          href={`/panel-administracion/reservas/new`}
+                          className={`flex gap-2.5 items-center px-10 h-11 hover:bg-zinc-200 dark:hover:bg-zinc-900 ${
+                            pathname === "/panel-administracion/users/new"
+                              ? "bg-zinc-300 dark:bg-zinc-900"
+                              : ""
+                          }`}
+                        >
+                          <Plus className="w-3.5 h-3.5" strokeWidth={3} />
+                          <p className="text-sm">Crear</p>
+                        </LinkItem>
+                      </li>
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </li>
             </Accordion>
           </ul>
         </nav>
@@ -398,21 +441,17 @@ const SideBar = () => {
       <div>
         {showSideBar ? (
           <div
-            className={`absolute -top-0 ${
-              showSideBar ? "-right-[296px]" : "-right-10 md:-right-20"
-            } lg:-right-10 w-10 h-10 cursor-pointer bg-gold-hr-dark dark:bg-zinc-950 rounded-r-md flex items-center justify-center transition-all duration-700`}
+            className={`fixed z-[20] top-0 left-[250px] w-9 h-9 cursor-pointer bg-gold-hr-dark dark:bg-gold-hr-dark rounded-r-md flex items-center justify-center transition-all duration-700`}
             onClick={() => setShowSideBar(false)}
           >
-            <ChevronLeft strokeWidth={1.5} className="text-white" />
+            <ChevronLeft strokeWidth={1.5} className="text-white w-6 h-6" />
           </div>
         ) : (
           <div
-            className={`absolute -top-0 ${
-              showSideBar ? "-right-[296px]" : "-right-10 md:-right-20"
-            } lg:-right-10 w-10 h-10 cursor-pointer bg-gold-hr-dark dark:bg-zinc-950 rounded-r-md flex items-center justify-center transition-all duration-700`}
+            className={`fixed z-[20] top-0 left-10 w-9 h-9 cursor-pointer bg-gold-hr-dark dark:bg-gold-hr-dark rounded-r-md flex items-center justify-center transition-all duration-700`}
             onClick={() => setShowSideBar(true)}
           >
-            <ChevronRight strokeWidth={1.5} className="text-white" />
+            <ChevronRight strokeWidth={1.5} className="text-white w-6 h-6" />
           </div>
         )}
       </div>

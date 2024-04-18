@@ -88,7 +88,8 @@ model booking {
   checkIn  DateTime
   checkOut DateTime
   userId   String
-  rooms    room[]
+  roomId   String
+  room     room     @relation(fields: [roomId], references: [id])
   user     user     @relation(fields: [userId], references: [id])
 }
 

@@ -1,7 +1,7 @@
 import { Room } from "@/types/Room/room";
 import { format } from "date-fns";
 
-export const formatDate = (date: Date) => {
+export const formatLocaleDate = (date: Date) => {
   const formatedDate = new Date(format(new Date(date), "MM/dd/yyyy"));
   return formatedDate;
 };
@@ -15,21 +15,20 @@ export const roomIsAvailable = ({
   checkIn: Date;
   checkOut: Date;
 }) => {
-  let available = true;
-
   if (room.bookings.length) {
     for (let booking of room.bookings) {
-      if (available) {
-        if (
-          !(formatDate(checkOut) <= formatDate(booking.checkIn)) ||
-          !(formatDate(checkIn) >= formatDate(booking.checkOut))
-        ) {
-          available = false;
-        }
-      } else {
-        return available;
+      if (
+        formatLocaleDate(checkOut) > formatLocaleDate(booking.checkIn) &&
+        formatLocaleDate(checkOut) < formatLocaleDate(booking.checkOut)
+      ) {
+        return false;
+      } else if (
+        formatLocaleDate(checkIn) > formatLocaleDate(booking.checkIn) &&
+        formatLocaleDate(checkIn) < formatLocaleDate(booking.checkOut)
+      ) {
+        return false;
       }
     }
   }
-  return available;
+  return true;
 };

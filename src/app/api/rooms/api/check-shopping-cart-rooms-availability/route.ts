@@ -1,3 +1,4 @@
+import room from "@/app/(root)/pago/_components/ReservationSummaryRoom/room";
 import { getAllRooms } from "@/db/rooms/getAllRooms";
 import { Room } from "@/types/Room/room";
 import { roomIsAvailable } from "@/utils/functions";
@@ -20,7 +21,7 @@ export const POST = async (req: NextRequest) => {
       })
     ) {
       return NextResponse.json({
-        error: `La ${room.room.roomtype} ya no está disponible, puede que la hayas tenido mucho tiempo en el carrito, o simplemente alguien más ya la reservó`,
+        error: `La ${room.room.roomtype.name} ya no está disponible, puede que la hayas tenido mucho tiempo en el carrito, o simplemente alguien más ya la reservó`,
       });
     }
   }
