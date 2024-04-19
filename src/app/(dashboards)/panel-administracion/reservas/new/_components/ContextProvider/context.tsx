@@ -14,6 +14,7 @@ interface SearchContextType {
   searching: boolean;
   setSearching: Function;
   addedRooms: AddedRoom[];
+  setAddedRooms: (rooms: AddedRoom[]) => void;
   addRoom: (room: AddedRoom) => void;
   removeRoom: (id: string) => void;
   showCart: boolean;
@@ -24,6 +25,7 @@ const SearchContext = createContext<SearchContextType>({
   searching: false,
   setSearching: () => {},
   addedRooms: [],
+  setAddedRooms: () => {},
   addRoom: () => {},
   removeRoom: () => {},
   showCart: false,
@@ -51,6 +53,7 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
         searching,
         setSearching,
         addedRooms,
+        setAddedRooms,
         addRoom,
         removeRoom,
         showCart,

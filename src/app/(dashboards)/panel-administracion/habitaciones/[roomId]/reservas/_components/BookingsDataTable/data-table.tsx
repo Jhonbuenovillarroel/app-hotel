@@ -37,7 +37,7 @@ const BookingsDataTable = <TData, TValue>({
   });
 
   return (
-    <div className="rounded-md border-zinc-300 dark:border-zinc-800 max-w-[800px] mx-auto pt-16">
+    <div className="rounded-md border border-zinc-300 dark:border-zinc-800 max-w-[800px] mx-auto mt-16">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -83,7 +83,7 @@ const BookingsDataTable = <TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="border-t border-zinc-300 dark:border-zinc-800 py-10"
+                  className="border-t border-zinc-300 dark:border-zinc-800 py-10 text-center"
                 >
                   No hay resultados
                 </TableCell>

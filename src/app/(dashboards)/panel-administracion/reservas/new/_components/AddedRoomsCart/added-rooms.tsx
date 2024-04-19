@@ -25,7 +25,8 @@ import { useRouter } from "next/navigation";
 const AddedRoomsCart = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const { addedRooms, showCart, setShowCart } = useSearchContext();
+  const { addedRooms, setAddedRooms, showCart, setShowCart } =
+    useSearchContext();
 
   return (
     <Sheet open={showCart} onOpenChange={setShowCart}>
@@ -114,6 +115,7 @@ const AddedRoomsCart = () => {
                             {
                               rooms: addedRooms,
                               userEmail: session?.user.email,
+                              creationMode: "manual",
                             }
                           );
 
@@ -131,6 +133,7 @@ const AddedRoomsCart = () => {
                                 "text-sm bg-zinc-100 dark:bg-zinc-950",
                               confirmButtonColor: "#bd9b57",
                             }).then((result) => {
+                              setAddedRooms([]);
                               router.refresh();
                             });
                           } else if (data.error) {

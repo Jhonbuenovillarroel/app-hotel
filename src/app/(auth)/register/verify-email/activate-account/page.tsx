@@ -37,10 +37,12 @@ const Page = () => {
   if (isVerified) {
     return (
       <main>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="flex flex-col gap-6 items-center justify-center">
+        <div className="flex items-center justify-center min-h-screen w-full">
+          <div className="flex flex-col gap-6 items-center justify-center w-full">
             <ShieldCheck className="w-12 h-12" strokeWidth={1.2} />
-            <p>Tu cuenta se activó con éxito, ahora puedes iniciar sesión</p>
+            <p className="text-sm">
+              Tu cuenta se activó con éxito, ahora puedes iniciar sesión
+            </p>
             <Link
               href={`/login`}
               className=" text-gold-hr border-b border-transparent hover:border-gold-hr-dark transition-all duration-200"

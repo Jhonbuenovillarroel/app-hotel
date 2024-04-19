@@ -84,13 +84,28 @@ model service {
 }
 
 model booking {
-  id       String   @id @default(cuid())
-  checkIn  DateTime
-  checkOut DateTime
-  userId   String
-  roomId   String
-  room     room     @relation(fields: [roomId], references: [id])
-  user     user     @relation(fields: [userId], references: [id])
+  id           String              @id @default(cuid())
+  checkIn      DateTime
+  checkOut     DateTime
+  userId       String
+  creationMode bookingCreationMode @default(paid)
+  roomId       String
+  room         room                @relation(fields: [roomId], references: [id])
+  user         user                @relation(fields: [userId], references: [id])
+}
+
+model amenitietoroom {
+  A String
+  B String
+
+  @@unique([A, B], map: "_amenitieToroom_AB_unique")
+  @@index([B], map: "_amenitieToroom_B_index")
+  @@map("_amenitietoroom")
+}
+
+enum bookingCreationMode {
+  manual
+  paid
 }
 
 enum user_role {

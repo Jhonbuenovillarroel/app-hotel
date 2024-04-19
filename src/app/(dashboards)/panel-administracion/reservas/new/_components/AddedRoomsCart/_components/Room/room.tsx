@@ -36,7 +36,7 @@ const AddedRoom = ({ room }: Props) => {
               </div>
               <Image
                 className="w-full max-w-[200px] h-fit"
-                src={room.room.images[0].url || ""}
+                src={room.room.images[0] ? room.room.images[0].url : ""}
                 width={200}
                 height={200}
                 alt={`Habitación ${room.room.roomNumber}`}

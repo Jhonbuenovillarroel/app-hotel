@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Room from "../Room/room";
 import { Room as RoomType } from "@/types/Room/room";
-import { Loader2, Search } from "lucide-react";
+import { BedDouble, Loader2, Search } from "lucide-react";
 import { useSearchContext } from "../ContextProvider/context";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -106,8 +106,11 @@ const AvailableRooms = ({ searchParams }: Props) => {
             </div>
           ) : (
             <>
-              <div className="order-2 md:order-1">
-                No se encontró ninguna habitación
+              <div className="order-2 md:order-1 flex flex-col max-w-[240px] text-center gap-4 items-center justify-center">
+                <BedDouble className="w-7 h-7" strokeWidth={1.5} />
+                <span className="text-sm">
+                  No hay habitaciones disponibles para estas fechas
+                </span>
               </div>
             </>
           )}

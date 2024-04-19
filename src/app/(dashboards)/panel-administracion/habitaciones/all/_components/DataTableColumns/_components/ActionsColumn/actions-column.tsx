@@ -10,7 +10,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Row } from "@tanstack/react-table";
 import axios from "axios";
-import { MoreHorizontal, Settings, Pencil, Trash2, Images } from "lucide-react";
+import {
+  MoreHorizontal,
+  Settings,
+  Pencil,
+  Trash2,
+  Images,
+  Bell,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
@@ -100,7 +107,7 @@ const ActionsColumn = ({ row }: Props) => {
             className="w-full flex gap-2 items-center h-full"
             href={`/panel-administracion/habitaciones/${row.original.id}/reservas`}
           >
-            <Images className="w-3 h-3" />
+            <Bell className="w-3 h-3" />
             <span>Ver Reservas</span>
           </Link>
         </DropdownMenuItem>

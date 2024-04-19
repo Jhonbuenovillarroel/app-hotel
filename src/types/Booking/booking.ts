@@ -5,6 +5,7 @@ export type Booking = {
   id: string;
   checkIn: Date;
   checkOut: Date;
+  creationMode: "manual" | "paid";
   userId: string;
   roomId: string;
   room: Room;

@@ -16,6 +16,13 @@ interface ShoppingCartState {
   }) => void;
   removeRoom: (roomId: string) => void;
   openShoppingCart: (isOpen: boolean) => void;
+  setRooms: (
+    rooms: {
+      room: Room;
+      checkIn: Date;
+      checkOut: Date;
+    }[]
+  ) => void;
 }
 
 export const useShoppingCartStore = create<ShoppingCartState>()(
@@ -27,6 +34,7 @@ export const useShoppingCartStore = create<ShoppingCartState>()(
         set({ rooms: get().rooms.filter((room) => room.room.id !== roomId) }),
       shoppingCartIsOpen: false,
       openShoppingCart: (isOpen) => set({ shoppingCartIsOpen: isOpen }),
+      setRooms: (rooms) => set({ rooms: [...rooms] }),
     }),
     {
       name: "shopping-cart-storage",

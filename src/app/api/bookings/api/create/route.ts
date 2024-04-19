@@ -8,13 +8,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { rooms, userEmail } = (await req.json()) as {
+    const { rooms, userEmail, creationMode } = (await req.json()) as {
       rooms: {
         room: Room;
         checkIn: string;
         checkOut: string;
       }[];
       userEmail: string;
+      creationMode: "paid" | "manual";
     };
 
     const user = await prisma.user.findUnique({ where: { email: userEmail } });
@@ -26,6 +27,7 @@ export const POST = async (req: NextRequest) => {
           checkIn: new Date(room.checkIn),
           checkOut: new Date(room.checkOut),
           room: room.room,
+          creationMode,
         });
       }
     } else {
