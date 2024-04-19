@@ -6,22 +6,24 @@ import { Check, Trash2 } from "lucide-react";
 
 interface Props {
   room: RoomType;
+  checkIn: Date;
+  checkOut: Date;
 }
 
-const Room = ({ room }: Props) => {
+const Room = ({ room, checkIn, checkOut }: Props) => {
   const { addRoom, addedRooms, removeRoom } = useSearchContext();
   const [selected, setSelected] = useState(false);
 
   const roomIsSelected = useCallback(
     (room: RoomType) => {
       for (let addedRoom of addedRooms) {
-        if (addedRoom.id === room.id) {
+        if (addedRoom.room.id === room.id) {
           return true;
         }
       }
       return false;
     },
-    [addedRooms, setSelected]
+    [addedRooms]
   );
 
   useEffect(() => {
@@ -30,10 +32,10 @@ const Room = ({ room }: Props) => {
     } else {
       setSelected(false);
     }
-  }, [roomIsSelected, setSelected]);
+  }, [roomIsSelected, setSelected, room]);
 
   return (
-    <div className="flex w-full  max-w-[360px] flex-col gap-4 items-start py-4 px-5 rounded-md border border-zinc-800">
+    <div className="flex w-full  max-w-[360px] flex-col gap-4 items-start py-4 px-5 rounded-md border border-zinc-300 dark:border-zinc-800">
       <div className="text-sm">
         <p className="text-base">{room.roomtype.name}</p>
         <p className="flex items-center gap-2">
@@ -71,7 +73,7 @@ const Room = ({ room }: Props) => {
             <Button
               variant={"bookingFormButton"}
               onClick={() => {
-                addRoom(room);
+                addRoom({ room, checkIn, checkOut });
               }}
             >
               Seleccionar

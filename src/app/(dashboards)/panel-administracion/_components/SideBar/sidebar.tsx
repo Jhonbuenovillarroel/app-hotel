@@ -27,6 +27,7 @@ import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import styles from "./sidebar.module.css";
+import ToggleTheme from "@/components/ToggleTheme/toggle-theme";
 
 const SideBar = () => {
   const pathname = usePathname();
@@ -34,7 +35,7 @@ const SideBar = () => {
   const [showSideBar, setShowSideBar] = useState(false);
 
   return (
-    <div className="fixed lg:relative  z-[60]">
+    <div className="fixed lg:relative z-10">
       <aside
         className={`fixed lg:sticky ${
           showSideBar ? "w-64" : "w-0 md:w-10"
@@ -406,7 +407,7 @@ const SideBar = () => {
                           setShowSideBar={setShowSideBar}
                           href={`/panel-administracion/reservas/all`}
                           className={`flex gap-2 items-center px-10 h-11 hover:bg-zinc-200 dark:hover:bg-zinc-900 ${
-                            pathname === "/panel-administracion/users/all"
+                            pathname === "/panel-administracion/reservas/all"
                               ? "bg-zinc-300 dark:bg-zinc-900"
                               : ""
                           }`}
@@ -420,7 +421,7 @@ const SideBar = () => {
                           setShowSideBar={setShowSideBar}
                           href={`/panel-administracion/reservas/new`}
                           className={`flex gap-2.5 items-center px-10 h-11 hover:bg-zinc-200 dark:hover:bg-zinc-900 ${
-                            pathname === "/panel-administracion/users/new"
+                            pathname === "/panel-administracion/reservas/new"
                               ? "bg-zinc-300 dark:bg-zinc-900"
                               : ""
                           }`}
@@ -434,6 +435,10 @@ const SideBar = () => {
                 </AccordionItem>
               </li>
             </Accordion>
+
+            <li className="flex items-center justify-center pt-5 pb-10">
+              <ToggleTheme />
+            </li>
           </ul>
         </nav>
       </aside>
@@ -448,7 +453,7 @@ const SideBar = () => {
           </div>
         ) : (
           <div
-            className={`fixed z-[20] top-0 left-10 w-9 h-9 cursor-pointer bg-gold-hr-dark dark:bg-gold-hr-dark rounded-r-md flex items-center justify-center transition-all duration-700`}
+            className={`fixed z-[20] top-0 left-0 md:left-10 w-9 h-9 cursor-pointer bg-gold-hr-dark dark:bg-gold-hr-dark rounded-r-md flex items-center justify-center transition-all duration-700`}
             onClick={() => setShowSideBar(true)}
           >
             <ChevronRight strokeWidth={1.5} className="text-white w-6 h-6" />

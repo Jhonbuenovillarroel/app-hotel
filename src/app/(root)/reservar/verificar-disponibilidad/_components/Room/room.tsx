@@ -95,7 +95,7 @@ const Room = ({ room, checkIn, checkOut }: Props) => {
   return (
     <div className="w-full flex flex-col justify-between gap-12 max-w-[900px]">
       <div
-        className={`w-[260px] md:w-[320px] lg:w-[400px] xl:w-[500px] order-1`}
+        className={`w-[260px]  md:w-[320px] lg:w-[400px] xl:w-[500px] order-1`}
       >
         <Carousel className="rounded-md overflow-hidden">
           <CarouselContent className="">

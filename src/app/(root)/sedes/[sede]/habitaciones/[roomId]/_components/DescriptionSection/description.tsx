@@ -43,8 +43,8 @@ const DescriptionSection = ({ room }: Props) => {
   return (
     <>
       <section className=" relative bottom-28">
-        <div className="w-[85%] grid grid-cols-9 bg-zinc-900 mx-auto pt-20 pb-20">
-          <div className="flex flex-col gap-8 px-12 col-span-6 border-r border-zinc-800">
+        <div className="w-[85%] grid grid-cols-9 bg-zinc-100 dark:bg-zinc-900 mx-auto pt-20 pb-20 shadow-lg rounded-md">
+          <div className="flex flex-col gap-8 px-12 col-span-6 border-r border-zinc-300 dark:border-zinc-800">
             <div className="flex flex-col gap-3">
               <h2 className="text-xl font-medium">Descripción</h2>
               <p>{room.description}</p>

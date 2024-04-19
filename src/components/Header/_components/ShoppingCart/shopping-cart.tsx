@@ -90,6 +90,9 @@ const ShoppingCart = () => {
                       }, 1200);
                     } else {
                       toast.error("Error: Debes iniciar sesión primero");
+                      setTimeout(() => {
+                        setLoadingButton(false);
+                      }, 1200);
                     }
                   }}
                   variant={"bookingFormButton"}

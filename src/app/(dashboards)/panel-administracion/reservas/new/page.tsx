@@ -17,11 +17,13 @@ const Page = ({
 }) => {
   return (
     <ContextProvider>
-      <main className="w-full">
-        <section className="w-full flex justify-between pt-16">
+      <main className="w-full min-h-screen">
+        <section className="w-full h-full flex justify-between pb-20 pt-24">
           <AddedRoomsCart />
-          <AvailableRooms searchParams={searchParams} />
-          <SideBar searchParams={searchParams} />
+          <div className="w-full h-full flex flex-col gap-16 md:flex-row md:justify-between">
+            <AvailableRooms searchParams={searchParams} />
+            <SideBar searchParams={searchParams} />
+          </div>
         </section>
       </main>
     </ContextProvider>

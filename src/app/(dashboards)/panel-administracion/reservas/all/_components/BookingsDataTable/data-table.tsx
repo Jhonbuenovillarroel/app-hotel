@@ -59,15 +59,15 @@ const BookingsDataTable = <TData, TValue>({
 
   return (
     <div className="max-w-[900px] mx-auto mt-16 flex flex-col items-center justify-center gap-5">
-      <div className="flex gap-4 w-full">
-        <div className="flex flex-col gap-2">
+      <div className="flex flex-col min-[500px]:flex-row gap-4 w-full">
+        <div className="flex flex-col gap-2 w-full max-w-[240px]">
           <Label>Filtrar por Check-In</Label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant={"outline"}
                 className={cn(
-                  "w-[280px] justify-start text-left font-normal",
+                  "w-full justify-start text-left font-normal",
                   !table.getColumn("Check-in")?.getFilterValue() &&
                     "text-muted-foreground"
                 )}
@@ -95,14 +95,14 @@ const BookingsDataTable = <TData, TValue>({
             </PopoverContent>
           </Popover>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-full max-w-[240px]">
           <Label>Filtrar por Check-Out</Label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant={"outline"}
                 className={cn(
-                  "w-[280px] justify-start text-left font-normal",
+                  "w-full justify-start text-left font-normal",
                   !table.getColumn("Check-out")?.getFilterValue() &&
                     "text-muted-foreground"
                 )}

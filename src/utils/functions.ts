@@ -3,6 +3,7 @@ import { format } from "date-fns";
 
 export const formatLocaleDate = (date: Date) => {
   const formatedDate = new Date(format(new Date(date), "MM/dd/yyyy"));
+  console.log(formatedDate);
   return formatedDate;
 };
 
@@ -19,7 +20,7 @@ export const roomIsAvailable = ({
     for (let booking of room.bookings) {
       if (
         formatLocaleDate(checkOut) > formatLocaleDate(booking.checkIn) &&
-        formatLocaleDate(checkOut) < formatLocaleDate(booking.checkOut)
+        formatLocaleDate(checkOut) <= formatLocaleDate(booking.checkOut)
       ) {
         return false;
       } else if (

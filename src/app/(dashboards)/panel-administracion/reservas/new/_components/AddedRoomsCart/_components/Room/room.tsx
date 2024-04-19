@@ -1,12 +1,12 @@
 "use client";
 
-import { useShoppingCartStore } from "@/store/shoppingCartStore";
 import { Room } from "@/types/Room/room";
 import { Loader2, X } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./room.module.css";
 import Link from "next/link";
+import { useSearchContext } from "../../../ContextProvider/context";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -14,8 +14,8 @@ interface Props {
   room: { room: Room; checkIn: Date; checkOut: Date };
 }
 
-const ShoppingCartRoom = ({ room }: Props) => {
-  const shoppingCartStore = useShoppingCartStore((state) => state);
+const AddedRoom = ({ room }: Props) => {
+  const searchContext = useSearchContext();
   const [removingRoom, setRemovingRoom] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ const ShoppingCartRoom = ({ room }: Props) => {
         href={`/sedes/${room.room.hotelcenter.name}/habitaciones/${room.room.id}`}
         className="w-full h-full flex items-center justify-start px-4 py-3 border-t border-zinc-300 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md transition-all duration-300"
       >
-        <div className="flex flex-col items-start justify-between gap-4">
+        <div className="flex flex-col items-start justify-between gap-3">
           <div className="flex flex-col min-[500px]:flex-row items-center justify-center gap-4">
             <div
               className={`relative w-[75%] min-[500px]:w-24 sm:w-24 before:content-[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[rgba(0,0,0,0.5)] before:opacity-0 before:transition-all before:duration-300 ${
@@ -36,10 +36,10 @@ const ShoppingCartRoom = ({ room }: Props) => {
               </div>
               <Image
                 className="w-full max-w-[200px] h-fit"
-                src={room.room.images[0]?.url ? room.room.images[0].url : ""}
-                width={150}
-                height={150}
-                alt={room.room.roomtype.name}
+                src={room.room.images[0].url || ""}
+                width={200}
+                height={200}
+                alt={`Habitación ${room.room.roomNumber}`}
               />
             </div>
             <div className="flex flex-col gap-2  max-w-[180px]">
@@ -48,7 +48,10 @@ const ShoppingCartRoom = ({ room }: Props) => {
                 <p className="text-sm">
                   <span className="">Piso:</span> {room.room.floor}
                 </p>
-                <p className="text-sm font-medium">S/ {room.room.price}</p>
+                <p className="text-sm font-medium flex gap-1.5">
+                  <span className="">N°:</span>
+                  <span>{room.room.roomNumber}</span>
+                </p>
               </div>
             </div>
           </div>
@@ -78,7 +81,7 @@ const ShoppingCartRoom = ({ room }: Props) => {
           setRemovingRoom(true);
 
           setTimeout(() => {
-            shoppingCartStore.removeRoom(room.room.id);
+            searchContext.removeRoom(room.room.id);
             setRemovingRoom(false);
           }, 1000);
         }}
@@ -89,4 +92,4 @@ const ShoppingCartRoom = ({ room }: Props) => {
   );
 };
 
-export default ShoppingCartRoom;
+export default AddedRoom;

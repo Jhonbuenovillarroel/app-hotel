@@ -21,11 +21,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import CalendarFormField from "./_components/CalendarFormField/calendar-form-field";
-import { Link, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { HotelCenter } from "@/types/HotelCenter/hotelCenterTypes";
 import { useRouter } from "next/navigation";
 import { addDays, format } from "date-fns";
 import { useSearchContext } from "../ContextProvider/context";
+import { formatLocaleDate } from "@/utils/functions";
+import Swal from "sweetalert2";
 
 export type FormSchemaType = UseFormReturn<
   {
@@ -102,7 +104,27 @@ const BookingForm = ({
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values.date);
+    if (
+      values.date.from.toLocaleDateString() ===
+      values.date.to.toLocaleDateString()
+    ) {
+      console.log({
+        from: formatLocaleDate(values.date.from),
+        to: formatLocaleDate(values.date.to),
+      });
+      Swal.fire({
+        html: `
+        <div class="flex flex-col gap-2 items-center justify-center">
+          <h2 class="text-lg font-bold text-zinc-900 dark:text-zinc-100">Fecha inválida</h2>
+          <p class="text-sm text-zinc-800 dark:text-zinc-200">Debes haber al menos un día de diferencia entre las fechas seleccionadas</p>
+        </div>
+        `,
+        customClass: "text-sm bg-zinc-100 dark:bg-zinc-950",
+        confirmButtonColor: "#bd9b57",
+      });
+      return;
+    }
+
     searchContext.setSearching(true);
     router.push(
       `/panel-administracion/reservas/new?hcId=${values.hotelCenter.id}&check-in=${values.date.from}&check-out=${values.date.to}&adults=${values.adults}&children=${values.children}`
@@ -111,7 +133,7 @@ const BookingForm = ({
   };
 
   return (
-    <div className="h-full w-full flex items-start justify-center">
+    <div className="h-full flex items-start justify-center">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

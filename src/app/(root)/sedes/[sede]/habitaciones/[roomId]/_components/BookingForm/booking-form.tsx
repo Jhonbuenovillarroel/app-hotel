@@ -31,6 +31,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useShoppingCartStore } from "@/store/shoppingCartStore";
 import { useState } from "react";
+import { addDays } from "date-fns";
 
 export type FormSchemaType = UseFormReturn<
   {
@@ -42,8 +43,8 @@ export type FormSchemaType = UseFormReturn<
 
 const formSchema = z.object({
   date: z.object({
-    from: z.date(),
-    to: z.date(),
+    from: z.date().default(new Date()),
+    to: z.date().default(addDays(new Date(), 3)),
   }),
 });
 
@@ -71,7 +72,7 @@ const BookingForm = ({
     defaultValues: {
       date: defaultValues?.date
         ? defaultValues.date
-        : { from: new Date(), to: new Date() },
+        : { from: new Date(), to: addDays(new Date(), 3) },
     },
   });
 
@@ -93,21 +94,20 @@ const BookingForm = ({
         Swal.fire({
           html: `
           <div class="flex flex-col gap-2 justify-center items-center">
-            <h2 class="text-lg text-zinc-100 font-semibold">
+            <h2 class="text-lg text-zinc-900 dark:text-zinc-100 font-semibold">
               Habitación disponible
             </h2>
-            <p class="text-sm text-zinc-200">${data.message}</p>
+            <p class="text-sm text-zinc-800 dark:text-zinc-200">${data.message}</p>
           </div>
           `,
           icon: "success",
           imageWidth: "100px",
-          background: "rgb(20, 20, 20)",
           confirmButtonColor: "#bd9b57",
           confirmButtonText: "Si, reservar",
           showDenyButton: true,
           denyButtonColor: "rgb(40, 40, 40)",
           denyButtonText: "No, Cancelar",
-          customClass: "text-sm",
+          customClass: "text-sm bg-zinc-100 dark:bg-zinc-950",
         }).then((result) => {
           if (result.isConfirmed) {
             shoppingCartStore.addRoom({
@@ -121,18 +121,17 @@ const BookingForm = ({
         Swal.fire({
           html: `
           <div class="flex flex-col gap-2 justify-center items-center">
-            <h2 class="text-lg text-zinc-100 font-semibold">
+            <h2 class="text-lg text-zinc-900 dark:text-zinc-100 font-semibold">
               Habitación no disponible
             </h2>
-            <p class="text-sm text-zinc-200">${data.error}</p>
+            <p class="text-sm text-zinc-800 dark:text-zinc-200">${data.error}</p>
           </div>
           `,
           icon: "error",
           imageWidth: "100px",
-          background: "rgb(20, 20, 20)",
           confirmButtonColor: "#bd9b57",
           confirmButtonText: "Entiendo",
-          customClass: "text-sm",
+          customClass: "text-sm bg-zinc-100 dark:bg-zinc-950",
         });
       }
     } catch (error) {

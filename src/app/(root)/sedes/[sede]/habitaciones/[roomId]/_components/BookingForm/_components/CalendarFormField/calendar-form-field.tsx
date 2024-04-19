@@ -72,6 +72,7 @@ const CalendarFormField = ({ form, name, label }: Props) => {
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
                 <Calendar
+                  fromDate={new Date()}
                   initialFocus
                   mode="range"
                   defaultMonth={date?.from}

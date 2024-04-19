@@ -4,12 +4,20 @@ import { Room } from "@/types/Room/room";
 import React, { useContext } from "react";
 import { createContext, useState } from "react";
 
+interface AddedRoom {
+  room: Room;
+  checkIn: Date;
+  checkOut: Date;
+}
+
 interface SearchContextType {
   searching: boolean;
   setSearching: Function;
-  addedRooms: Room[];
-  addRoom: (room: Room) => void;
+  addedRooms: AddedRoom[];
+  addRoom: (room: AddedRoom) => void;
   removeRoom: (id: string) => void;
+  showCart: boolean;
+  setShowCart: (boolean: boolean) => void;
 }
 
 const SearchContext = createContext<SearchContextType>({
@@ -18,25 +26,36 @@ const SearchContext = createContext<SearchContextType>({
   addedRooms: [],
   addRoom: () => {},
   removeRoom: () => {},
+  showCart: false,
+  setShowCart: () => {},
 });
 
 export const useSearchContext = () => useContext(SearchContext);
 
 const ContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [searching, setSearching] = useState(false);
-  const [addedRooms, setAddedRooms] = useState<Room[]>([]);
+  const [addedRooms, setAddedRooms] = useState<AddedRoom[]>([]);
+  const [showCart, setShowCart] = useState(false);
 
-  const addRoom = (room: Room) => {
+  const addRoom = (room: AddedRoom) => {
     setAddedRooms([...addedRooms, room]);
   };
 
   const removeRoom = (id: string) => {
-    setAddedRooms(addedRooms.filter((room) => room.id !== id));
+    setAddedRooms(addedRooms.filter((room) => room.room.id !== id));
   };
 
   return (
     <SearchContext.Provider
-      value={{ searching, setSearching, addedRooms, addRoom, removeRoom }}
+      value={{
+        searching,
+        setSearching,
+        addedRooms,
+        addRoom,
+        removeRoom,
+        showCart,
+        setShowCart,
+      }}
     >
       {children}
     </SearchContext.Provider>

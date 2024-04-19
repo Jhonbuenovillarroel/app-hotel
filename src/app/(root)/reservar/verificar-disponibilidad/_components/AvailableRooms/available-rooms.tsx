@@ -7,6 +7,8 @@ import { BedDouble, Loader2 } from "lucide-react";
 import { useCheckAvailabilityPageContext } from "@/app/(root)/_components/CheckAvailabilityPageProvider/context-provider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 type SearchParams = {
   hcId: string;
@@ -58,7 +60,7 @@ const AvailableRooms = ({ searchParams }: Props) => {
 
   if (searchButtonLoading) {
     return (
-      <div className="h-60 flex flex-col gap-3 w-full items-center justify-center">
+      <div className="h-60 flex flex-col gap-3 w-full items-center justify-center order-2 md:order-1">
         <Loader2 className="animate-spin" />
         <p>Buscando Habitaciones...</p>
       </div>
@@ -69,6 +71,28 @@ const AvailableRooms = ({ searchParams }: Props) => {
         {rooms.length ? (
           <>
             <div className="w-full flex flex-col gap-16 px-6 sm:px-12 xl:px-16 order-2 md:order-1">
+              <div>
+                <p className="font-medium max-w-[400px] text-center mx-auto lg:text-lg">
+                  Se encontraron {rooms.length} habitaciones del{" "}
+                  <span className="font-bold dark:font-semibold text-gold-hr-dark dark:text-gold-hr">
+                    {format(
+                      searchParams["check-in"],
+                      "dd 'de' MMMM 'del' yyyy",
+                      {
+                        locale: es,
+                      }
+                    )}
+                  </span>{" "}
+                  al{" "}
+                  <span className="font-bold dark:font-semibold text-gold-hr-dark dark:text-gold-hr">
+                    {format(
+                      searchParams["check-out"],
+                      "dd 'de' MMMM 'del' yyyy",
+                      { locale: es }
+                    )}
+                  </span>
+                </p>
+              </div>
               {rooms.map((room) => (
                 <Room
                   key={room.id}

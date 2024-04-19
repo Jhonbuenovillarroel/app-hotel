@@ -19,23 +19,25 @@ const ImagesSection = ({ room }: Props) => {
       <section>
         <div className={`w-[500px] mx-auto pb-20 flex flex-col gap-4`}>
           <p className="text-center text-2xl font-medium">Imagenes</p>
-          <Carousel className="rounded-md overflow-hidden">
-            <CarouselContent>
-              {room.images.map((image) => (
-                <CarouselItem key={image.id}>
-                  <Image
-                    className="w-full h-full"
-                    src={image.url}
-                    width={1000}
-                    height={1000}
-                    alt="Foto de la habitación"
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="" />
-            <CarouselNext className="" />
-          </Carousel>
+          <div className="">
+            <Carousel className="rounded-md overflow-hidden">
+              <CarouselContent>
+                {room.images.map((image) => (
+                  <CarouselItem key={image.id} className="">
+                    <Image
+                      className=""
+                      src={image.url}
+                      width={1000}
+                      height={1000}
+                      alt="Foto de la habitación"
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="" />
+              <CarouselNext className="" />
+            </Carousel>
+          </div>
         </div>
       </section>
     </>

@@ -7,6 +7,8 @@ import Room from "../Room/room";
 import { Room as RoomType } from "@/types/Room/room";
 import { Loader2, Search } from "lucide-react";
 import { useSearchContext } from "../ContextProvider/context";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 interface SearchParams {
   hcId: string;
@@ -61,23 +63,52 @@ const AvailableRooms = ({ searchParams }: Props) => {
   if (searchParams.hcId) {
     if (searching) {
       return (
-        <div className="flex text-sm flex-col w-full justify-center items-center gap-5">
+        <div className="flex text-sm flex-col w-full justify-center items-center gap-5 order-2 md:order-1">
           <Loader2 className="w-6 h-6 animate-spin" />
           <span>Buscando Habitaciones...</span>
         </div>
       );
     } else {
       return (
-        <div className="flex flex-col items-center justify-center gap-5 w-full">
+        <div className="flex flex-col items-center justify-center gap-5 w-full order-2 md:order-1">
           {rooms.length ? (
-            <>
+            <div className="flex flex-col gap-8 py-4">
+              <div>
+                <p className="font-medium max-w-[400px] text-center mx-auto lg:text-lg">
+                  Se encontraron {rooms.length} habitaciones del{" "}
+                  <span className="font-bold dark:font-semibold text-gold-hr-dark dark:text-gold-hr">
+                    {format(
+                      searchParams["check-in"],
+                      "dd 'de' MMMM 'del' yyyy",
+                      {
+                        locale: es,
+                      }
+                    )}
+                  </span>{" "}
+                  al{" "}
+                  <span className="font-bold dark:font-semibold text-gold-hr-dark dark:text-gold-hr">
+                    {format(
+                      searchParams["check-out"],
+                      "dd 'de' MMMM 'del' yyyy",
+                      { locale: es }
+                    )}
+                  </span>
+                </p>
+              </div>
               {rooms.map((room) => (
-                <Room key={room.id} room={room} />
+                <Room
+                  key={room.id}
+                  room={room}
+                  checkIn={new Date(searchParams["check-in"])}
+                  checkOut={new Date(searchParams["check-out"])}
+                />
               ))}
-            </>
+            </div>
           ) : (
             <>
-              <div>No se encontró ninguna habitación</div>
+              <div className="order-2 md:order-1">
+                No se encontró ninguna habitación
+              </div>
             </>
           )}
         </div>
@@ -85,7 +116,7 @@ const AvailableRooms = ({ searchParams }: Props) => {
     }
   } else {
     return (
-      <div className="flex text-sm flex-col w-full justify-center items-center gap-5">
+      <div className="flex text-sm flex-col w-full justify-center items-center gap-5 order-2 md:order-1">
         <Search className="w-6 h-6 animate-pulse" />
         <span>Realiza una búsqueda...</span>
       </div>
