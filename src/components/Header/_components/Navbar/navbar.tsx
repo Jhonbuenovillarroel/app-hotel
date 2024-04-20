@@ -77,6 +77,13 @@ export default function Navbar({ hotelCentersData }: Props) {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+            <Link
+              href={`/contacto`}
+              className="font-medium"
+              onClick={() => setShowMenuPopup(false)}
+            >
+              Contacto
+            </Link>
           </div>
 
           <div
