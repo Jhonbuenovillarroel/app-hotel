@@ -15,7 +15,7 @@ const Page = async ({ params }: { params: { roomId: string } }) => {
   const data = await getData(params.roomId);
 
   return (
-    <main>
+    <main className="w-full">
       <HeroSection data={data.room} />
       <DescriptionSection room={data.room} />
       <ImagesSection room={data.room} />

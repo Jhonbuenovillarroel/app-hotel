@@ -6,9 +6,10 @@ interface Props {
   subtitle: string;
   bgImage: string;
   mounted: boolean;
+  urlSegment: string;
 }
 
-const Slide = ({ title, subtitle, bgImage, mounted }: Props) => {
+const Slide = ({ title, subtitle, bgImage, mounted, urlSegment }: Props) => {
   return (
     <div
       className={`w-full h-full ${bgImage} bg-[length:1400px_1000px] bg-center before:content-[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[rgba(0,0,0,0.75)] before:z-0 flex justify-center`}
@@ -38,7 +39,7 @@ const Slide = ({ title, subtitle, bgImage, mounted }: Props) => {
           } relative transition-all duration-500`}
         >
           <Link
-            href={``}
+            href={`/sedes/${urlSegment}`}
             className={`h-auto w-auto text-sm font-medium tracking-wide flex gap-1 hover:gap-2 items-center justify-center py-1 border-b border-transparent hover:border-white transition-all duration-300 text-white`}
           >
             <p>Ver detalles</p>

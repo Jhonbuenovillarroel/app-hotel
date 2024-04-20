@@ -80,7 +80,7 @@ const UserProfile = () => {
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Link
-                href={`/`}
+                href={`/perfil`}
                 className="w-full h-full flex gap-2 items-center text-sm"
               >
                 <User className="w-4 h-4" />

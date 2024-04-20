@@ -11,13 +11,13 @@ interface Props {
 const OtherRoomsSection = ({ room }: Props) => {
   return (
     <>
-      <section className="flex flex-col items-center gap-8 pb-20">
-        <div className="text-center flex flex-col gap-3">
+      <section className="flex w-full flex-col items-center gap-8 pb-20">
+        <div className="text-center w-full flex flex-col gap-3">
           <h2 className="text-3xl font-medium">Otras habitaciones</h2>
           <p>También podrían interesarte</p>
         </div>
 
-        <div className="grid grid-cols-3 max-w-[1000px] w-full gap-10">
+        <div className="grid grid-cols-1 justify-items-center lg:grid-cols-3 md:max-w-[900px] xl:max-w-[1100px] w-full gap-10">
           {room.hotelcenter?.rooms
             .filter((data) => data.id !== room.id)
             .map(
@@ -25,13 +25,14 @@ const OtherRoomsSection = ({ room }: Props) => {
                 i < 3 && (
                   <div
                     key={data.id}
-                    className="flex flex-col gap-3 w-full h-full"
+                    className="flex flex-col gap-3 w-full max-w-[360px] h-full"
                   >
                     <Link
                       href={`/sedes/${data.hotelcenter?.urlSegment}/habitaciones/${data.id}`}
+                      className="w-full"
                     >
                       <div
-                        className={`cursor-pointer relative before:content-[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[rgba(0,0,0,0.6)] before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-300 ${styles["container"]}`}
+                        className={`w-full overflow-hidden cursor-pointer relative before:content-[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[rgba(0,0,0,0.6)] before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-300 ${styles["container"]}`}
                       >
                         <div
                           className={`absolute w-16 h-[2px] bg-white rotate-90 left-1/2 top-0 -translate-x-1/2 opacity-0 ${styles["item1"]} ${styles["item"]}`}
@@ -44,7 +45,7 @@ const OtherRoomsSection = ({ room }: Props) => {
                           width={400}
                           height={400}
                           alt={data.roomtype.name}
-                          className=""
+                          className="w-full h-full"
                         />
                       </div>
                     </Link>

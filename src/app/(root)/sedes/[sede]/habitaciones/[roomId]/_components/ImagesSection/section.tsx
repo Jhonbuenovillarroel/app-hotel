@@ -17,7 +17,9 @@ const ImagesSection = ({ room }: Props) => {
   return (
     <>
       <section>
-        <div className={`w-[500px] mx-auto pb-20 flex flex-col gap-4`}>
+        <div
+          className={`max-w-[500px] md:w-[500px] mx-auto pb-20 flex flex-col gap-4 px-6`}
+        >
           <p className="text-center text-2xl font-medium">Imagenes</p>
           <div className="">
             <Carousel className="rounded-md overflow-hidden">

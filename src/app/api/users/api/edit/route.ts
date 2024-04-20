@@ -9,12 +9,9 @@ export const POST = async (req: NextRequest) => {
       where: { id },
     });
 
-    // if (user?.username === username && user?.email === email) {
-    //   return NextResponse.json({
-    //     ok: true,
-    //     message: "Actualizado correctamente",
-    //   });
-    // }
+    if (!user) {
+      return NextResponse.json({ error: "El usuario no existe" });
+    }
 
     const usernameExists = await prisma.user.findUnique({
       where: { username },

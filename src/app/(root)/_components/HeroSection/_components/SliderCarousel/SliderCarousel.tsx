@@ -15,6 +15,7 @@ interface SlideType {
   slideTitle: string;
   slideSubtitle: string;
   slideBgImage: string;
+  urlSegment: string;
 }
 
 export interface Slides {
@@ -37,6 +38,7 @@ const transformDataToSlideData = (data: HotelCenter[]) => {
       slideTitle: data[i].name,
       slideSubtitle: data[i].description,
       slideBgImage: `bg-[url('/images/hero-images/canon-de-shucto.jpg')]`,
+      urlSegment: data[i].urlSegment,
     };
   }
 
@@ -105,6 +107,7 @@ const SliderCarousel = ({ dataSlides }: Props) => {
             title={slide[1].slideTitle}
             subtitle={slide[1].slideSubtitle}
             bgImage={slide[1].slideBgImage}
+            urlSegment={slide[1].urlSegment}
           />
         </div>
       ))}

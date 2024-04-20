@@ -44,7 +44,17 @@ const SideBar = () => {
         } transition-all duration-700`}
       >
         <div
-          className={`pb-3 flex flex-col gap-3 items-center justify-center text-sm ${
+          className={`w-full flex items-center justify-center ${
+            showSideBar ? "opacity-100 w-full" : "opacity-0 w-0"
+          } text-nowrap`}
+        >
+          <Link href={"/"} className="flex text-sm gap-1.5 items-center">
+            <ChevronLeft className="w-4 h-4" />
+            <p>Volver al Home</p>
+          </Link>
+        </div>
+        <div
+          className={`pt-1 flex flex-col gap-3 items-center justify-center text-sm ${
             showSideBar ? "opacity-100 w-full" : "opacity-0 w-0"
           } transition-all duration-700`}
         >
@@ -82,7 +92,7 @@ const SideBar = () => {
           <p className="text-sm text-nowrap">Hola, {session?.user.name}</p>
         </div>
 
-        <nav className="w-full">
+        <nav className="w-full pt-3">
           <ul className="w-full">
             <li className="w-full">
               <LinkItem
@@ -446,7 +456,7 @@ const SideBar = () => {
       <div>
         {showSideBar ? (
           <div
-            className={`fixed z-[20] top-0 left-[250px] w-9 h-9 cursor-pointer bg-gold-hr-dark dark:bg-gold-hr-dark rounded-r-md flex items-center justify-center transition-all duration-700`}
+            className={`fixed z-[20] top-0 left-[256px] w-9 h-9 cursor-pointer bg-gold-hr-dark dark:bg-gold-hr-dark rounded-r-md flex items-center justify-center transition-all duration-700`}
             onClick={() => setShowSideBar(false)}
           >
             <ChevronLeft strokeWidth={1.5} className="text-white w-6 h-6" />
