@@ -1,26 +1,7 @@
 "use client";
 
 import { Room } from "@/types/Room/room";
-import {
-  Check,
-  BedDouble,
-  Users,
-  Baby,
-  Hotel,
-  CloudSun,
-  ChevronRight,
-} from "lucide-react";
 import React from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
-import Image from "next/image";
 
 interface Props {
   data: Room;

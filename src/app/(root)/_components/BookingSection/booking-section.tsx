@@ -13,7 +13,7 @@ const BookingSection = async () => {
 
   return (
     <section>
-      <div className="relative bottom-14 z-[60] bg-white dark:bg-zinc-950 rounded-md h-full pt-4 w-fit mx-auto px-7">
+      <div className="relative bottom-14 z-[60] bg-white dark:bg-zinc-950 rounded-md h-full py-8 w-fit mx-auto px-7 shadow-lg">
         <BookingForm positioning="horizontal" hotelCenters={data} />
       </div>
     </section>

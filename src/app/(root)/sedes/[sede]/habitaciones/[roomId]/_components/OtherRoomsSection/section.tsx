@@ -41,7 +41,7 @@ const OtherRoomsSection = ({ room }: Props) => {
                           className={`absolute w-16 h-[2px] bg-white top-1/2 translate-x-1/2 right-0 opacity-0 ${styles["item2"]} ${styles["item"]}`}
                         ></div>
                         <Image
-                          src={data.images[0].url}
+                          src={data.images[0] ? data.images[0].url : ""}
                           width={400}
                           height={400}
                           alt={data.roomtype.name}

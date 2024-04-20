@@ -25,7 +25,8 @@ export const POST = async (req: NextRequest) => {
       });
     } else {
       return NextResponse.json({
-        error: "La habitación ya está reservada, por favor elige otra",
+        error:
+          "La habitación ya está reservada para las fechas elegidas, por favor elige otras fechas",
       });
     }
   } catch (error) {

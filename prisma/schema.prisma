@@ -94,6 +94,11 @@ model booking {
   user         user                @relation(fields: [userId], references: [id])
 }
 
+model newsletterEmail {
+  id    String @id @default(cuid())
+  email String @unique
+}
+
 model amenitietoroom {
   A String
   B String
