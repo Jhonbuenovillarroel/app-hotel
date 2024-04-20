@@ -36,7 +36,7 @@ const Page = async () => {
                       alt="logo hospedaje"
                       className="w-20"
                     />
-                    <p className="text-lg">{hotelCenter.name}</p>
+                    <p className="text-lg text-center">{hotelCenter.name}</p>
                     <h3 className="text-base">Sede 0{i + 1}</h3>
                     <p className="text-sm text-zinc-400">
                       {hotelCenter.address}
