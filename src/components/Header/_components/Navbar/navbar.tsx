@@ -108,6 +108,11 @@ export default function Navbar({ hotelCentersData }: Props) {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
+          <NavigationMenuItem className="">
+            <Link href={`/contacto`} className="text-sm font-medium">
+              Contacto
+            </Link>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </>
