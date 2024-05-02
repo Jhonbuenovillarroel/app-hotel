@@ -84,14 +84,16 @@ model service {
 }
 
 model booking {
-  id           String              @id @default(cuid())
-  checkIn      DateTime
-  checkOut     DateTime
-  userId       String
-  creationMode bookingCreationMode @default(paid)
-  roomId       String
-  room         room                @relation(fields: [roomId], references: [id])
-  user         user                @relation(fields: [userId], references: [id])
+  id            String              @id @default(cuid())
+  checkIn       DateTime
+  checkOut      DateTime
+  transactionId String?
+  number        Int?
+  userId        String
+  creationMode  bookingCreationMode @default(paid)
+  roomId        String
+  room          room                @relation(fields: [roomId], references: [id])
+  user          user                @relation(fields: [userId], references: [id])
 }
 
 model newsletterEmail {
