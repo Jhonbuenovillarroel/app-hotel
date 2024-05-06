@@ -116,6 +116,8 @@ const AddedRoomsCart = () => {
                               rooms: addedRooms,
                               userEmail: session?.user.email,
                               creationMode: "manual",
+                              transactionId: "",
+                              paymentStatus: "pending",
                             }
                           );
 
