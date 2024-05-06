@@ -11,7 +11,9 @@ export const POST = async (req: NextRequest) => {
     const answerHash = Hex.stringify(
       hmacSHA256(
         form.get("kr-answer") as string,
-        process.env.IZIPAY_TEST_HMAC_KEY as string
+        process.env.NODE_ENV === "development"
+          ? (process.env.IZIPAY_TEST_HMAC_KEY as string)
+          : (process.env.IZIPAY_PROD_HMAC_KEY as string)
       )
     );
 
