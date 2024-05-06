@@ -23,7 +23,7 @@ export const POST = async (req: NextRequest) => {
           `/pago/resultados-de-pago?status=${answer.orderStatus}&total-amount=${answer.orderDetails.orderTotalAmount}`,
           process.env.NODE_ENV === "development"
             ? req.url
-            : process.env.NEXTAUTH_URL
+            : `https://${process.env.NEXTAUTH_URL}`
         )
       );
     } else {
