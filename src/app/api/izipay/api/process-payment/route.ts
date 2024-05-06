@@ -21,7 +21,9 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.redirect(
         new URL(
           `/pago/resultados-de-pago?status=${answer.orderStatus}&total-amount=${answer.orderDetails.orderTotalAmount}`,
-          req.url
+          process.env.NODE_ENV === "development"
+            ? req.url
+            : process.env.NEXTAUTH_URL
         )
       );
     } else {
