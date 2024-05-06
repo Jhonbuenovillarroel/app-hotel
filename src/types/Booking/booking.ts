@@ -6,6 +6,7 @@ export type Booking = {
   checkIn: Date;
   checkOut: Date;
   creationMode: "manual" | "paid";
+  paymentStatus: "paid" | "pending";
   userId: string;
   roomId: string;
   room: Room;

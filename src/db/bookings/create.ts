@@ -7,12 +7,16 @@ export const createBooking = async ({
   checkOut,
   room,
   creationMode,
+  transactionId,
+  paymentStatus,
 }: {
   userId: string;
   checkIn: Date;
   checkOut: Date;
   room: Room;
   creationMode: "paid" | "manual";
+  transactionId: string;
+  paymentStatus: "paid" | "pending";
 }) => {
   const booking = await prisma.booking.create({
     data: {
@@ -21,6 +25,8 @@ export const createBooking = async ({
       checkOut,
       roomId: room.id,
       creationMode: creationMode ? creationMode : "manual",
+      transactionId,
+      paymentStatus,
     },
   });
 

@@ -16,6 +16,7 @@ import { format } from "date-fns";
 import {
   CircleDollarSign,
   Hand,
+  Loader,
   MoreHorizontal,
   Settings,
   Shield,
@@ -130,6 +131,32 @@ export const columns = [
         )}
       </p>
     ),
+  }),
+  columnHelper.accessor((row) => `${row.paymentStatus}`, {
+    id: "Estado de pago",
+    header: () => <span>Estado de pago</span>,
+    cell: (info) => (
+      <p
+        className={`${
+          info.getValue() === "paid"
+            ? "bg-green-700 text-green-400"
+            : "bg-zinc-700 text-zinc-200"
+        } w-fit rounded-full px-4 py-1.5 text-xs flex items-center gap-2`}
+      >
+        {info.getValue() === "paid" ? (
+          <>
+            <CircleDollarSign className="w-3 h-3" strokeWidth={1.2} />
+            <span>Pagado</span>
+          </>
+        ) : (
+          <>
+            <Loader className="w-3 h-3" strokeWidth={1.2} />
+            <span>Pendiente</span>
+          </>
+        )}
+      </p>
+    ),
+    filterFn: "checkOutFilter",
   }),
   columnHelper.accessor((row) => `${row.room.roomtype.name}`, {
     id: "Habitación",

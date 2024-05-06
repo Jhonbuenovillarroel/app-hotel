@@ -84,16 +84,16 @@ model service {
 }
 
 model booking {
-  id            String              @id @default(cuid())
+  id            String               @id @default(cuid())
   checkIn       DateTime
   checkOut      DateTime
-  transactionId String?
-  number        Int?
   userId        String
-  creationMode  bookingCreationMode @default(paid)
+  transactionId String
+  creationMode  bookingCreationMode  @default(paid)
+  paymentStatus bookingPaymentStatus @default(pending)
   roomId        String
-  room          room                @relation(fields: [roomId], references: [id])
-  user          user                @relation(fields: [userId], references: [id])
+  room          room                 @relation(fields: [roomId], references: [id])
+  user          user                 @relation(fields: [userId], references: [id])
 }
 
 model newsletterEmail {
@@ -113,6 +113,11 @@ model amenitietoroom {
 enum bookingCreationMode {
   manual
   paid
+}
+
+enum bookingPaymentStatus {
+  paid
+  pending
 }
 
 enum user_role {

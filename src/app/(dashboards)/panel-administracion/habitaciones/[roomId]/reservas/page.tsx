@@ -4,7 +4,7 @@ import React from "react";
 import BookingsDataTable from "./_components/BookingsDataTable/data-table";
 import { columns } from "./_components/BookingsDataTableColumns/columns";
 
-const getData = async (roomId: string) => {
+const getData = async (roomId: string): Promise<Booking[]> => {
   const bookings = await getBookingsByRoomId(roomId);
   return bookings as Booking[];
 };

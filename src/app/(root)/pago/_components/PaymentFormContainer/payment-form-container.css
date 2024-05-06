@@ -1,0 +1,41 @@
+@import url("https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/neon-reset.css");
+
+.kr-embedded {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100% !important;
+}
+
+.kr-embedded .kr-field-element {
+  background-color: rgb(240, 240, 240) !important;
+  border-radius: 4px !important;
+  border: 1px solid rgb(224, 224, 224) !important;
+  position: relative !important;
+}
+.kr-embedded .kr-payment-button {
+  background-color: #bd9b57 !important;
+  color: white !important;
+  border-radius: 4px !important;
+  text-align: center;
+  transition: all !important;
+  transition-duration: 200ms !important;
+  border: 1px solid #d4ae63 !important;
+}
+.kr-embedded .kr-payment-button:hover {
+  background-color: #d4ae63 !important;
+}
+
+.kr-embedded .kr-payment-button span {
+  font-size: 13px !important;
+}
+
+.kr-embedded .kr-form-error {
+  border-radius: 4px !important;
+}
+
+.kr-embedded .kr-spinner {
+  margin: 0 auto !important;
+  width: 10px !important;
+}

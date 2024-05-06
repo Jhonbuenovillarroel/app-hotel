@@ -1,33 +1,35 @@
 import { createBooking } from "@/db/bookings/create";
-import { getAllRooms } from "@/db/rooms/getAllRooms";
 import prisma from "@/lib/prisma";
 import { Room } from "@/types/Room/room";
-import { roomIsAvailable } from "@/utils/functions";
-import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { rooms, userEmail, creationMode } = (await req.json()) as {
-      rooms: {
-        room: Room;
-        checkIn: string;
-        checkOut: string;
-      }[];
-      userEmail: string;
-      creationMode: "paid" | "manual";
-    };
+    const { rooms, userEmail, creationMode, transactionId, paymentStatus } =
+      (await req.json()) as {
+        rooms: {
+          room: Room;
+          checkIn: string;
+          checkOut: string;
+        }[];
+        userEmail: string;
+        creationMode: "paid" | "manual";
+        transactionId: string;
+        paymentStatus: "paid" | "pending";
+      };
 
     const user = await prisma.user.findUnique({ where: { email: userEmail } });
 
     if (user) {
       for (let room of rooms) {
-        await createBooking({
+        const booking = await createBooking({
           userId: user?.id,
           checkIn: new Date(room.checkIn),
           checkOut: new Date(room.checkOut),
           room: room.room,
           creationMode,
+          transactionId,
+          paymentStatus,
         });
       }
     } else {
