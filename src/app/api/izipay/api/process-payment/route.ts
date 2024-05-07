@@ -18,14 +18,15 @@ export const POST = async (req: NextRequest) => {
     );
 
     if (hash === answerHash) {
-      return NextResponse.redirect(
-        new URL(
-          `/pago/resultados-de-pago?status=${answer.orderStatus}&total-amount=${answer.orderDetails.orderTotalAmount}`,
-          process.env.NODE_ENV === "development"
-            ? req.url
-            : `https://www.${process.env.NEXTAUTH_URL}`
-        )
-      );
+      // return NextResponse.redirect(
+      //   new URL(
+      //     `/pago/resultados-de-pago?status=${answer.orderStatus}&total-amount=${answer.orderDetails.orderTotalAmount}`,
+      //     process.env.NODE_ENV === "development"
+      //       ? req.url
+      //       : `https://www.${process.env.NEXTAUTH_URL}`
+      //   )
+      // );
+      return NextResponse.json({ message: "Pago procesado correctamente" });
     } else {
       return NextResponse.json({ error: "Intento de fraude" }, { status: 500 });
     }
