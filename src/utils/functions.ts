@@ -17,9 +17,9 @@ export const roomIsAvailable = ({
 }) => {
   if (!!room.bookings.length) {
     for (let booking of room.bookings) {
-      if (booking.paymentStatus === "pending") {
-        continue;
-      }
+      // if (booking.paymentStatus === "pending") {
+      //   continue;
+      // }
       if (
         formatLocaleDate(checkOut) > formatLocaleDate(booking.checkIn) &&
         formatLocaleDate(checkOut) <= formatLocaleDate(booking.checkOut)

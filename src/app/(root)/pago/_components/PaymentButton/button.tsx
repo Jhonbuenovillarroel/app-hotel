@@ -12,12 +12,16 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useShoppingCartStore } from "@/store/shoppingCartStore";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import styles from "./button.module.css";
 
 const PaymentButton = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const [loadingButton, setLoadingButton] = useState(false);
+  const [cellPhone, setCellPhone] = useState<string>();
 
   return (
     <>
@@ -34,6 +38,14 @@ const PaymentButton = () => {
         </>
       ) : (
         <>
+          <PhoneInput
+            value={cellPhone}
+            onChange={(value) => {
+              setCellPhone(value);
+            }}
+            className={`${styles["phone-input-container"]} focus-within:outline-2 focus-within:outline-zinc-800 dark:border-zinc-800 dark:focus-within:outline-2 dark:focus-within:outline-zinc-100`}
+            placeholder="ej. 997 706 692"
+          />
           <Button
             onClick={async (e: MouseEvent<HTMLButtonElement>) => {
               setLoadingButton(true);
@@ -52,35 +64,23 @@ const PaymentButton = () => {
                 return;
               }
 
-              try {
-                const { data } = await axios.post(
-                  "/api/rooms/api/check-shopping-cart-rooms-availability",
+              if (cellPhone) {
+                //@ts-ignore
+                window.location.href = `/pago/checkout?amount=${calculateBookingTotalAmount(
                   shoppingCartStore.rooms
-                );
-
-                if (data.ok) {
-                  //@ts-ignore
-                  window.location.href = `/pago/checkout?amount=${calculateBookingTotalAmount(
-                    shoppingCartStore.rooms
-                  )}&currency=PEN&email=${session.user.email}&expiry_time=${
-                    new Date().getTime() + 1000 * 60 * 10
-                  }`;
-                } else if (data.error) {
-                  generateSweetAlertPopup({
-                    title: "Habitación no Disponible",
-                    subtitle: data.error,
-                    confirmButtonText: "Entiendo",
-                  }).then((result) => {
-                    shoppingCartStore.removeRoom(data.room.id);
-                  });
-                }
-              } catch (error) {
-                toast.error("Algo salió mal, vuelve a intentarlo");
+                )}&currency=PEN&email=${session.user.email}&expiry_time=${
+                  new Date().getTime() + 1000 * 60 * 14
+                }&cellPhone=${cellPhone}`;
+              } else {
+                generateSweetAlertPopup({
+                  title: "Campo Vacío",
+                  subtitle: "Debes completar el campo con tu número de celular",
+                });
               }
 
               setTimeout(() => {
                 setLoadingButton(false);
-              }, 2100);
+              }, 1500);
             }}
             variant={"bookingFormButton"}
             className="mt-2 h-11 flex items-center gap-2 justify-center w-full"

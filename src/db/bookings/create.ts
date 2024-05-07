@@ -9,6 +9,7 @@ export const createBooking = async ({
   creationMode,
   transactionId,
   paymentStatus,
+  cellPhone,
 }: {
   userId: string;
   checkIn: Date;
@@ -17,6 +18,7 @@ export const createBooking = async ({
   creationMode: "paid" | "manual";
   transactionId: string;
   paymentStatus: "paid" | "pending";
+  cellPhone?: string;
 }) => {
   const booking = await prisma.booking.create({
     data: {
@@ -27,6 +29,7 @@ export const createBooking = async ({
       creationMode: creationMode ? creationMode : "manual",
       transactionId,
       paymentStatus,
+      cellPhone,
     },
   });
 

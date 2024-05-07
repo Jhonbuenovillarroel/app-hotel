@@ -6,7 +6,6 @@ import React, { useEffect, useRef, useState } from "react";
 
 const Page = ({ searchParams }: { searchParams: { "kr-answer": string } }) => {
   const router = useRouter();
-  console.log(JSON.parse(searchParams["kr-answer"]));
   const answer = JSON.parse(searchParams["kr-answer"]);
   const [countdown, setCountdown] = useState(20);
   const countdownInterval = useRef<any>(null);

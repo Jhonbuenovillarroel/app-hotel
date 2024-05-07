@@ -9,7 +9,6 @@ export const POST = async (req: NextRequest) => {
       where: { id },
       include: { room: true, user: true },
     });
-    console.log(removedBooking);
 
     return NextResponse.json({ ok: true });
   } catch (error) {

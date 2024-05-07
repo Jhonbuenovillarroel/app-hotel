@@ -8,6 +8,7 @@ export type Booking = {
   creationMode: "manual" | "paid";
   paymentStatus: "paid" | "pending";
   transactionId: string;
+  cellPhone?: string;
   userId: string;
   roomId: string;
   room: Room;

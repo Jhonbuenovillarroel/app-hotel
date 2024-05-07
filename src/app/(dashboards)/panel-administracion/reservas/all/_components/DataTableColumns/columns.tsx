@@ -170,11 +170,15 @@ export const columns = [
     cell: (info) => <span>{info.getValue()}</span>,
     filterFn: "checkOutFilter",
   }),
+  columnHelper.accessor((row) => `${row.cellPhone}`, {
+    id: "Celular/Teléfono",
+    header: () => <span>Celular/Teléfono</span>,
+    cell: (info) => <span>{info.getValue()}</span>,
+  }),
   columnHelper.accessor((row) => `${row.room.hotelcenter.name}`, {
     id: "Sede",
     header: () => <span>Sede</span>,
     cell: (info) => <span>{info.getValue()}</span>,
-    filterFn: "checkOutFilter",
   }),
 
   columnHelper.display({

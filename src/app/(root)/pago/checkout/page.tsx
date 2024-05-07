@@ -10,9 +10,10 @@ const Page = ({
     currency: string;
     email: string;
     expiry_time: string;
+    cellPhone: string;
   };
 }) => {
-  const { amount, currency, email, expiry_time } = searchParams;
+  const { amount, currency, email, expiry_time, cellPhone } = searchParams;
 
   if (!searchParams.amount) {
     redirect("/reservar/verificar-disponibilidad");
@@ -26,6 +27,7 @@ const Page = ({
           currency={currency}
           email={email}
           expiryTime={expiry_time}
+          cellPhone={cellPhone}
         />
       </section>
     </main>

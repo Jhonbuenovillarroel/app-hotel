@@ -1,4 +1,4 @@
-@import url("https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/neon-reset.css");
+@import url("https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.css");
 
 .kr-embedded {
   display: flex !important;
@@ -35,7 +35,7 @@
   border-radius: 4px !important;
 }
 
-.kr-embedded .kr-spinner {
+/* .kr-embedded .kr-spinner {
   margin: 0 auto !important;
   width: 10px !important;
-}
+} */

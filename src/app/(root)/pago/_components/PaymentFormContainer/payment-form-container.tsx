@@ -7,6 +7,7 @@ interface Props {
   currency: string;
   email: string;
   expiryTime: string;
+  cellPhone: string;
 }
 
 const getData = async (data: {
@@ -24,6 +25,7 @@ const PaymentFormContainer = async ({
   currency,
   email,
   expiryTime,
+  cellPhone,
 }: Props) => {
   const data = await getData({ amount, currency, email });
 
@@ -33,6 +35,7 @@ const PaymentFormContainer = async ({
         formToken={data.formToken}
         orderId={data.orderId}
         expiryTime={expiryTime}
+        cellPhone={cellPhone}
       />
     </>
   );

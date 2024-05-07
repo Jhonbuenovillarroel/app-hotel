@@ -87,6 +87,7 @@ model booking {
   id            String               @id @default(cuid())
   checkIn       DateTime
   checkOut      DateTime
+  cellPhone     String?
   userId        String
   transactionId String
   creationMode  bookingCreationMode  @default(paid)

@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --PhoneInputCountrySelectArrow-color: rgb(20, 20, 20);
+}
 
 @layer utilities {
   .rotate-child-180 .child {
