@@ -96,6 +96,12 @@ const PaymentForm = ({ formToken, orderId, expiryTime }: Props) => {
                   shoppingCartStore.setRooms([]);
                   return true;
                 } else if (data.error) {
+                  generateSweetAlertPopup({
+                    icon: "error",
+                    title: data.message,
+                    subtitle:
+                      "Parece que el usuario con el que quieres realizar la reserva, no existe",
+                  });
                   return false;
                 }
               } catch (error) {
