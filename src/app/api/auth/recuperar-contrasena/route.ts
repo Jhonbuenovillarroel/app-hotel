@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         subject: "Cambia tu contraseña",
         html: `<div>
                 <p>Hola <strong>${user.username}</strong>, puedes cambiar tu contraseña con el siguiente enlace:</p>
-                <a href="${process.env.NEXTAUTH_URL}/recuperar-contrasena/${token}">Verifica tu correo electrónico</a>
+                <a href="${process.env.NEXTAUTH_URL}/recuperar-contrasena/${token}">Cambiar Contraseña</a>
              </div>`,
       });
 

@@ -59,6 +59,7 @@ const PaymentButton = () => {
                 );
 
                 if (data.ok) {
+                  //@ts-ignore
                   window.location.href = `/pago/checkout?amount=${calculateBookingTotalAmount(
                     shoppingCartStore.rooms
                   )}&currency=PEN&email=${session.user.email}&expiry_time=${
@@ -82,7 +83,7 @@ const PaymentButton = () => {
               }, 2100);
             }}
             variant={"bookingFormButton"}
-            className="mt-2 h-11 flex items-center justify-center w-full"
+            className="mt-2 h-11 flex items-center gap-2 justify-center w-full"
           >
             <span>Pagar Ahora</span>
             <span className="font-semibold">

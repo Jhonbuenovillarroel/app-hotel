@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface Props {
   formToken: string;
@@ -22,6 +22,7 @@ const PaymentForm = ({ formToken, orderId, expiryTime }: Props) => {
   const shoppingCartStore = useShoppingCartStore((state) => state);
   const [creatingBookings, setCreatingBookings] = useState(false);
   const [countdown, setCountdown] = useState<string | null>(null);
+  const timerInterval = useRef<any>(null);
 
   const updateTimer = () => {
     const now = new Date().getTime();
@@ -41,13 +42,23 @@ const PaymentForm = ({ formToken, orderId, expiryTime }: Props) => {
       }`
     );
 
-    if (distance <= 0) {
-      clearInterval(interval);
+    // if (distance <= 0) {
+    //   clearInterval(interval);
+    //   router.push("/pago");
+    //   router.refresh();
+    // }
+  };
+  // const interval = setInterval(updateTimer, 1000);
+
+  useEffect(() => {
+    timerInterval.current = setInterval(updateTimer, 1000);
+    const timeLeft = parseInt(expiryTime) - new Date().getTime();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval.current);
       router.push("/pago");
       router.refresh();
     }
-  };
-  const interval = setInterval(updateTimer, 1000);
+  }, [countdown]);
 
   return (
     <>
@@ -68,8 +79,6 @@ const PaymentForm = ({ formToken, orderId, expiryTime }: Props) => {
           });
           //@ts-ignore
           await KR.smartForm.onClick(async (event) => {
-            console.log("Antes de iniciar el proceso");
-            console.log(event);
             if (session) {
               setCreatingBookings(true);
               try {
@@ -84,6 +93,7 @@ const PaymentForm = ({ formToken, orderId, expiryTime }: Props) => {
                 setCreatingBookings(false);
 
                 if (data.ok) {
+                  shoppingCartStore.setRooms([]);
                   return true;
                 } else if (data.error) {
                   return false;
