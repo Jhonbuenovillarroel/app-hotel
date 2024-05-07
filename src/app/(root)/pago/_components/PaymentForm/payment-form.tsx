@@ -41,14 +41,7 @@ const PaymentForm = ({ formToken, orderId, expiryTime }: Props) => {
         seconds < 10 ? `0${seconds}` : seconds
       }`
     );
-
-    // if (distance <= 0) {
-    //   clearInterval(interval);
-    //   router.push("/pago");
-    //   router.refresh();
-    // }
   };
-  // const interval = setInterval(updateTimer, 1000);
 
   useEffect(() => {
     timerInterval.current = setInterval(updateTimer, 1000);
