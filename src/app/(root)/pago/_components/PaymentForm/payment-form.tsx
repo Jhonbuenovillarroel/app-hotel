@@ -69,7 +69,7 @@ const PaymentForm = ({ formToken, orderId, expiryTime }: Props) => {
             ? process.env.NEXT_PUBLIC_IZIPAY_TEST_PUBLIC_KEY
             : process.env.NEXT_PUBLIC_IZIPAY_PROD_PUBLIC_KEY
         }`}
-        kr-post-url-success="/api/izipay/api/process-payment"
+        // kr-post-url-success="/api/izipay/api/process-payment"
         kr-get-url-success="/pago/resultados-de-pago"
         kr-language="es-ES"
         onLoad={async () => {
