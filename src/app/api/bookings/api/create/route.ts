@@ -44,7 +44,7 @@ export const POST = async (req: NextRequest) => {
                 where: { id: updatedBooking.id },
               });
             }
-          }, 1000 * 60 * 2);
+          }, 1000 * 60 * 10);
         }
       }
     } else {
