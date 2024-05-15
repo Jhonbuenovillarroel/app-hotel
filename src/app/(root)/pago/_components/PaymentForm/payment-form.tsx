@@ -52,43 +52,57 @@ const PaymentForm = ({ formToken, orderId, expiryTime, cellPhone }: Props) => {
             setCreatingBookings(true);
             try {
               const { data } = await axios.post(
-                "/api/rooms/api/check-shopping-cart-rooms-availability",
-                shoppingCartStore.rooms
+                "/api/bookings/api/check-reservation-exists",
+                { orderId }
               );
 
               if (data.ok) {
-                const { data } = await axios.post("/api/bookings/api/create", {
-                  rooms: shoppingCartStore.rooms,
-                  creationMode: "paid",
-                  transactionId: orderId,
-                  paymentStatus: "pending",
-                  cellPhone,
-                });
                 setCreatingBookings(false);
+                shoppingCartStore.setRooms([]);
+                return true;
+              } else if (data.error) {
+                const { data } = await axios.post(
+                  "/api/rooms/api/check-shopping-cart-rooms-availability",
+                  shoppingCartStore.rooms
+                );
+
                 if (data.ok) {
-                  shoppingCartStore.setRooms([]);
-                  return true;
+                  const { data } = await axios.post(
+                    "/api/bookings/api/create",
+                    {
+                      rooms: shoppingCartStore.rooms,
+                      creationMode: "paid",
+                      transactionId: orderId,
+                      paymentStatus: "pending",
+                      cellPhone,
+                    }
+                  );
+                  setCreatingBookings(false);
+                  if (data.ok) {
+                    shoppingCartStore.setRooms([]);
+                    return true;
+                  } else if (data.error) {
+                    generateSweetAlertPopup({
+                      icon: "error",
+                      title: data.message,
+                      subtitle:
+                        "Parece que el usuario con el que quieres realizar la reserva, no existe",
+                    });
+                    return false;
+                  }
                 } else if (data.error) {
+                  setCreatingBookings(false);
                   generateSweetAlertPopup({
-                    icon: "error",
-                    title: data.message,
-                    subtitle:
-                      "Parece que el usuario con el que quieres realizar la reserva, no existe",
+                    title: "Habitación no Disponible",
+                    subtitle: data.error,
+                    confirmButtonText: "Entiendo",
+                  }).then((result) => {
+                    shoppingCartStore.removeRoom(data.room.id);
+                    router.push("/pago");
+                    router.refresh();
                   });
                   return false;
                 }
-              } else if (data.error) {
-                setCreatingBookings(false);
-                generateSweetAlertPopup({
-                  title: "Habitación no Disponible",
-                  subtitle: data.error,
-                  confirmButtonText: "Entiendo",
-                }).then((result) => {
-                  shoppingCartStore.removeRoom(data.room.id);
-                  router.push("/pago");
-                  router.refresh();
-                });
-                return false;
               }
             } catch (error) {
               setCreatingBookings(false);
@@ -108,7 +122,7 @@ const PaymentForm = ({ formToken, orderId, expiryTime, cellPhone }: Props) => {
       />
       <Script src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js" />
       <div className="w-full flex flex-col items-center justify-center">
-        <div className="relative w-full max-w-[320px] flex flex-col items-center justify-center gap-8 bg-zinc-100 border border-zinc-200 px-8 py-6 rounded-md">
+        <div className="relative w-full max-w-[320px] flex flex-col items-center justify-center gap-8 bg-zinc-100 px-8 py-6 rounded-md">
           {creatingBookings && (
             <div className="absolute z-10 top-0 right-0 left-0 bottom-0 bg-[rgba(40,40,40,0.6)] rounded-md flex items-center justify-center">
               <Loader2 className="w-10 h-10 animate-spin" strokeWidth={1.5} />
